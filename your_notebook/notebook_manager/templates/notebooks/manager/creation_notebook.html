@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{%block title%} Create new notebook{%endblock%}
+{% block content %}
+<main class="main-content">
+
+
+    <div class="marco-layout teachlearn teach">
+        {% include 'notebooks/includes/navbar.html'%}
+
+        <!---->
+
+
+        <header class="marco-layout__header" data-marco-full-height-sidebar="">
+            <h1>Create new notebook</h1>
+        </header>
+
+        <article class="marco-layout__content">
+            <div id="ember504" class="new-course-form ember-view teachlearn__new-course-form">
+                <form novalidate="" id="ember505" class="the-form ember-view new-course-form__form"
+                      data-gtm-form-interact-id="0" method="POST">
+                    {%csrf_token%}
+                    <label class="new-course-form__label">
+                        <div data-required="" data-visible-errors="0" data-invalid="presence" id="ember507"
+                             class="the-form__field the-form-field ember-view new-course-form__form-field"
+                             data-err-shown="">
+                            <legend class="the-form-field__caption new-course-form__caption" data-required="">
+                                Notebook name
+                            </legend>
+
+
+                            {{form.name}}
+                            <span class="new-course-form__note">
+
+        </span>
+
+                            <!---->
+                            <span class="the-form-field__char-counter" data-pos="footnote">
+  </span>
+
+                            <!----></div>
+                    </label>
+
+                    <button id="ember510"
+                            class="the-form__submit the-form-submit ember-view new-course-form__btn button_with-loader">
+                        <!---->
+                        Create notebook
+
+                    </button>
+                </form>
+
+                <div class="new-course-form__desc">
+                    <p>Here will be some description</p>
+                </div>
+            </div>
+        </article>
+
+        <aside class="marco-layout__aside">
+            <div class="nav-links-block new-course__links">
+                <div>
+                    If you need help <br> <a href="" target="_blank">click</a>
+                </div>
+
+            </div>
+
+            <div class="nav-links-block new-course__links">
+                <div class="nav-links-block__title">
+                    You can also write us
+                </div>
+                <ul class="nav-links-block__list">
+                    <li><a href="" target="_blank" data-directly="">Click</a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </aside>
+    </div>
+
+</main>
+{% endblock %}
+

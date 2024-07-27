@@ -1,0 +1,29 @@
+<span id="teach-nav-menu-label" hidden="">Navigation menu</span>
+        <nav class="marco-layout__nav teachlearn__nav-container" data-marco-sticky-nav-content=""
+             aria-labelledby="teach-nav-menu-label">
+            <div id="ember460" class="nav-menu teach-nav ember-view teachlearn__course-nav">
+
+                <a href="{% url 'notebook_manager:create_notebook' %}" id="ember461"
+                   class="active ember-view teach-nav__new-course-btn button has-icon success is-outlined">
+                    <span>New notebook</span>
+                </a>
+
+                <ul class="nav-menu__menu menu teach-nav__menu" data-level="1">
+                    <li class="menu-item " data-item="courses">
+                        <a href="{% url 'notebook_manager:notebooks' %}" aria-disabled="false" data-active="">
+                            <span>My notebooks</span>
+                        </a>
+                    </li>
+
+                    <li class="menu-item " data-item="notifications">
+                        <a href="/notifications?type=teach" aria-disabled="false">
+                            <span>Settings</span>
+                        </a>
+                    </li>
+
+
+
+
+                </ul>
+            </div>
+        </nav>

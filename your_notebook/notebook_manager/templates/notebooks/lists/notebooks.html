@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="main-content">
+
+    <div class="marco-layout teachlearn teach">
+        {% include 'notebooks/includes/navbar.html' %}
+
+
+        <header class="marco-layout__header" data-marco-full-height-sidebar="">
+            <h1>Notebooks</h1>
+        </header>
+
+        <article class="marco-layout__content">
+            <!---->
+
+            <header class="teachlearn__content-header">
+                <div class="teachlearn__content-header-toolbar">
+                    <div data-value="" id="ember1199" class="select-box ember-view teachlearn__filter">
+          <span id="ember1215" class="search-form ember-view teachlearn__search-form"><div class="search-form__form">
+  <div class="search-form__input-wrapper">
+
+        <input class="search-form__input " placeholder="Notebooks name " autocomplete="on" spellcheck="false"
+               aria-label="Search" type="search">
+
+        <button class="st-button_style_none search-form__reset" hidden="" type="button" data-ember-action=""
+                data-ember-action-1217="1217">
+          <span id="ember1218" class="svg-icon close_icon svg-icon_inline ember-view"><svg
+                  xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#close"></use>
+  </svg></span>
+        </button>
+
+
+  </div>
+
+
+
+    <button class="button_with-loader search-form__submit teachlearn__search-form-submit" type="button"
+            data-ember-action="" data-ember-action-1219="1219">
+<!---->
+      Search
+    </button>
+</div>
+</span>
+                    </div>
+            </header>
+
+            <div class="teachlearn-courses teach-courses">
+                <div class="infinite-scroll-modern">
+                    {% for notebook in notebooks %}
+                        <div class="item-tile-list">
+                        <div class="item-tile teach-course-tile">
+                            <a class="item-tile__link-wrapper" href="{{ notebook.get_absolute_url }}"
+                               aria-label="Link to the course Test"></a>
+
+                            <figure class="item-tile__cover">
+                                <img class="item-tile__cover-img" alt="Course cover"
+                                     src="{{notebook.image.url}}">
+
+                                <span class="item-tile__cover-badge" tabindex="0" data-tooltip="{{notebook.get_mode_display}}">
+                          <span id="ember1222" class="svg-icon eye-off_icon ember-view"><svg
+                                  xmlns="http://www.w3.org/2000/svg">
+                            <use xlink:href="/static/frontend-build/icons.svg?1720098406#eye-off"></use>
+                          </svg></span>
+                        </span>
+                            </figure>
+
+                            <div class="item-tile__title item-tile__title_with_badge">
+                                <a href="{{notebook.get_absolute_url}}" class="item-tile__title-link" tabindex="-1">
+                                    {{notebook.name}}
+                                </a>
+
+                            </div>
+
+                            <div class="item-tile__footer" data-hover="false">
+                                <!---->
+                                <!---->                    </div>
+
+                            <div class="item-tile__footer" data-hover="true">
+                                <!---->
+                                <a href="/course/210510/edit-info" class="item-tile__footer-link">
+                                    Description
+                                </a>
+
+                                <a href="/course/210510/edit" class="item-tile__footer-link">
+                                    Content
+                                </a>
+                            </div>
+
+                            <!---->
+                            <div class="item-tile__tools">
+                                <button class="item-tile__tool-btn item-tile__pin" data-tooltip="Закрепить"
+                                        type="button" data-ember-action="" data-ember-action-1225="1225">
+                          <span id="ember1226" class="svg-icon pin_icon svg-icon_inline ember-view"><svg
+                                  xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#pin"></use>
+  </svg></span>
+                                </button>
+
+                                <div id="ember1227" class="drop-down drop-down-menu ember-view item-tile__menu">
+                                    <div aria-expanded="false" aria-haspopup="true" id="ember1228"
+                                         class="drop-down__toggler drop-down-toggler drop-down-toggler--auto-toggle ember-view">
+                                        <button class="item-tile__tool-btn" type="button">
+                            <span id="ember1229" class="svg-icon menu-more_icon svg-icon_inline ember-view"><svg
+                                    xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#menu-more"></use>
+  </svg></span>
+                                        </button>
+
+                                    </div>
+
+                                    <!---->
+
+
+                                    <!----></div>
+                            </div>
+                        </div>
+                    </div>
+                    {%endfor%}
+
+                    <!----> <span class="infinite-scroll-modern__trigger" aria-hidden="true"></span></div>
+            </div>
+        </article>
+
+        <!---->
+        <div class="marco-layout__mobile-bottom-panel">
+            <a href="/teach/courses/new" id="ember1220" class="ember-view button has-icon">
+    <span id="ember1221" class="svg-icon plus-2_icon svg-icon_inline ember-view"><svg
+            xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#plus-2"></use>
+  </svg></span>
+                <span>Новый курс</span>
+            </a>
+        </div>
+
+    </div>
+
+</main>
+{% endblock %}
