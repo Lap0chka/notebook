@@ -1,0 +1,658 @@
+{%extends 'base.html'%}
+{% block title %} Settings {{notebook.name}} {%endblock%}
+{% block content %}
+<main class="main-content">
+
+
+    <div class="marco-layout course">
+        <span id="course-nav-menu-label" hidden="">Main menu and course navigation</span>
+        <nav class="marco-layout__nav course__course-nav-container" data-marco-sticky-nav-content=""
+             aria-labelledby="course-nav-menu-label">
+            <div id="ember2720" class="nav-menu course-nav ember-view course__course-nav"><img class="course-nav__cover"
+                                                                                               src="/static/frontend/course_cover.png"
+                                                                                               alt="Course cover"
+                                                                                               height="56" width="56">
+
+                <h1 class="course-nav__title">Test</h1>
+
+                <div id="ember2721" class="course-badges ember-view course-nav__badges">    <span id="ember2722"
+                                                                                                  class="ember-view course-badge course-badges__badge"
+                                                                                                  data-type="draft"
+                                                                                                  data-value="true"
+                                                                                                  aria-label="Course badge: Черновик">
+  <span id="ember2723" class="svg-icon eye-off_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#eye-off"></use>
+  </svg></span>
+  Черновик
+                    <!----></span>
+
+                    <span id="ember2724" class="ember-view course-badge course-badges__badge" data-type="basic"
+                          data-kind="tariff" data-value="true" aria-label="Course badge: Базовый">
+  <span id="ember2725" class="svg-icon basic_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#basic"></use>
+  </svg></span>
+  Базовый
+                        <!----></span>
+
+                </div>
+
+                <a class="button course-nav__publish-btn success is-outlined" href="/course/210510/publication">
+                    Опубликовать
+                </a>
+
+                <ul class="nav-menu__menu menu course-nav__main-menu" data-level="1">
+                    <li class="menu-item " data-item="course">
+                        <span id="ember2727" hidden="">Курс</span>
+
+                        <button class="nav-menu__menu-toggler" aria-expanded="true" aria-labelledby="ember2727"
+                                type="button" data-ember-action="" data-ember-action-2729="2729">
+        <span id="ember2731" class="svg-icon course-content-filled_icon ember-view"><svg
+                xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#course-content-filled"></use>
+  </svg></span>
+
+                            <span>Курс</span>
+
+                            <!---->
+                            <!---->
+                            <span id="ember2732"
+                                  class="svg-icon right-arrow_icon ember-view nav-menu__menu-item-fold-icon"><svg
+                                    xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#right-arrow"></use>
+  </svg></span>
+
+                        </button>
+
+                        <ul class="nav-menu__menu menu" data-level="2" aria-labelledby="ember2727">
+                            <li class="menu-item " data-item="info">
+                                <a href="/course/210510/info" aria-disabled="false" data-active="">
+                                    <!---->
+                                    <span>Описание</span>
+
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </a>
+                            </li>
+
+                            <li class="menu-item " data-item="syllabus">
+                                <a href="/course/210510/syllabus" aria-disabled="false">
+                                    <!---->
+                                    <span>Содержание</span>
+
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </a>
+                            </li>
+
+                            <li class="menu-item " data-item="checklist">
+                                <a href="/course/210510/checklist" aria-disabled="false">
+                                    <!---->
+                                    <span>Чек-лист</span>
+
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="menu-item " data-item="communications">
+                        <span id="ember2742" hidden="">Общение с учащимися</span>
+
+                        <button class="nav-menu__menu-toggler" aria-expanded="true" aria-labelledby="ember2742"
+                                type="button" data-ember-action="" data-ember-action-2744="2744">
+        <span id="ember2746" class="svg-icon communications_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#communications"></use>
+  </svg></span>
+
+                            <span>Общение с учащимися</span>
+
+                            <!---->
+                            <!---->
+                            <span id="ember2747"
+                                  class="svg-icon right-arrow_icon ember-view nav-menu__menu-item-fold-icon"><svg
+                                    xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#right-arrow"></use>
+  </svg></span>
+
+                        </button>
+
+                        <ul class="nav-menu__menu menu" data-level="2" aria-labelledby="ember2742">
+                            <li class="menu-item " data-item="assessments">
+                                <a href="/course/210510/assessments" aria-disabled="false">
+                                    <!---->
+                                    <span>Проверка решений</span>
+
+                                    <span class="nav-menu__menu-item-feature-plan">  <span class="feature-tariff-badge"
+                                                                                           aria-label="Feature badge: Платный"
+                                                                                           data-tariff="basic_paid">Платный</span>
+</span>
+
+                                    <!---->
+                                    <!---->
+                                </a>
+                            </li>
+
+                            <li class="menu-item " data-item="news">
+                                <a href="/course/210510/news" aria-disabled="false">
+                                    <!---->
+                                    <span>Новости</span>
+
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </a>
+                            </li>
+
+                            <li class="menu-item " data-item="comments">
+                                <a href="/course/210510/comments" aria-disabled="false">
+                                    <!---->
+                                    <span>Комментарии</span>
+
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </a>
+                            </li>
+
+                            <li class="menu-item " data-item="reviews">
+                                <a href="/course/210510/reviews" aria-disabled="false">
+                                    <!---->
+                                    <span>Отзывы</span>
+
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="menu-item " data-item="analytics">
+                        <span id="ember2760" hidden="">Аналитика</span>
+
+                        <button class="nav-menu__menu-toggler" aria-expanded="false" aria-labelledby="ember2760"
+                                type="button" data-ember-action="" data-ember-action-2762="2762">
+        <span id="ember2764" class="svg-icon reports_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#reports"></use>
+  </svg></span>
+
+                            <span>Аналитика</span>
+
+                            <!---->
+                            <!---->
+                            <span id="ember2765"
+                                  class="svg-icon right-arrow_icon ember-view nav-menu__menu-item-fold-icon"><svg
+                                    xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#right-arrow"></use>
+  </svg></span>
+
+                        </button>
+
+                        <ul class="nav-menu__menu menu" data-level="2" hidden="" aria-labelledby="ember2760">
+                            <li class="menu-item " data-item="gradebook">
+                                <a href="/course-grade-book/210510" aria-disabled="false">
+                                    <!---->
+                                    <span>Табель успеваемости</span>
+
+                                    <span class="nav-menu__menu-item-feature-plan">  <span class="feature-tariff-badge"
+                                                                                           aria-label="Feature badge: Платный"
+                                                                                           data-tariff="basic_paid">Платный</span>
+</span>
+
+                                    <!---->
+                                    <!---->
+                                </a>
+                            </li>
+
+                            <li class="menu-item " data-item="reports">
+                                <a href="/course/210510/reports" aria-disabled="false">
+                                    <!---->
+                                    <span>Отчёты</span>
+
+                                    <span class="nav-menu__menu-item-feature-plan">  <span class="feature-tariff-badge"
+                                                                                           aria-label="Feature badge: Платный"
+                                                                                           data-tariff="basic_paid">Платный</span>
+</span>
+
+                                    <!---->
+                                    <!---->
+                                </a>
+                            </li>
+
+                            <li class="menu-item " data-item="revenue">
+                                <a href="/course/210510/revenue" aria-disabled="false">
+                                    <!---->
+                                    <span>Доход</span>
+
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </a>
+                            </li>
+
+                            <li class="menu-item " data-item="statistics">
+                                <a href="/course/210510/stats" aria-disabled="false">
+                                    <!---->
+                                    <span>Статистика</span>
+
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </a>
+                            </li>
+
+                            <li class="menu-item " data-item="dashboard">
+                                <a href="/course/210510/instructor-dashboard" aria-disabled="false">
+                                    <!---->
+                                    <span>Дашборд</span>
+
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="menu-item " data-item="settings">
+                        <span id="ember2781" hidden="">Настройки</span>
+
+                        <button class="nav-menu__menu-toggler" aria-expanded="false" aria-labelledby="ember2781"
+                                type="button" data-ember-action="" data-ember-action-2783="2783">
+        <span id="ember2785" class="svg-icon course-settings_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#course-settings"></use>
+  </svg></span>
+
+                            <span>Настройки</span>
+
+                            <!---->
+                            <!---->
+                            <span id="ember2786"
+                                  class="svg-icon right-arrow_icon ember-view nav-menu__menu-item-fold-icon"><svg
+                                    xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#right-arrow"></use>
+  </svg></span>
+
+                        </button>
+
+                        <ul class="nav-menu__menu menu" data-level="2" hidden="" aria-labelledby="ember2781">
+                            <li class="menu-item " data-item="publication">
+                                <a href="/course/210510/publication" aria-disabled="false">
+                                    <!---->
+                                    <span>Публикация</span>
+
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </a>
+                            </li>
+
+                            <li class="menu-item " data-item="pricing">
+                                <a href="/course/210510/pricing" aria-disabled="false">
+                                    <!---->
+                                    <span>Цена и промокоды</span>
+
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </a>
+                            </li>
+
+                            <li class="menu-item " data-item="permissions">
+                                <span id="ember2793" hidden="">Права доступа</span>
+
+                                <button class="nav-menu__menu-toggler" aria-expanded="false" aria-labelledby="ember2793"
+                                        type="button" data-ember-action="" data-ember-action-2795="2795">
+                                    <!---->
+                                    <span>Права доступа</span>
+
+                                    <!---->
+                                    <!---->
+                                    <span id="ember2797"
+                                          class="svg-icon right-arrow_icon ember-view nav-menu__menu-item-fold-icon"><svg
+                                            xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#right-arrow"></use>
+  </svg></span>
+
+                                </button>
+
+                                <ul class="nav-menu__menu menu" data-level="3" hidden="" aria-labelledby="ember2793">
+                                    <li class="menu-item " data-item="permissions-admins">
+                                        <a href="/course/210510/edit-permissions/admins" aria-disabled="false">
+                                            <!---->
+                                            <span>Администраторы</span>
+
+                                            <span class="nav-menu__menu-item-feature-plan"><!----></span>
+
+                                            <!---->
+                                            <!---->
+                                        </a>
+                                    </li>
+
+                                    <li class="menu-item " data-item="permissions-teachers">
+                                        <a href="/course/210510/edit-permissions/teachers" aria-disabled="false">
+                                            <!---->
+                                            <span>Преподаватели</span>
+
+                                            <span class="nav-menu__menu-item-feature-plan">  <span
+                                                    class="feature-tariff-badge" aria-label="Feature badge: Платный"
+                                                    data-tariff="basic_paid">Платный</span>
+</span>
+
+                                            <!---->
+                                            <!---->
+                                        </a>
+                                    </li>
+
+                                    <li class="menu-item " data-item="permissions-assistants">
+                                        <a href="/course/210510/edit-permissions/assistants" aria-disabled="false">
+                                            <!---->
+                                            <span>Ассистенты</span>
+
+                                            <span class="nav-menu__menu-item-feature-plan">  <span
+                                                    class="feature-tariff-badge" aria-label="Feature badge: Платный"
+                                                    data-tariff="basic_paid">Платный</span>
+</span>
+
+                                            <!---->
+                                            <!---->
+                                        </a>
+                                    </li>
+
+                                    <li class="menu-item " data-item="permissions-moderators">
+                                        <a href="/course/210510/edit-permissions/moderators" aria-disabled="false">
+                                            <!---->
+                                            <span>Модераторы</span>
+
+                                            <span class="nav-menu__menu-item-feature-plan"><!----></span>
+
+                                            <!---->
+                                            <!---->
+                                        </a>
+                                    </li>
+
+                                    <li class="menu-item " data-item="permissions-testers">
+                                        <a href="/course/210510/edit-permissions/testers" aria-disabled="false">
+                                            <!---->
+                                            <span>Тестирующие</span>
+
+                                            <span class="nav-menu__menu-item-feature-plan">  <span
+                                                    class="feature-tariff-badge" aria-label="Feature badge: Enterprise"
+                                                    data-tariff="enterprise">Enterprise</span>
+</span>
+
+                                            <!---->
+                                            <!---->
+                                        </a>
+                                    </li>
+
+                                    <li class="menu-item " data-item="permissions-learners">
+                                        <a href="/course/210510/edit-permissions/learners" aria-disabled="false">
+                                            <!---->
+                                            <span>Учащиеся</span>
+
+                                            <span class="nav-menu__menu-item-feature-plan">  <span
+                                                    class="feature-tariff-badge" aria-label="Feature badge: Enterprise"
+                                                    data-tariff="enterprise">Enterprise</span>
+</span>
+
+                                            <!---->
+                                            <!---->
+                                        </a>
+                                    </li>
+
+                                    <li class="menu-item " data-item="blacklist">
+                                        <a href="/course/210510/blacklist" aria-disabled="false">
+                                            <!---->
+                                            <span>Чёрный список</span>
+
+                                            <!---->
+                                            <!---->
+                                            <!---->
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
+                            <li class="menu-item " data-item="certificates">
+                                <a href="/course/210510/edit-certificate" aria-disabled="false">
+                                    <!---->
+                                    <span>Сертификаты</span>
+
+                                    <span class="nav-menu__menu-item-feature-plan">  <span class="feature-tariff-badge"
+                                                                                           aria-label="Feature badge: Платный"
+                                                                                           data-tariff="basic_paid">Платный</span>
+</span>
+
+                                    <!---->
+                                    <!---->
+                                </a>
+                            </li>
+
+                            <li class="menu-item " data-item="attachments">
+                                <a href="/course/210510/attachments/" data-href-to-ignore="/course/210510/attachments/"
+                                   aria-disabled="false">
+                                    <!---->
+                                    <span>Файлы</span>
+
+                                    <span class="nav-menu__menu-item-feature-plan">  <span class="feature-tariff-badge"
+                                                                                           aria-label="Feature badge: Платный"
+                                                                                           data-tariff="basic_paid">Платный</span>
+</span>
+
+                                    <!---->
+                                    <!---->
+                                </a>
+                            </li>
+
+                            <li class="menu-item " data-item="advanced-settings">
+                                <a href="/course/210510/advanced-settings" aria-disabled="false">
+                                    <!---->
+                                    <span>Дополнительно</span>
+
+                                    <span class="nav-menu__menu-item-feature-plan">  <span class="feature-tariff-badge"
+                                                                                           aria-label="Feature badge: Enterprise"
+                                                                                           data-tariff="enterprise">Enterprise</span>
+</span>
+
+                                    <!---->
+                                    <!---->
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="menu-item-divider " data-media-query="not-mobile"></li>
+
+                    <li class="menu-item " data-media-query="not-mobile" data-item="search">
+                        <a href="/course/210510/search" aria-disabled="false">
+        <span id="ember2832" class="svg-icon search_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#search"></use>
+  </svg></span>
+
+                            <span>Искать в курсе</span>
+
+                            <!---->
+                            <!---->
+                            <!---->
+                        </a>
+                    </li>
+
+                    <li class="menu-item " data-media-query="not-mobile" data-item="new-class">
+                        <a href="/new-class?course=210510" aria-disabled="false">
+        <span id="ember2836" class="svg-icon plus-2_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#plus-2"></use>
+  </svg></span>
+
+                            <span>Создать класс</span>
+
+                            <!---->
+                            <!---->
+                            <!---->
+                        </a>
+                    </li>
+
+                </ul>
+
+
+                <!----></div>
+        </nav>
+
+        <!---->
+
+        <header class="marco-layout__header" data-marco-full-height-sidebar="">
+            <h1>Settings</h1>
+        </header>
+
+        <article class="marco-layout__content">
+            <fieldset class="course-info-editor">
+                <section class="course-info-editor__section course-info-editor__section_hor-list">
+
+                    <div class="course-info-editor__upload-widget course-info-editor__cover-widget" data-state="empty">
+                        <div class="course-info-editor__upload-widget-inner course-info-editor__upload-widget-content"
+                             data-state="empty">
+          <span class="svg-icon img-placeholder_icon ember-view course-info-editor__upload-widget-icon"><svg
+                  xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#img-placeholder"></use>
+  </svg></span>
+                            <div class="course-info-editor__upload-widget-label">
+                                Logo
+                            </div>
+                            <div class="course-info-editor__upload-widget-text">
+                                png-file<br>230×230px
+                            </div>
+                        </div>
+
+                        <div class="course-info-editor__upload-widget-inner course-info-editor__upload-widget-upload"
+                             data-state="empty">
+                            <button class="course-info-editor__upload-widget-inner st-button_style_none course-info-editor__upload-widget-upload-btn"
+                                    type="button" data-ember-action="" data-ember-action-2838="2838">
+          <span class="svg-icon upload_icon ember-view course-info-editor__upload-widget-icon"><svg
+                  xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#upload"></use>
+  </svg></span>
+                                <div class="course-info-editor__upload-widget-label">
+                                    Download
+                                </div>
+                                <div class="course-info-editor__upload-widget-text">
+                                    png-file<br>230×230px
+                                </div>
+                            </button>
+
+                        </div>
+                    </div>
+
+
+                    <input class="file-upload__input" name="cover" accept="image/png,image/jpeg" tabindex="-1"
+                           type="file">
+
+
+                    <div class="modal-popup ember-view course-info-editor__upload-widget-add-modal">
+                        <!----></div>
+
+
+                    <input class="file-upload__input" name="source" accept="video/mp4,video/x-m4v,video/*" tabindex="-1"
+                           type="file">
+
+
+                    <div id="ember2843" class="modal-popup ember-view course-info-editor__upload-widget-play-modal">
+                        <!----></div>
+                </section>
+
+                <section class="course-info-editor__section">
+                    <div class="course-info-editor__section-heading">
+                        <label for="title">Name</label>
+                    </div>
+
+                    <input id="title" class="st-input w-full block" placeholder="Название курса" type="text" required=""
+                           maxlength="64" size="64" minlength="3">
+
+                    <div class="input-note">
+                        Maximum 64 symbols
+                        <span class="input-note__char-counter">4/64</span>
+                    </div>
+                </section>
+
+                <section class="course-info-editor__section">
+                    <div class="course-info-editor__section-heading">
+                        <label for="short-descr">Categories</label>
+                        <span id="ember2844"
+                              class="svg-icon question-filled_icon svg-icon_inline svg-icon_inline-baseline ember-view ui-help"
+                              tabindex="0"><svg xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#question-filled"></use>
+  </svg></span>
+                    </div>
+
+                    <!---->
+                    <div class="tags-course-tags course-info-editor__tags" data-selected-count="0"
+                         data-selected-chain-count="0">
+                        <button class="button tags-modal-selector-btn is-outlined has-icon tags-course-tags__btn"
+                                type="button">
+  
+    <span id="ember2846" class="svg-icon plus-2_icon svg-icon_inline ember-view"><svg
+            xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#plus-2"></use>
+  </svg></span>
+                            <span>Choose the category</span>
+
+                        </button>
+
+                        <div data-theme="modern" id="ember2847" class="modal-popup ember-view tags-modal-selector-modal"
+                             aria-hidden="true"><!----></div>
+
+
+                        <!---->
+                    </div>
+                </section>
+
+                <section class="course-info-editor__section">
+                    <div class="course-info-editor__section-heading">
+                        <label for="short-descr">Description</label>
+                        <span id="ember2848"
+                              class="svg-icon question-filled_icon svg-icon_inline svg-icon_inline-baseline ember-view ui-help"
+                              tabindex="0"><svg xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#question-filled"></use>
+  </svg></span>
+                    </div>
+
+                    <textarea id="short-descr" rows="4" class="st-input w-full block"></textarea>
+
+                </section>
+
+
+                <section class="course-info-editor__section">
+                    <div class="course-info-editor__section-heading">
+                        <label for="learning-outcomes">Who might find this notebook useful?</label>
+                        <span id="ember3044"
+                              class="svg-icon question-filled_icon svg-icon_inline svg-icon_inline-baseline ember-view ui-help"
+                              tabindex="0"><svg xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#question-filled"></use>
+  </svg></span>
+                    </div>
+
+                    <textarea id="learning-outcomes" rows="5" class="st-input w-full block"
+                              style="height: 124px;"></textarea>
+
+                </section>
+
+
+            </fieldset>
+        </article>
+
+    </div>
+    </span>
+
+    </div>
+
+    <!---->
+</main>
+{%endblock%}

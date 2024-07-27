@@ -17,15 +17,14 @@
                 <div id="ember442" class="drop-down ember-view drop-down-empty rubricator-dropdown navbar__rubricator">
                     <div aria-expanded="false" aria-haspopup="true" id="ember443"
                          class="drop-down__toggler drop-down-toggler drop-down-toggler--auto-toggle ember-view">
-                        <button class="st-button_style_none rubricator-dropdown__toggler" aria-label="Rubricator"
-                                type="button">
-                            Каталог
+                        <a href="{% url 'notebook:index' %}" class="navbar__link st-link">
+                            Catalog
                             <span id="ember444"
                                   class="svg-icon down-arrow_icon ember-view navbar__down-arrow rubricator-dropdown__icon"><svg
                                     xmlns="http://www.w3.org/2000/svg">
     <use xlink:href="/static/frontend-build/icons.svg?1720098406#down-arrow"></use>
   </svg></span>
-                        </button>
+                        </a>
 
                     </div>
 
@@ -37,14 +36,14 @@
 
             <li class="navbar__menu-item" data-navbar-item="learn">
                 <a href="/learn?auth=registration" id="ember445" class="ember-view navbar__link st-link">
-                    Моё обучение
+                    My notebooks
                 </a>
             </li>
 
             <li class="navbar__menu-item" data-navbar-item="teach">
                 <a class="navbar__link st-link" href="https://teach.stepik.org/ru" target="_blank"
                    rel="noopener noreferrer">
-                    Преподавание
+                    Create notebook
                 </a>
             </li>
         </ul>

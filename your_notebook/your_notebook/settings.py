@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     # Apps
     'notebook_manager',
+    'notebook',
 ]
 
 MIDDLEWARE = [

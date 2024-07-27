@@ -5,7 +5,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('notebook_manager.urls', namespace='notebook')),
+    path('', include('notebook.urls', namespace='notebook')),
+    path('manager/', include('notebook_manager.urls', namespace='notebook_manager')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 

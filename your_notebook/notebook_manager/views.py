@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.decorators.http import require_POST
 
 from notebook_manager.forms import TitleNotebookForm, NotebookTopicForm, NotebookNoteForm, NotebookStepForm
-from notebook_manager.models import NameNotebook, NotebookNote, NotebookTopic, NotebookStep
+from notebook_manager.models import Notebook, NotebookNote, NotebookTopic, NotebookStep
 
 
 # @login_required
@@ -16,12 +16,12 @@ def create_notebook(request):
             return redirect('notebook_manager:edit_notebook', notebook.slug)
     else:
         form = TitleNotebookForm()
-    return render(request, 'notebooks/manager/creation_notebook.html', {'form': form})
+    return render(request, 'notebooks/manager/creation/creation_notebook.html', {'form': form})
 
 
 # @login_required
 def edit_notebook(request, slug):
-    name_notebook = get_object_or_404(NameNotebook, slug=slug)
+    name_notebook = get_object_or_404(Notebook, slug=slug)
     topics = name_notebook.topics.all()
 
     if request.method == 'POST':
@@ -61,12 +61,12 @@ def edit_notebook(request, slug):
         'note_form': note_form,
         'topics': topics,
     }
-    return render(request, 'notebooks/manager/edit_notebook.html', context)
+    return render(request, 'notebooks/manager/edit/edit_notebook.html', context)
 
 
 # @login_required
 def list_notebooks(request):
-    notebooks = NameNotebook.objects.all()
+    notebooks = Notebook.objects.all()
     return render(request, 'notebooks/lists/notebooks.html', {'notebooks': notebooks})
 
 
@@ -88,7 +88,7 @@ def edit_note(request, slug_topic, slug, pk):
         'topics': topics,
         'form': form,
     }
-    return render(request, 'notebooks/manager/edit_note.html', context)
+    return render(request, 'notebooks/manager/edit/edit_note.html', context)
 
 
 @require_POST
@@ -110,3 +110,23 @@ def add_step(request):
             return JsonResponse({'error': 'Your created maximum steps'}, status=400)
 
     return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+
+def settings_notebook(request, slug):
+    notebook = get_object_or_404(Notebook, slug=slug)
+    if request.method == 'POST':
+        form = NotebookStepForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = NotebookStepForm(instance=notebook)
+    context = {
+        'notebook': notebook,
+        'form': form
+    }
+    return render(
+        request,
+        'notebooks/manager/settings/notebook_settings.html',
+        context
+    )
+

@@ -15,13 +15,15 @@ def rand_slug() -> str:
     return "".join(sample(ascii_letters + digits, 3))
 
 
-class NameNotebook(models.Model):
+class Notebook(models.Model):
     class Mode(models.TextChoices):
         PUBLIC = 'PB', 'Public'
         PRIVATE = 'PR', 'Private'
 
     name = models.CharField(max_length=64)
-    slug = models.SlugField(max_length=76, blank=True)  # unique=True)
+    description = RichTextUploadingField(blank=True)
+    target_audience = RichTextUploadingField(blank=True)
+    slug = models.SlugField(max_length=76, unique=True)
     image = models.ImageField(upload_to='Notebook_images/%Y/%m/', blank=True, default='default/default_notebook.jpeg')
     mode = models.CharField(
         max_length=2,
@@ -41,11 +43,11 @@ class NameNotebook(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('notebook:edit_notebook', kwargs={'slug': self.slug})
+        return reverse('notebook_manager:edit_notebook', kwargs={'slug': self.slug})
 
 
 class NotebookTopic(models.Model):
-    name_notebook = models.ForeignKey(NameNotebook, on_delete=models.CASCADE, related_name='topics')
+    name_notebook = models.ForeignKey(Notebook, on_delete=models.CASCADE, related_name='topics')
     topic = models.CharField(max_length=128)
     slug = models.SlugField(max_length=76, blank=True)
     description = models.TextField(blank=True)
@@ -69,7 +71,7 @@ class NotebookNote(models.Model):
 
     def get_absolute_url(self):
         first = self.steps.all().first()
-        return reverse('notebook:edit_note', kwargs={
+        return reverse('notebook_manager:edit_note', kwargs={
             'slug_topic': self.topic.slug, 'slug': self.slug, 'pk': first.pk
         })
 
@@ -85,6 +87,6 @@ class NotebookStep(models.Model):
     content = RichTextUploadingField(blank=True)
 
     def get_absolute_url(self):
-        return reverse('notebook:edit_note', kwargs={
+        return reverse('notebook_manager:edit_note', kwargs={
             'slug_topic': self.note.topic.slug, 'slug': self.note.slug, 'pk': self.pk
         })

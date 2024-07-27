@@ -1,9 +1,9 @@
 from django.contrib import admin
 
-from notebook_manager.models import NameNotebook, NotebookNote, NotebookTopic, NotebookStep
+from notebook_manager.models import Notebook, NotebookNote, NotebookTopic, NotebookStep
 
 
-@admin.register(NameNotebook)
+@admin.register(Notebook)
 class NameNotebookAdmin(admin.ModelAdmin):
     list_display = ('id', 'name',)
 

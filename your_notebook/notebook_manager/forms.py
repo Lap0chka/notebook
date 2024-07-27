@@ -1,11 +1,23 @@
 from django import forms
 
-from notebook_manager.models import NameNotebook, NotebookTopic, NotebookNote, NotebookStep
+from notebook_manager.models import Notebook, NotebookTopic, NotebookNote, NotebookStep
+
+
+class SettingsNotebookForm(forms.ModelForm):
+    class Meta:
+        model = Notebook
+        fields = ['name', 'description', '']
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'st-input w-full block',
+                'placeholder': 'Notebook name',
+            }),
+        }
 
 
 class TitleNotebookForm(forms.ModelForm):
     class Meta:
-        model = NameNotebook
+        model = Notebook
         fields = ['name']
         widgets = {
             'name': forms.TextInput(
