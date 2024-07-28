@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.safestring import mark_safe
 
 from notebook_manager.models import Notebook, NotebookTopic, NotebookNote, NotebookStep
 
@@ -6,12 +7,21 @@ from notebook_manager.models import Notebook, NotebookTopic, NotebookNote, Noteb
 class SettingsNotebookForm(forms.ModelForm):
     class Meta:
         model = Notebook
-        fields = ['name', 'description', '']
+        fields = ['name', 'description', 'audience', 'image']
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'st-input w-full block',
                 'placeholder': 'Notebook name',
             }),
+            'description': forms.Textarea(attrs={
+                'class': 'st-input w-full block',
+                'rows': 6,
+            }),
+            'audience': forms.Textarea(attrs={
+                'class': 'st-input w-full block',
+                'rows': 5,
+            }),
+            'image': forms.FileInput(attrs={})
         }
 
 

@@ -514,10 +514,12 @@
         </header>
 
         <article class="marco-layout__content">
-            <fieldset class="course-info-editor">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset class="course-info-editor">
                 <section class="course-info-editor__section course-info-editor__section_hor-list">
 
-                    <div class="course-info-editor__upload-widget course-info-editor__cover-widget" data-state="empty">
+                    <div class="course-info-editor__upload-widget course-info-editor__cover-widget" >
                         <div class="course-info-editor__upload-widget-inner course-info-editor__upload-widget-content"
                              data-state="empty">
           <span class="svg-icon img-placeholder_icon ember-view course-info-editor__upload-widget-icon"><svg
@@ -532,36 +534,24 @@
                             </div>
                         </div>
 
-                        <div class="course-info-editor__upload-widget-inner course-info-editor__upload-widget-upload"
-                             data-state="empty">
-                            <button class="course-info-editor__upload-widget-inner st-button_style_none course-info-editor__upload-widget-upload-btn"
-                                    type="button" data-ember-action="" data-ember-action-2838="2838">
-          <span class="svg-icon upload_icon ember-view course-info-editor__upload-widget-icon"><svg
-                  xmlns="http://www.w3.org/2000/svg">
-    <use xlink:href="/static/frontend-build/icons.svg?1720098406#upload"></use>
-  </svg></span>
+                        <div class="course-info-editor__upload-widget-inner course-info-editor__upload-widget-upload">
+                            <div class="course-info-editor__upload-widget-inner st-button_style_none course-info-editor__upload-widget-upload-btn"
+                                    type="button">
+                                          <span class="svg-icon upload_icon ember-view course-info-editor__upload-widget-icon"><svg
+                                                  xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/static/frontend-build/icons.svg?1720098406#upload"></use>
+                                  </svg></span>
                                 <div class="course-info-editor__upload-widget-label">
-                                    Download
+                                    {{form.image}}
                                 </div>
                                 <div class="course-info-editor__upload-widget-text">
                                     png-file<br>230×230px
                                 </div>
-                            </button>
+                            </div>
 
                         </div>
                     </div>
 
-
-                    <input class="file-upload__input" name="cover" accept="image/png,image/jpeg" tabindex="-1"
-                           type="file">
-
-
-                    <div class="modal-popup ember-view course-info-editor__upload-widget-add-modal">
-                        <!----></div>
-
-
-                    <input class="file-upload__input" name="source" accept="video/mp4,video/x-m4v,video/*" tabindex="-1"
-                           type="file">
 
 
                     <div id="ember2843" class="modal-popup ember-view course-info-editor__upload-widget-play-modal">
@@ -573,8 +563,7 @@
                         <label for="title">Name</label>
                     </div>
 
-                    <input id="title" class="st-input w-full block" placeholder="Название курса" type="text" required=""
-                           maxlength="64" size="64" minlength="3">
+                    {{form.name}}
 
                     <div class="input-note">
                         Maximum 64 symbols
@@ -623,11 +612,10 @@
     <use xlink:href="/static/frontend-build/icons.svg?1720098406#question-filled"></use>
   </svg></span>
                     </div>
-
-                    <textarea id="short-descr" rows="4" class="st-input w-full block"></textarea>
+                     {{ form.media }}
+                    {{form.description}}
 
                 </section>
-
 
                 <section class="course-info-editor__section">
                     <div class="course-info-editor__section-heading">
@@ -639,13 +627,14 @@
   </svg></span>
                     </div>
 
-                    <textarea id="learning-outcomes" rows="5" class="st-input w-full block"
-                              style="height: 124px;"></textarea>
+                     {{ form.media }}
+                    {{ form.audience }}
 
                 </section>
-
-
+                    <br>
+                     <button type="submit">Save</button>
             </fieldset>
+            </form>
         </article>
 
     </div>

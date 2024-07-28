@@ -22,7 +22,7 @@ class Notebook(models.Model):
 
     name = models.CharField(max_length=64)
     description = RichTextUploadingField(blank=True)
-    target_audience = RichTextUploadingField(blank=True)
+    audience = RichTextUploadingField(blank=True)
     slug = models.SlugField(max_length=76, unique=True)
     image = models.ImageField(upload_to='Notebook_images/%Y/%m/', blank=True, default='default/default_notebook.jpeg')
     mode = models.CharField(

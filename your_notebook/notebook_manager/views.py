@@ -3,7 +3,8 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.decorators.http import require_POST
 
-from notebook_manager.forms import TitleNotebookForm, NotebookTopicForm, NotebookNoteForm, NotebookStepForm
+from notebook_manager.forms import TitleNotebookForm, NotebookTopicForm, NotebookNoteForm, NotebookStepForm, \
+    SettingsNotebookForm
 from notebook_manager.models import Notebook, NotebookNote, NotebookTopic, NotebookStep
 
 
@@ -115,11 +116,11 @@ def add_step(request):
 def settings_notebook(request, slug):
     notebook = get_object_or_404(Notebook, slug=slug)
     if request.method == 'POST':
-        form = NotebookStepForm(request.POST)
+        form = SettingsNotebookForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
     else:
-        form = NotebookStepForm(instance=notebook)
+        form = SettingsNotebookForm(instance=notebook)
     context = {
         'notebook': notebook,
         'form': form
