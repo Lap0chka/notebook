@@ -15,8 +15,8 @@
     <nav id="main-navbar" class="navbar" aria-label="Общая навигация по сайту">
         <a href="/catalog?auth=registration" id="ember441" class="ember-view navbar__logo-link">
             <picture>
-                <source srcset="/static/frontend/topbar_logo_small.svg" media="(max-width: 1024px)">
-                <img class="navbar__logo" alt="Stepik" src="/static/frontend/topbar_logo.svg">
+                <source srcset="{% static 'img/logo/logo_main.png' %}" media="(max-width: 1024px)">
+                <img class="navbar__logo" alt="Your Notebook" src="{% static 'img/logo/logo_main.png' %}">
             </picture>
         </a>
         {% block menu %}

@@ -41,3 +41,8 @@ def notebook_page_step(request, slug_notebook, slug_topic, slug_note, step_value
     }
 
     return render(request, 'notebook/step_page.html', context)
+
+
+def notebook_description(request, slug):
+    notebook = get_object_or_404(Notebook, slug=slug)
+    return render(request, 'notebook/description.html', {'notebook': notebook})

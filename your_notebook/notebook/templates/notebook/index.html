@@ -95,11 +95,11 @@
                                         <div id="ember1658"
                                              class="course-card catalog-rich-card ember-view course-cards__card"
                                              data-has-bookmark=""><a class="catalog-rich-card__link-wrapper"
-                                                                     href="{% url 'notebook:notebook_page' notebook.slug %} "
+                                                                     href="{{notebook.get_absolute_url_public}} "
                                                                      aria-label="PRO C#. Коллекции"
                                                                      draggable="false"></a>
 
-                                            <a class="course-card__title" href="{% url 'notebook:notebook_page' notebook.slug %} ">
+                                            <a class="course-card__title" href="{{notebook.get_absolute_url_public}}">
                                                 {{notebook.name}}
                                             </a>
 

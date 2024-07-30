@@ -1,36 +1,26 @@
 {% extends 'base.html' %}
-{% block title %} My notebooks {%endblock%}
+{% block title %} {{notebook.name}}  topics {%endblock%}
 {% block content %}
 <main class="main-content">
-
-
     <div class="marco-layout course">
         <span id="course-nav-menu-label" hidden="">Main menu and course navigation</span>
         <nav class="marco-layout__nav course__course-nav-container" data-marco-sticky-nav-content=""
              aria-labelledby="course-nav-menu-label">
-            <div id="ember732" class="nav-menu course-nav ember-view course__course-nav"><img class="course-nav__cover"
-                                                                                              src="https://cdn.stepik.net/media/cache/images/courses/58852/cover_xGphyPj/ca3f6f66d38c26e93f7dacf8bd7a2a32.png"
-                                                                                              alt="Course cover"
-                                                                                              height="56" width="56">
-
+            <div class="nav-menu course-nav ember-view course__course-nav">
+                <img class="course-nav__cover" src="{{notebook.image.url}}" alt="Course cover" height="56" width="56">
                 <h1 class="course-nav__title">{{notebook.name}}</h1>
-                <div id="ember733" class="course-join-button ember-view course-nav__course-join">
+                <div class="course-join-button ember-view course-nav__course-join">
                     <button class="button" title="Продолжить обучение с последнего пройденного шага" type="button"
                             data-ember-action="" data-ember-action-734="734">
-                        Продолжить
+                        Continue
                     </button>
                 </div>
 
                 <!---->
                 <ul class="nav-menu__menu menu course-nav__main-menu" data-level="1">
                     <li class="menu-item nav-menu__menu-item_collapse-icon" data-item="info">
-                        <a href="/course/58852/info" aria-disabled="false">
-                            <!---->
-                            <span>Описание</span>
-
-                            <!---->
-                            <!---->
-                            <!---->
+                        <a href="{% url 'notebook:notebook_description' notebook.slug %}" aria-disabled="false">
+                            <span>Description</span>
                         </a>
                     </li>
 

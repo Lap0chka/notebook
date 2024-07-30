@@ -1,0 +1,695 @@
+{% extends 'base.html' %}
+{% block title %} Desciption {%endblock%}
+{% block content  %}
+<main class="main-content">
+
+    <div class="marco-layout course">
+        <span id="course-nav-menu-label" hidden="">Main menu and course navigation</span>
+        {% include 'notebook/includes/left_menu.html' %}
+        <header class="marco-layout__header">
+            <h1>Description</h1>
+        </header>
+        <div class="course-index marco-layout__content page-fragment" data-marco-no-aside="">
+            <div class="flex-row course-index__main-wrapper course-index__main-wrapper_fixed-btn">
+                <div class="col-xs-12 col-md-8 col-md-8_left-padding-none">
+                    <div class="course-index_xs-hidden">
+                        <div class="course-index__bordered-wrapper">
+                            <div class="flex-row flex-row_paddings_none course-index__header">
+                                <h2 class="st-h2 col-xs-12">Notebook description</h2>
+                            </div>
+                            <div class="flex-row flex-row_paddings_none">
+                                <div class="col-xs-12">
+                                    {{notebook.description|safe}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-index__bordered-wrapper">
+                        <div class="flex-row flex-row_paddings_none course-index__header">
+                            <h2 class="st-h2 col-xs-12 ">Creator</h2>
+                        </div>
+                        <ol class="flex-row flex-row_paddings_none course-index__authors-list">
+                            <li class="author-widget ember-view course-index__author col-xs-12"><img
+                                    class="author-widget__avatar"
+                                    src="https://cdn.stepik.net/media/users/37228178/avatar.png"
+                                    style="width: 50px; height: 50px;" alt="Аватар пользователя">
+
+                                <div class="author-widget__content">
+                                    <a href="/users/37228178"
+                                       class="ember-view author-widget__name link-secondary link_no-static-line">
+                                        USER NAME SURNAME
+                                    </a>
+                                    <div class="author-widget__details">
+                                        <div class="shortened-text ember-view">
+                                            USER DESCRIPTION
+                                        </div>
+                                    </div>
+
+                                    <div class="author-widget__info">
+                                        <div class="rating-badge author-widget__rating" data-theme="min">
+                                                                                    <span class="ui-stars rating-badge__icon">
+                                                                                    <span class="ui-star ui-stars__star"
+                                                                                          role="button" data-index="1">
+                                                                                    ★
+
+                                                            </span>
+
+                                                                <span class="ui-star ui-stars__star" role="button"
+                                                                      data-index="2">
+                                                                ★
+
+                                                            </span>
+
+                                                                <span class="ui-star ui-stars__star" role="button"
+                                                                      data-index="3">
+                                                                ★
+
+                                                            </span>
+
+                                                                <span class="ui-star ui-stars__star" role="button"
+                                                                      data-index="4">
+                                                                ★
+
+                                                            </span>
+
+                                                                <span class="ui-star ui-stars__star" role="button"
+                                                                      data-index="5">
+                                                                ★
+
+                                                            </span>
+
+                                                            </span>
+
+
+                                            <span class="rating-badge__average">
+                                        5
+                                      </span>
+
+                                            <span class="rating-badge__count">
+                                          (28748)
+                                        </span>
+                                        </div>
+
+                                        <div class="author-widget__widgets">
+        <span class="author-widget__widget" data-type="created_courses">
+          <span id="ember2731" class="svg-icon courses_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#courses"></use>
+  </svg></span>
+          21 курс
+        </span>
+                                            <span class="author-widget__widget" data-type="followers">
+          <span id="ember2732" class="svg-icon user_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#user"></use>
+  </svg></span>
+          1.1M подписчиков
+        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="flex-row flex-row_paddings_none course-index__header">
+                        <div class="col-xs-12 col-md-8">
+                            <h2 class="st-h2">Отзывы о курсе</h2>
+                        </div>
+                        <div class="col-xs-12 col-md-4 course-index__reviews-link">
+                            <a href="/course/58852/reviews" id="ember2794" class="ember-view st-link_style_dimmed">Смотреть
+                                все отзывы</a>
+                        </div>
+                    </div>
+
+                    <div class="flex-row flex-row_paddings_none">
+                        <div class="col-xs-12 course-info-reviews">
+                            <div class="course-review-card course-info-reviews__item" data-review-id="364565"
+                                 data-theme="course">
+                                <!---->
+                                <!---->
+                                <div class="course-review-card__text">
+                                    <div class="show-more" style="--max-height: 172;">
+                                        <div class="show-more__content">Хороший курс. Для начинающего в IT - сфере самое
+                                            то!
+                                        </div>
+                                    </div>
+
+
+                                    <!---->
+
+
+                                    <!---->      </div>
+
+                                <span id="ember2800"
+                                      class="rating-stars ember-view course-review-card__score">      <span
+                                        class="rating_stras__star colored-star">
+          <span id="ember2801" class="svg-icon star-filled_icon svg-icon_inline ember-view"><svg
+                  xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#star-filled"></use>
+  </svg></span>
+      </span>
+      <span class="rating_stras__star colored-star">
+          <span id="ember2802" class="svg-icon star-filled_icon svg-icon_inline ember-view"><svg
+                  xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#star-filled"></use>
+  </svg></span>
+      </span>
+      <span class="rating_stras__star colored-star">
+          <span id="ember2803" class="svg-icon star-filled_icon svg-icon_inline ember-view"><svg
+                  xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#star-filled"></use>
+  </svg></span>
+      </span>
+      <span class="rating_stras__star colored-star">
+          <span id="ember2804" class="svg-icon star-filled_icon svg-icon_inline ember-view"><svg
+                  xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#star-filled"></use>
+  </svg></span>
+      </span>
+      <span class="rating_stras__star colored-star">
+          <span id="ember2805" class="svg-icon star-filled_icon svg-icon_inline ember-view"><svg
+                  xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#star-filled"></use>
+  </svg></span>
+      </span>
+</span>
+
+                                <div class="course-review-card__info">
+                                    <a href="/users/642561232" id="ember2806"
+                                       class="ember-view course-review-card__author">
+                                        Александр Полянский
+                                    </a>
+
+                                    <time class="course-review-card__date" datetime="2024-07-30T14:32:38.311Z"
+                                          title="вторник, 30 июля 2024 г. в 16:32 GMT+2">
+                                        2 часа назад
+                                    </time>
+                                </div>
+
+                                <div class="course-review-card__actions">
+                                    <div class="ui-vote course-review-card__vote">
+                                        <button class="st-button_style_none ui-like ui-vote__like" title="Одобряю!"
+                                                data-type="like" tabindex="0" type="button">
+    <span id="ember2807" class="svg-icon thumbs-up_icon ember-view ui-like__icon"><svg
+            xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#thumbs-up"></use>
+  </svg></span>
+
+                                            <!---->  </button>
+
+
+                                        <button class="st-button_style_none ui-like ui-vote__like" title="Не нравится"
+                                                data-type="dislike" tabindex="0" type="button">
+    <span id="ember2808" class="svg-icon thumbs-up_icon ember-view ui-like__icon"><svg
+            xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#thumbs-up"></use>
+  </svg></span>
+
+                                            <!---->  </button>
+
+                                    </div>
+
+                                    <!---->
+                                    <div id="ember2809" class="drop-down drop-down-menu ember-view">
+                                        <div aria-expanded="false" aria-haspopup="true" id="ember2810"
+                                             class="drop-down__toggler drop-down-toggler drop-down-toggler--auto-toggle ember-view">
+                                            <button class="st-button_style_none course-review-card__menu-toggler"
+                                                    type="button">
+                  <span id="ember2811" class="svg-icon menu-more_icon ember-view"><svg
+                          xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#menu-more"></use>
+  </svg></span>
+                                            </button>
+
+                                        </div>
+
+                                        <!---->
+
+
+                                        <!----></div>
+                                </div>
+
+                                <!----></div>
+                            <div class="course-review-card course-info-reviews__item" data-review-id="364560"
+                                 data-theme="course">
+                                <!---->
+                                <!---->
+                                <div class="course-review-card__text">
+                                    <div class="show-more" style="--max-height: 172;">
+                                        <div class="show-more__content">1. Научился синтаксису Питон, научился решать
+                                            простые задачи.
+                                            2. Понравилось как излагается материал.
+                                            3. Много задач на математике, шахматную логику, для курса мне кажется нужны
+                                            подсказки людям, как решается та или иная задача, именно логически, а не
+                                            языком программирования. А ученику уже переложить это в язык.
+                                            4. Много отзывов на Хабре и в интернете.
+                                        </div>
+                                    </div>
+
+
+                                    <!---->
+
+
+                                    <!---->      </div>
+
+                                <span id="ember2812"
+                                      class="rating-stars ember-view course-review-card__score">      <span
+                                        class="rating_stras__star colored-star">
+          <span id="ember2813" class="svg-icon star-filled_icon svg-icon_inline ember-view"><svg
+                  xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#star-filled"></use>
+  </svg></span>
+      </span>
+      <span class="rating_stras__star colored-star">
+          <span id="ember2814" class="svg-icon star-filled_icon svg-icon_inline ember-view"><svg
+                  xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#star-filled"></use>
+  </svg></span>
+      </span>
+      <span class="rating_stras__star colored-star">
+          <span id="ember2815" class="svg-icon star-filled_icon svg-icon_inline ember-view"><svg
+                  xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#star-filled"></use>
+  </svg></span>
+      </span>
+      <span class="rating_stras__star colored-star">
+          <span id="ember2816" class="svg-icon star-filled_icon svg-icon_inline ember-view"><svg
+                  xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#star-filled"></use>
+  </svg></span>
+      </span>
+      <span class="rating_stras__star colored-star">
+          <span id="ember2817" class="svg-icon star-filled_icon svg-icon_inline ember-view"><svg
+                  xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#star-filled"></use>
+  </svg></span>
+      </span>
+</span>
+
+                                <div class="course-review-card__info">
+                                    <a href="/users/40465817" id="ember2818"
+                                       class="ember-view course-review-card__author">
+                                        Константин Симонов
+                                    </a>
+
+                                    <time class="course-review-card__date" datetime="2024-07-30T14:12:14.789Z"
+                                          title="вторник, 30 июля 2024 г. в 16:12 GMT+2">
+                                        2 часа назад
+                                    </time>
+                                </div>
+
+                                <div class="course-review-card__actions">
+                                    <div class="ui-vote course-review-card__vote">
+                                        <button class="st-button_style_none ui-like ui-vote__like" title="Одобряю!"
+                                                data-type="like" tabindex="0" type="button">
+    <span id="ember2819" class="svg-icon thumbs-up_icon ember-view ui-like__icon"><svg
+            xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#thumbs-up"></use>
+  </svg></span>
+
+                                            <!---->  </button>
+
+
+                                        <button class="st-button_style_none ui-like ui-vote__like" title="Не нравится"
+                                                data-type="dislike" tabindex="0" type="button">
+    <span id="ember2820" class="svg-icon thumbs-up_icon ember-view ui-like__icon"><svg
+            xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#thumbs-up"></use>
+  </svg></span>
+
+                                            <!---->  </button>
+
+                                    </div>
+
+                                    <!---->
+                                    <div id="ember2821" class="drop-down drop-down-menu ember-view">
+                                        <div aria-expanded="false" aria-haspopup="true" id="ember2822"
+                                             class="drop-down__toggler drop-down-toggler drop-down-toggler--auto-toggle ember-view">
+                                            <button class="st-button_style_none course-review-card__menu-toggler"
+                                                    type="button">
+                  <span id="ember2823" class="svg-icon menu-more_icon ember-view"><svg
+                          xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#menu-more"></use>
+  </svg></span>
+                                            </button>
+
+                                        </div>
+
+                                        <!---->
+
+
+                                        <!----></div>
+                                </div>
+
+                                <!----></div>
+                            <div class="course-review-card course-info-reviews__item" data-review-id="364525"
+                                 data-theme="course">
+                                <!---->
+                                <!---->
+                                <div class="course-review-card__text">
+                                    <div class="show-more" style="--max-height: 172;">
+                                        <div class="show-more__content">Замечательный курс! Благодаря грамотному
+                                            изложению теории решение задач, которых в курсе представлено большое
+                                            количество и разнообразие, даётся довольно легко. Зачастую уроки
+                                            сопровождаются полезными ссылками на дополнительные материалы по теме. Курс
+                                            прекрасно подойдёт для начинающих!
+                                        </div>
+                                    </div>
+
+
+                                    <!---->
+
+
+                                    <!---->      </div>
+
+                                <span id="ember2824"
+                                      class="rating-stars ember-view course-review-card__score">      <span
+                                        class="rating_stras__star colored-star">
+          <span id="ember2825" class="svg-icon star-filled_icon svg-icon_inline ember-view"><svg
+                  xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#star-filled"></use>
+  </svg></span>
+      </span>
+      <span class="rating_stras__star colored-star">
+          <span id="ember2826" class="svg-icon star-filled_icon svg-icon_inline ember-view"><svg
+                  xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#star-filled"></use>
+  </svg></span>
+      </span>
+      <span class="rating_stras__star colored-star">
+          <span id="ember2827" class="svg-icon star-filled_icon svg-icon_inline ember-view"><svg
+                  xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#star-filled"></use>
+  </svg></span>
+      </span>
+      <span class="rating_stras__star colored-star">
+          <span id="ember2828" class="svg-icon star-filled_icon svg-icon_inline ember-view"><svg
+                  xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#star-filled"></use>
+  </svg></span>
+      </span>
+      <span class="rating_stras__star colored-star">
+          <span id="ember2829" class="svg-icon star-filled_icon svg-icon_inline ember-view"><svg
+                  xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#star-filled"></use>
+  </svg></span>
+      </span>
+</span>
+
+                                <div class="course-review-card__info">
+                                    <a href="/users/643552561" id="ember2830"
+                                       class="ember-view course-review-card__author">
+                                        Евгений Яковлев
+                                    </a>
+
+                                    <time class="course-review-card__date" datetime="2024-07-30T10:57:41.927Z"
+                                          title="вторник, 30 июля 2024 г. в 12:57 GMT+2">
+                                        5 часов назад
+                                    </time>
+                                </div>
+
+                                <div class="course-review-card__actions">
+                                    <div class="ui-vote course-review-card__vote" data-is-liked="">
+                                        <button class="st-button_style_none ui-like ui-vote__like" title="Одобряю!"
+                                                data-type="like" tabindex="0" type="button">
+    <span id="ember2831" class="svg-icon thumbs-up_icon ember-view ui-like__icon"><svg
+            xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#thumbs-up"></use>
+  </svg></span>
+
+                                            <span class="ui-like__count">
+          1
+        </span>
+                                        </button>
+
+
+                                        <button class="st-button_style_none ui-like ui-vote__like" title="Не нравится"
+                                                data-type="dislike" tabindex="0" type="button">
+    <span id="ember2832" class="svg-icon thumbs-up_icon ember-view ui-like__icon"><svg
+            xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#thumbs-up"></use>
+  </svg></span>
+
+                                            <!---->  </button>
+
+                                    </div>
+
+                                    <!---->
+                                    <div id="ember2833" class="drop-down drop-down-menu ember-view">
+                                        <div aria-expanded="false" aria-haspopup="true" id="ember2834"
+                                             class="drop-down__toggler drop-down-toggler drop-down-toggler--auto-toggle ember-view">
+                                            <button class="st-button_style_none course-review-card__menu-toggler"
+                                                    type="button">
+                  <span id="ember2835" class="svg-icon menu-more_icon ember-view"><svg
+                          xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#menu-more"></use>
+  </svg></span>
+                                            </button>
+
+                                        </div>
+
+                                        <!---->
+
+
+                                        <!----></div>
+                                </div>
+
+                                <!----></div>
+                        </div>
+                    </div>
+                    <div class="course-index__join-btn course-index__join-btn_last">
+                        <!---->      </div>
+                </div>
+
+
+                <div class="hide-xs col-xs-12 col-md-4 col-md-4_right-padding-none course-index__aside-wrapper">
+                    <!---->
+                    <div class="course-index__bordered-wrapper">
+                        <div class="flex-row flex-row_paddings_none course-index__aside-section">
+                            <strong class="course-index__rating">5</strong>
+                            <span id="ember2795" class="rating-stars ember-view">      <span
+                                    class="rating_stras__star colored-star">
+          ★
+      </span>
+      <span class="rating_stras__star colored-star">
+          ★
+      </span>
+      <span class="rating_stras__star colored-star">
+          ★
+      </span>
+      <span class="rating_stras__star colored-star">
+          ★
+      </span>
+      <span class="rating_stras__star uncolored-star">
+        <span class="partial-star-bg">★<span class="partial-star-fill" style="width: 100%;">★</span>
+        </span>
+      </span>
+    </span>
+                            <a href="/course/58852/reviews" id="ember2796"
+                               class="ember-view course-index__reviews-link st-link_style_dimmed">Все отзывы</a>
+                        </div>
+                    </div>
+                    <div class="course-index__bordered-wrapper">
+                        <div class="flex-row flex-row_paddings_none course-index__aside-authors">
+              <span id="ember2714" class="user-avatar ember-view course-index__author">  <a href="/users/470788160"
+                                                                                            id="ember2715"
+                                                                                            class="ember-view user-avatar__link">
+
+      <img src="https://cdn.stepik.net/media/users/470788160/avatar.png" alt="User avatar" class="user-avatar__img "
+           style="width: 50px; height: 50px;">
+
+      <span class="user-avatar__name">Поколение Python</span>
+
+  </a>
+</span>
+                            <span id="ember2716" class="user-avatar ember-view course-index__author">  <a
+                                    href="/users/207915658" id="ember2717" class="ember-view user-avatar__link">
+
+      <img src="https://cdn.stepik.net/media/users/207915658/avatar.png" alt="User avatar" class="user-avatar__img "
+           style="width: 50px; height: 50px;">
+
+      <span class="user-avatar__name">Благотворительный фонд "Айкью Опшн"</span>
+
+  </a>
+</span>
+                        </div>
+                    </div>
+
+                    <!---->
+                    <div class="course-index__bordered-wrapper">
+                        <div class="flex-row flex-row_paddings_none">
+                            <div class="col-xs-12">
+                                <p id="ember2718"
+                                   class="html-content rich-text-viewer ember-view course-index__short-desc"
+                                   data-processed=""><!----><span>Курс с кучей тренировочных задач, удобный как для самостоятельного изучения, так и для работы в группе в рамках внеурочной деятельности.</span>
+                                </p>
+
+                                <!---->          </div>
+                        </div>
+                        <div class="flex-row flex-row_paddings_none">
+                            <dl class="col-xs-12">
+                                <!---->
+                                <!---->
+                                <!---->
+                                <div class="course-index__def-row">
+                                    <dt class="course-index__def-title">Время прохождения курса:</dt>
+                                    <dd>42 часа</dd>
+                                </div>
+
+                                <div class="course-index__def-row">
+                                    <dt class="course-index__def-title">Язык:</dt>
+                                    <dd>Русский</dd>
+                                </div>
+                                <div class="course-index__def-row">
+                                    <dt class="course-index__def-title">Сертификат:</dt>
+                                    <dd>Выдается</dd>
+                                </div>
+                                <div id="ember2719" class="tooltip-hint ember-view course-index__certificate-tooltip">
+                                    <div class="course-index__cert-details">Подробнее о сертификате</div>
+
+                                    <div class="tooltip-hint_inside tooltip-hint__up tooltip-hint__right">
+                                        Условие получения сертификата: 1&nbsp;600 баллов<br>С отличием: 1&nbsp;800
+                                        баллов
+                                    </div>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="flex-row flex-row_paddings_none course-index__share-block-wrapper">
+                        <div class="col-xs-12 course-index__share-block">
+                            <div class="course-index__share-text">
+                                Поделиться в социальных сетях:
+                            </div>
+                            <div id="ember2720" class="share-buttons ember-view course-buttons__share-buttons"><span
+                                    id="ember2720_buttons"
+                                    class="share-buttons__buttons share-buttons__buttons-ultra-compact ya-share2 ya-share2_inited"><div
+                                    class="ya-share2__container ya-share2__container_size_m ya-share2__container_color-scheme_normal ya-share2__container_shape_normal"><ul
+                                    class="ya-share2__list ya-share2__list_direction_horizontal"><li
+                                    class="ya-share2__item ya-share2__item_service_vkontakte"><a class="ya-share2__link"
+                                                                                                 href="https://vk.com/share.php?url=https%3A%2F%2Fstepik.org%2Fcourse%2F58852%2Finfo&amp;title=%22%D0%9F%D0%BE%D0%BA%D0%BE%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5%20Python%22%3A%20%D0%BA%D1%83%D1%80%D1%81%20%D0%B4%D0%BB%D1%8F%20%D0%BD%D0%B0%D1%87%D0%B8%D0%BD%D0%B0%D1%8E%D1%89%D0%B8%D1%85%20%E2%80%93%20Stepik&amp;utm_source=share2"
+                                                                                                 rel="nofollow noopener"
+                                                                                                 target="_blank"
+                                                                                                 title="ВКонтакте"><span
+                                    class="ya-share2__badge"><span class="ya-share2__icon"></span></span><span
+                                    class="ya-share2__title">ВКонтакте</span></a></li><li
+                                    class="ya-share2__item ya-share2__item_service_twitter"><a class="ya-share2__link"
+                                                                                               href="https://twitter.com/intent/tweet?text=%22%D0%9F%D0%BE%D0%BA%D0%BE%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5%20Python%22%3A%20%D0%BA%D1%83%D1%80%D1%81%20%D0%B4%D0%BB%D1%8F%20%D0%BD%D0%B0%D1%87%D0%B8%D0%BD%D0%B0%D1%8E%D1%89%D0%B8%D1%85%20%E2%80%93%20Stepik&amp;url=https%3A%2F%2Fstepik.org%2Fcourse%2F58852%2Finfo&amp;utm_source=share2"
+                                                                                               rel="nofollow noopener"
+                                                                                               target="_blank"
+                                                                                               title="Twitter"><span
+                                    class="ya-share2__badge"><span class="ya-share2__icon"></span></span><span
+                                    class="ya-share2__title">Twitter</span></a></li></ul></div></span>
+
+                            </div>
+                            <div class="course-index__share-url">
+                                <button data-theme="default" id="ember2721"
+                                        class="copy-btn clipboard-fragment st-button_style_none ember-view ember-tooltip-target"
+                                        type="button" data-clipboard-text="https://stepik.org/58852"><span
+                                        class="clipboard-fragment__content">
+                https://stepik.org/58852
+              </span>
+                                    <div id="ember2722" class="ember-tooltip-base ember-view">
+                                        <div>
+                                            <!---->  </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-index__description">
+                        <div class="course-index_md-hidden">
+                            <div class="flex-row flex-row_paddings_none course-index__header">
+                                <h2 class="st-h2 col-xs-12">Описание курса</h2>
+                            </div>
+                            <div class="flex-row flex-row_paddings_none">
+                                <div class="col-xs-12">
+                                    <p id="ember2723" class="html-content rich-text-viewer ember-view"
+                                       data-processed=""><!----><span><p>Присоединяйтесь к официальному <strong>telegram-каналу</strong> "Поколение Python" по <a
+                                            href="https://t.me/pygen_ru" rel="noopener noreferrer nofollow"
+                                            target="_blank">ссылке</a>.</p>
+
+<p>"Поколение Python": курс для начинающих знакомит школьников и всех, кому это интересно, с программированием.&nbsp;</p>
+
+<p>Рассказывает об основных&nbsp;типах данных,<img alt="" height="336"
+                                                   src="https://ucarecdn.com/5cf1b9b8-5df0-47e1-a977-05642ef9d293/"
+                                                   style="float: right;" width="240"> конструкциях и принципах структурного программирования, используя версию языка Python.</p>
+
+<p>Выбран Python за ясность кода и быстроту реализации на нем программ.</p>
+
+<p>Цель&nbsp;курса&nbsp;– формирование базовых понятий структурного программирования.</p>
+
+<p>В нем 8&nbsp;модулей с теоретическими и практическими материалами и заданиями.</p>
+
+<p><strong>Модули курса:</strong></p>
+
+<ol>
+	<li>Ввод-вывод данных</li>
+	<li>Условный оператор</li>
+	<li>Типы данных</li>
+	<li>Циклы for и while</li>
+	<li>Строковый тип данных</li>
+	<li>Списки</li>
+	<li>Функции</li>
+	<li>Работа над мини-проектом</li>
+</ol>
+
+<p>Решения&nbsp;проверяет&nbsp;автоматическая система, поэтому обратную связь вы&nbsp;получите быстро. Если у вас возникнут вопросы, команда курса даст советы и подсказки. Кроме того,&nbsp;проблемы&nbsp;можно обсуждать с однокурсниками в комментариях к задачам.</p>
+
+<p><img alt="" height="74" src="https://ucarecdn.com/0c2aa7fe-886e-4b07-bedd-319fce079ed3/" style="float: left;"
+        width="86">Курс –&nbsp;<strong>победитель</strong>&nbsp;конкурса&nbsp;<strong>Stepik Awards 2020</strong>&nbsp;в номинации "Лучший бесплатный онлайн-курс размещенный на&nbsp;платформе Stepik".</p>
+
+<p>Сертификат о прохождении этого курса позволяет участвовать в <a href="https://talent2035.kruzhok.org/python"
+                                                                   rel="noopener noreferrer nofollow" target="_blank">конкурсе «Талант 20.35»</a></p>
+
+<p>Этот курс –&nbsp; первый из серии "Поколение Python", в которую также входят&nbsp;<a
+        href="https://stepik.org/course/68343" rel="noopener noreferrer nofollow">Курс для продвинутых</a> и <a
+        href="https://stepik.org/82541" rel="noopener noreferrer nofollow">Курс для профессионалов</a>.</p>
+
+<p>&nbsp;</p>
+
+<p><img alt="" src="https://ucarecdn.com/f2151744-f2c4-48c3-b54d-85e8febb24d0/"></p></span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-index__bordered-wrapper">
+                            <div class="flex-row flex-row_paddings_none course-index__header">
+                                <h2 class="st-h2 col-xs-12">Начальные требования</h2>
+                            </div>
+                            <div class="flex-row flex-row_paddings_none">
+                                <div class="col-xs-12">
+                                    <p id="ember2724" class="html-content rich-text-viewer ember-view"
+                                       data-processed=""><!----><span><p>Для освоения курса требуются базовые знания из школьной программы по информатике и математике.</p></span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex-row flex-row_paddings_none course-index__header">
+                                <h2 class="st-h2 col-xs-12">Для кого этот курс</h2>
+                            </div>
+                            <div class="flex-row flex-row_paddings_none">
+                                <div class="col-xs-12">
+                                    <p id="ember2725" class="html-content rich-text-viewer ember-view"
+                                       data-processed=""><!----><span>Курс рассчитан на школьников и всех желающих познакомиться с программированием.</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-row course-index__aside-section course-index__bordered-wrapper">
+                            <div class="course-index__selfpaced-note">
+                <span id="ember2726" class="svg-icon info2_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#info2"></use>
+  </svg></span>
+                                <span>Курс доступен бесплатно. Все материалы доступны сейчас для свободного прохождения</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!---->
+    </div>
+
+    <!---->
+</main>
+{% endblock %}
+
