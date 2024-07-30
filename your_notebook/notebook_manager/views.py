@@ -22,8 +22,8 @@ def create_notebook(request):
 
 # @login_required
 def edit_notebook(request, slug):
-    name_notebook = get_object_or_404(Notebook, slug=slug)
-    topics = name_notebook.topics.all()
+    notebook = get_object_or_404(Notebook, slug=slug)
+    topics = notebook.topics.all()
 
     if request.method == 'POST':
         topic_form = NotebookTopicForm(request.POST)
@@ -47,7 +47,7 @@ def edit_notebook(request, slug):
                     )
         elif topic_form.is_valid():
             instance = topic_form.save(commit=False)
-            instance.name_notebook = name_notebook
+            instance.notebook = notebook
             instance.save()
             return redirect(reverse(
                 'notebook_manager:edit_notebook', kwargs={'slug': slug})
@@ -79,8 +79,6 @@ def edit_note(request, slug_topic, slug, pk):
             step = form.save(commit=False)
             step.note = get_object_or_404(NotebookNote, slug=slug)
             step.save()
-        else:
-            print(form.errors)
     note = get_object_or_404(NotebookNote, slug=slug)
     topics = NotebookTopic.objects.all()
     form = NotebookStepForm(instance=step)
@@ -95,7 +93,6 @@ def edit_note(request, slug_topic, slug, pk):
 @require_POST
 def add_step(request):
     if request.method == 'POST':
-        print(request.POST)
         note_id = request.POST.get('note_id')
         note = get_object_or_404(NotebookNote, id=note_id)
         amount = len(NotebookStep.objects.all())
@@ -116,7 +113,7 @@ def add_step(request):
 def settings_notebook(request, slug):
     notebook = get_object_or_404(Notebook, slug=slug)
     if request.method == 'POST':
-        form = SettingsNotebookForm(request.POST, request.FILES)
+        form = SettingsNotebookForm(request.POST, request.FILES, instance=notebook)
         if form.is_valid():
             form.save()
     else:

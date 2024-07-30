@@ -45,9 +45,12 @@ class Notebook(models.Model):
     def get_absolute_url(self):
         return reverse('notebook_manager:edit_notebook', kwargs={'slug': self.slug})
 
+    def get_absolute_url_public(self):
+        return reverse('notebook:notebook_page', kwargs={'slug': self.slug})
+
 
 class NotebookTopic(models.Model):
-    name_notebook = models.ForeignKey(Notebook, on_delete=models.CASCADE, related_name='topics')
+    notebook = models.ForeignKey(Notebook, on_delete=models.CASCADE, related_name='topics')
     topic = models.CharField(max_length=128)
     slug = models.SlugField(max_length=76, blank=True)
     description = models.TextField(blank=True)
@@ -75,18 +78,46 @@ class NotebookNote(models.Model):
             'slug_topic': self.topic.slug, 'slug': self.slug, 'pk': first.pk
         })
 
+    def get_absolute_url_public(self):
+        return reverse('notebook:notebook_step', kwargs={
+            'slug_notebook': self.topic.notebook.slug,
+            'slug_topic': self.topic.slug,
+            'slug_note': self.slug,
+            'step_value': 1
+        })
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(rand_slug() + self.title)
         super().save(*args, **kwargs)
         NotebookStep.objects.get_or_create(note=self)
 
+    def __str__(self):
+        return self.title
+
 
 class NotebookStep(models.Model):
     note = models.ForeignKey(NotebookNote, on_delete=models.CASCADE, related_name='steps')
     content = RichTextUploadingField(blank=True)
+    value = models.PositiveSmallIntegerField(default=0, blank=True)
 
     def get_absolute_url(self):
         return reverse('notebook_manager:edit_note', kwargs={
             'slug_topic': self.note.topic.slug, 'slug': self.note.slug, 'pk': self.pk
         })
+
+    def get_absolute_url_public(self):
+        return reverse('notebook:notebook_step', kwargs={
+            'slug_notebook': self.note.topic.notebook.slug,
+            'slug_topic': self.note.topic.slug,
+            'slug_note': self.note.slug,
+            'step_value': self.value
+        })
+
+    def save(self, *args, **kwargs):
+        last_value = NotebookStep.objects.filter(note=self.note).order_by('value').last()
+        if last_value:
+            self.value = last_value.value + 1
+        else:
+            self.value = 1
+        return super().save(*args, **kwargs)

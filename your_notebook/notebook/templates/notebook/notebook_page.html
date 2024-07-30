@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+{% block title %} My notebooks {%endblock%}
+{% block content %}
+<main class="main-content">
+
+
+    <div class="marco-layout course">
+        <span id="course-nav-menu-label" hidden="">Main menu and course navigation</span>
+        <nav class="marco-layout__nav course__course-nav-container" data-marco-sticky-nav-content=""
+             aria-labelledby="course-nav-menu-label">
+            <div id="ember732" class="nav-menu course-nav ember-view course__course-nav"><img class="course-nav__cover"
+                                                                                              src="https://cdn.stepik.net/media/cache/images/courses/58852/cover_xGphyPj/ca3f6f66d38c26e93f7dacf8bd7a2a32.png"
+                                                                                              alt="Course cover"
+                                                                                              height="56" width="56">
+
+                <h1 class="course-nav__title">{{notebook.name}}</h1>
+                <div id="ember733" class="course-join-button ember-view course-nav__course-join">
+                    <button class="button" title="Продолжить обучение с последнего пройденного шага" type="button"
+                            data-ember-action="" data-ember-action-734="734">
+                        Продолжить
+                    </button>
+                </div>
+
+                <!---->
+                <ul class="nav-menu__menu menu course-nav__main-menu" data-level="1">
+                    <li class="menu-item nav-menu__menu-item_collapse-icon" data-item="info">
+                        <a href="/course/58852/info" aria-disabled="false">
+                            <!---->
+                            <span>Описание</span>
+
+                            <!---->
+                            <!---->
+                            <!---->
+                        </a>
+                    </li>
+
+                    <li class="menu-item nav-menu__menu-item_collapse-icon" data-item="syllabus">
+                        <a href="/course/58852/syllabus" aria-disabled="false" data-active="">
+                            <!---->
+                            <span>Содержание</span>
+
+                            <!---->
+                            <!---->
+                            <!---->
+                        </a>
+                    </li>
+
+                    <li class="menu-item nav-menu__menu-item_collapse-icon" data-item="news">
+                        <a href="/course/58852/news" aria-disabled="false">
+                            <!---->
+                            <span>Новости</span>
+
+                            <!---->
+                            <!---->
+                            <!---->
+                        </a>
+                    </li>
+
+                    <li class="menu-item nav-menu__menu-item_collapse-icon" data-item="comments">
+                        <a href="/course/58852/comments" aria-disabled="false">
+                            <!---->
+                            <span>Комментарии</span>
+
+                            <!---->
+                            <!---->
+                            <!---->
+                        </a>
+                    </li>
+
+                    <li class="menu-item nav-menu__menu-item_collapse-icon" data-item="reviews">
+                        <a href="/course/58852/reviews" aria-disabled="false">
+                            <!---->
+                            <span>Отзывы</span>
+
+                            <!---->
+                            <!---->
+                            <!---->
+                        </a>
+                    </li>
+
+                    <li class="menu-item-divider " data-media-query="not-mobile"></li>
+
+                    <li class="menu-item " data-media-query="not-mobile" data-item="search">
+                        <a href="/course/58852/search" aria-disabled="false">
+        <span id="ember756" class="svg-icon search_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#search"></use>
+  </svg></span>
+
+                            <span>Искать в курсе</span>
+
+                            <!---->
+                            <!---->
+                            <!---->
+                        </a>
+                    </li>
+
+                    <li class="menu-item " data-media-query="not-mobile" data-item="favorite">
+                        <button type="button">
+        <span id="ember760" class="svg-icon bookmark_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#bookmark"></use>
+  </svg></span>
+
+                            <span>Добавить в избранные</span>
+
+                            <!---->
+                            <!---->
+                            <!---->
+                        </button>
+                    </li>
+
+                    <li class="menu-item " data-media-query="not-mobile" data-item="new-class">
+                        <a href="/new-class?course=58852" aria-disabled="false">
+        <span id="ember764" class="svg-icon plus-2_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#plus-2"></use>
+  </svg></span>
+
+                            <span>Создать класс</span>
+
+                            <!---->
+                            <!---->
+                            <!---->
+                        </a>
+                    </li>
+
+                    <li class="menu-item-divider " data-media-query="not-mobile"></li>
+
+                </ul>
+
+
+                <!----></div>
+        </nav>
+
+
+        <header class="course-page__syllabus page-fragment marco-layout__header">
+            <h1>Notebook topics</h1>
+
+            <!----></header>
+
+        <article class="course-page__syllabus page-fragment marco-layout__content" data-marco-no-aside="">
+            <nav aria-label="Навигация по курсу" id="ember768" class="toc-syllabus toc-component ember-view">
+                <div id="ember769" class="course-toc ember-view">
+                    <div id="ember850" class="toc-syllabus__sections course-toc-sections ember-view">
+                        {% for topic in notebook.topics.all %}
+                        {% with forloop.counter as index %}
+                        <div class="toc-syllabus__section">
+                            <div data-position="1" id="ember867"
+                                 class="toc-syllabus-section ember-view toc-syllabus__section-widget">
+                                <div class="toc-syllabus-section__header">
+                                    <div class="toc-syllabus-section__title">
+                                        <span class="toc-syllabus-section__position">
+                                          {{index}}
+                                        </span>
+                                        {{ topic.topic }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="ember868" class="course-toc-units ember-view toc-syllabus__lessons">
+                                {% for note in topic.notes.all %}
+                                {% with forloop.counter as note_index %}
+                                <div id="ember869" class="lesson-widget ember-view toc-syllabus__lesson">
+                                    <div class="lesson-widget__content">
+                                        <div class="lesson-widget__cover">
+                                            <a href="{% url 'notebook:notebook_step' notebook.slug topic.slug note.slug note.steps.first.id %}"
+                                               tabindex="-1">
+                                                <div class="lesson-widget__cover-image"
+                                                     style="background-image: url(https://ucarecdn.com/836b8980-19a2-43d4-a788-0d31d687e93c/-/scale_crop/180x180/center/);"></div>
+                                            </a>
+                                        </div>
+                                        <div class="lesson-widget__info">
+                                            <div class="lesson-widget__title">
+                                                <a href="{% url 'notebook:notebook_step' notebook.slug topic.slug note.slug note.steps.first.id %}"
+                                                   class="lesson-widget__title-text">
+                                                    {{index}}.{{note_index}}
+                                                    {{note.title}} <!---->
+                                                </a>
+
+                                                <!---->      </div>
+
+                                            <div class="lesson-widget__stats">
+                                                <!---->
+                                                <span class="lesson-widget__hoverable-stats">
+              <span class="lesson-widget__stat" title="Views">5000</span>
+              <span class="lesson-widget__stat" title="Likes">
+                <span id="ember2799" class="svg-icon eye_icon ember-view lesson-widget__stat-icon"><svg
+                        xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#eye"></use>
+  </svg></span>
+                1000
+              </span>
+              <span class="lesson-widget__stat" title="Reviews">
+                <span id="ember2800" class="svg-icon st-user_icon ember-view lesson-widget__stat-icon"><svg
+                        xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#st-user"></use>
+  </svg></span>
+                265
+              </span>
+          </span>
+
+                                                <!---->
+                                                <!---->      </div>
+
+                                            <!---->    </div>
+                                    </div>
+                                    <!----></div>
+                                {%endwith%}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {%endwith%}
+                        {%endfor%}
+                    </div>
+                </div>
+            </nav>
+        </article>
+
+        <!---->
+        <div data-theme="tak-exam" id="ember770" class="modal-popup ember-view"><!----></div>
+
+    </div>
+
+    <!---->
+</main>
+{%endblock%}

@@ -77,108 +77,84 @@
             <div class="catalog-block__content">
                 <div id="ember1647" class="catalog-block-full-course-lists ember-view">
                     <div data-list-type="fragment" id="ember1653" class="catalog-course-cards ember-view">
-                            <div
-                                 class="catalog-course-cards__hor-scroller horizontal-scroller ember-view"
-                                 data-has-right-scroll="">
-                                <button class="horizontal-scroller__scroll-btn horizontal-scroller__scroll-btn_left st-button_style_none"
-                                        tabindex="-1" type="button" data-ember-action="" data-ember-action-1655="1655">
+                        <div
+                                class="catalog-course-cards__hor-scroller horizontal-scroller ember-view"
+                                data-has-right-scroll="">
+                            <button class="horizontal-scroller__scroll-btn horizontal-scroller__scroll-btn_left st-button_style_none"
+                                    tabindex="-1" type="button" data-ember-action="" data-ember-action-1655="1655">
                                   <span id="ember1656" class="svg-icon arrow2-left_icon svg-icon_inline ember-view"><svg
                                           xmlns="http://www.w3.org/2000/svg">
                                     <use xlink:href="/static/frontend-build/icons.svg?1720098406#arrow2-left"></use>
                                   </svg></span>
-                                </button>
-                                <div class="horizontal-scroller__content catalog-course-cards__hor-scrollable">
+                            </button>
+                            <div class="horizontal-scroller__content catalog-course-cards__hor-scrollable">
 
-                                    <ul id="ember1657" class="course-cards ember-view catalog-course-cards__cards">
-                                        {% for notebook in notebooks_popular %}
-                                            <li class="course-cards__item">
-                                            <div id="ember1658"
-                                                 class="course-card catalog-rich-card ember-view course-cards__card"
-                                                 data-has-bookmark=""><a class="catalog-rich-card__link-wrapper"
-                                                                         href="/course/194856?auth=login"
-                                                                         aria-label="PRO C#. Коллекции"
-                                                                         draggable="false"></a>
+                                <ul id="ember1657" class="course-cards ember-view catalog-course-cards__cards">
+                                    {% for notebook in notebooks_popular %}
+                                    <li class="course-cards__item">
+                                        <div id="ember1658"
+                                             class="course-card catalog-rich-card ember-view course-cards__card"
+                                             data-has-bookmark=""><a class="catalog-rich-card__link-wrapper"
+                                                                     href="{% url 'notebook:notebook_page' notebook.slug %} "
+                                                                     aria-label="PRO C#. Коллекции"
+                                                                     draggable="false"></a>
 
-                                                <a class="course-card__title" href="/course/194856?auth=login">
-                                                    PRO C#. Коллекции
-                                                </a>
+                                            <a class="course-card__title" href="{% url 'notebook:notebook_page' notebook.slug %} ">
+                                                {{notebook.name}}
+                                            </a>
 
-                                                <span class="course-card__authors">
-      <a class="course-card__author" href="/users/1825018?auth=login">Иосиф Дзеранов</a>
-      <a class="course-card__author" href="/users/596721262?auth=login">PRO C#</a>
+                                            <span class="course-card__authors">
+            <a class="course-card__author" href="/users/596721262?auth=login">USER</a>
   </span>
 
-                                                <img class="course-card__cover" alt="Course cover"
-                                                     src="https://cdn.stepik.net/media/cache/images/courses/194856/cover_Sl6ky3x/2023ab5a2b085ae4307c6d4e981c7a68.png">
+                                            <img class="course-card__cover" alt="Course cover"
+                                                 src="{{notebook.image.url}}">
 
+                                            <!---->
+                                            <div class="course-card__widgets">
                                                 <!---->
-                                                <div class="course-card__widgets">
-                                                    <!---->
-                                                    <span class="course-card__widget" data-type="learners"
-                                                          aria-label="There are 424 learners in the course">
+                                                <span class="course-card__widget" data-type="learners"
+                                                      aria-label="There are 424 learners in the course">
             <span id="ember2480" class="svg-icon user_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
     <use xlink:href="/static/frontend-build/icons.svg?1720098406#user"></use>
   </svg></span>
-            <span>424</span>
+            <span>Views</span>
           </span>
 
-                                                    <span class="course-card__widget" data-type="workload"
-                                                          aria-label="Course workload is 1 ч">
+                                                <span class="course-card__widget" data-type="workload">
             <span id="ember2481" class="svg-icon clock_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
     <use xlink:href="/static/frontend-build/icons.svg?1720098406#clock"></use>
   </svg></span>
-            <span>1 ч</span>
+            <span>Reads</span>
           </span>
 
-                                                    <span class="course-card__widget"
-                                                          aria-label="This course issues a certificate"
-                                                          data-type="certificate" data-tooltip="сертификат"
-                                                          tabindex="0">
-          <span id="ember2482" class="svg-icon diploma_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
-    <use xlink:href="/static/frontend-build/icons.svg?1720098406#diploma"></use>
-  </svg></span>
+                                                <!---->  </div>
+                                            <div id="ember2483"
+                                                 class="course-badges ember-view course-card__badges"><!----></div>
 
-                                                        <!---->        </span>
+                                            <!---->
 
-                                                    <!---->  </div>
-
-                                                <span class="course-card__price">
-        <span class="display-price">
-      <span class="sr-only display-price__sr-only-price-default">Price:</span>
-      <span class="display-price__price display-price__price_default"><span class="format-price"><span
-              data-type="integer" data-value="9">9</span><span data-type="group" data-value="&nbsp;">&nbsp;</span><span
-              data-type="integer" data-value="990">990</span><span data-type="literal" data-value="&nbsp;">&nbsp;</span><span
-              data-type="currency" data-value="₽">₽</span></span></span>
-
-            <!---->  </span>
-
-  </span>
-
-                                                <div id="ember2483"
-                                                     class="course-badges ember-view course-card__badges"><!----></div>
-
-                                                <!---->
-
-                                                <button class="course-card__bookmark ember-tooltip-target" type="button"
-                                                        data-ember-action="" data-ember-action-2484="2484"
-                                                        aria-describedby="tooltip_hg8onjsshj" title="">
+                                            <button class="course-card__bookmark ember-tooltip-target" type="button"
+                                                    data-ember-action="" data-ember-action-2484="2484"
+                                                    aria-describedby="tooltip_hg8onjsshj" title="">
           <span id="ember2485" class="svg-icon favorite-outline_icon ember-view"><svg
                   xmlns="http://www.w3.org/2000/svg">
     <use xlink:href="/static/frontend-build/icons.svg?1720098406#favorite-outline"></use>
   </svg></span>
 
-                                                    <div id="ember2486" class="ember-tooltip-base ember-view">
-                                                        <!----></div>
-                                                </button>
+                                                <div id="ember2486" class="ember-tooltip-base ember-view">
+                                                    <!----></div>
+                                            </button>
 
-                                            </div>
-                                        </li>
-                                        {%endfor%}
-                                    </ul>
+                                        </div>
 
-                                </div>
+                                    </li>
+                                    {%endfor%}
+                                </ul>
+
                             </div>
                         </div>
+                    </div>
 
                 </div>
             </div>

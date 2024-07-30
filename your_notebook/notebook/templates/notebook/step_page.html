@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{%block title%}{%endblock%}
+{% block menu %}
+<div id="main-navbar-body-slot">
+    <div class="player-topbar__panel">
+        <div class="player-topbar__step-pins">
+            {%for step in steps%}
+            <div class="m-step-pin ember-view player__step-pin"
+                 {% if request.path == step.get_absolute_url_public%} data-is-passed="" data-is-active="" {%endif%}>
+                <a href="{{step.get_absolute_url_public}}" class="active ember-view m-step-pin__link">
+                        <span class="m-step-pin__pin">
+                        </span>
+                </a>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{%block content%}
+<main class="main-content">
+    <div class="lesson-modern__main lesson-wrapper in-course ember-view">
+        <div class="lesson-modern__body">
+            <div data-pinned=""
+                 class="lesson-sidebar ember-view player-lesson-sidebar player__lesson-sidebar" data-hovered="">
+                <div class="lesson-sidebar__wrapper">
+                    <div class="lesson-sidebar__body">
+                        <div class="lesson-sidebar__header">
+                            <a title="{{notebook.name}}"
+                               href="{{ notebook.get_absolute_url_public }}"
+                               class="ember-view lesson-sidebar__course-title">
+                                {{notebook.name}}
+                            </a>
+                        </div>
+                        <div class="lesson-sidebar__content custom-scrollbar custom-scrollbar_dark">
+                            <nav class="toc-sections ember-view lesson-sidebar__toc"
+                                 aria-label="navigation">
+                                {% for topic in notebook.topics.all %}
+                                {% with forloop.counter as topic_index %}
+                                <div class="lesson-sidebar__module-header sidebar-module-header"
+                                     role="directory" aria-expanded="false">
+                                    <div class="sidebar-module-header__title">
+                                        {{topic_index}}&nbsp;&nbsp;{{topic.topic}}
+                                    </div>
+                                </div>
+                                {% for note in topic.notes.all %}
+                                {% with forloop.counter as note_index %}
+                                <div class="lesson-sidebar__toc-inner">
+                                    <div class="with-lazy-loading toc-lesson ember-view">
+                                        <div>
+                                            <a href="{{note.get_absolute_url_public}}"
+                                               class="{% if request.path == note.get_absolute_url_public %}active{%endif%}
+                                               ember-view lesson-sidebar__lesson">
+                                                <span class="lesson-sidebar__lesson-name">
+                                                    {{topic_index}}.{{note_index}}&nbsp;&nbsp;{{note.title}}
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {%endwith%}
+                                {%endfor%}
+                                {%endwith%}
+                                {%endfor%}
+                            </nav>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="lesson-modern__wrapper">
+                <div class="lesson-modern__top-panel ember-view">
+                    <div class="top-tools page-fragment">
+                        <div class="top-tools__lesson-name" title="About">
+                            {{topic_index}}.{{step.value}}
+                            {{step.note.title}}
+                        </div>
+                        <div class="top-tools__progress">
+                            <span>{{step.value}}</span>
+                            of
+                            <span>{{steps_count}}</span>
+
+                        </div>
+                        <!---->
+                        <!----></div>
+                </div>
+
+                <div class="lesson lesson-modern">
+                    <div class="lesson__player">
+                        <div class="player-content-wrapper">
+                            <article  class="step-show ember-view">
+                                <div class="step-dynamic-container">
+                                    <div class="step-view step-view_material ember-view"><!---->
+                                        <div class="step-wrapper">
+                                            <div class="step-inner page-fragment">
+                                                <div  class="html-content rich-text-viewer ember-view" data-processed="">
+                                                    <span>
+                                                       {{ step.content|safe }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <hr class="modern-lesson-divider">
+                    <div class="lesson__footer no-print">
+                        <div class="page-fragment lesson__footer-wrapper">
+                            <div class="ui-vote lesson__likes-widget" data-is-liked="" data-is-abused="">
+                                <button class="st-button_style_none ui-like ui-vote__like" title="Like!"
+                                        data-type="like" tabindex="0" type="button">
+                                    <span  class="svg-icon thumbs-up_icon ember-view ui-like__icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="/static/frontend-build/icons.svg?1720098406#thumbs-up"></use>
+                                        </svg>
+                                    </span>
+                                    <span class="ui-like__count">
+                                        19196
+                                    </span>
+                                </button>
+                                <button class="st-button_style_none ui-like ui-vote__like" title="Dislike"
+                                        data-type="dislike" tabindex="0" type="button">
+                                    <span class="svg-icon thumbs-up_icon ember-view ui-like__icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="/static/frontend-build/icons.svg?1720098406#thumbs-up"></use>
+                                        </svg>
+                                    </span>
+                                    <span class="ui-like__count">
+                                        1615
+                                    </span>
+                                </button>
+                            </div>
+
+                            <span class="lesson__step-title">
+                              Step {{step.value}}
+                            </span>
+                            <div class="lesson__footer-nav-buttons">
+                                <a class="lesson__next-btn button has-icon" href="" >
+                                          <span>
+                                            Next step
+                                          </span>
+                                    <span  class="svg-icon right-arrow_icon ember-view">
+                                        <svg xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="/static/frontend-build/icons.svg?1720098406#right-arrow"></use>
+                                        </svg>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</main>
+{%endblock%}
