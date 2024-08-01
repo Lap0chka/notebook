@@ -1,4 +1,5 @@
-<nav class="marco-layout__nav course__course-nav-container" data-marco-sticky-nav-content="" aria-labelledby="course-nav-menu-label">
+<nav class="marco-layout__nav course__course-nav-container" data-marco-sticky-nav-content=""
+     aria-labelledby="course-nav-menu-label">
     <div class="nav-menu course-nav ember-view course__course-nav">
         <img class="course-nav__cover" src="{{notebook.image.url}}" alt="Course cover" height="56" width="56">
         <h1 class="course-nav__title">{{notebook.name}}</h1>
@@ -9,12 +10,16 @@
         </div>
         <ul class="nav-menu__menu menu course-nav__main-menu" data-level="1">
             <li class="menu-item nav-menu__menu-item_collapse-icon" data-item="info">
-                <a href=""  data-active="">
-                    <span>Description</span>
+                {% url 'notebook:description' notebook.slug as description_url %}
+                <a href="{{ description_url }}"
+                   {% if request.path == description_url %}data-active="" {% endif %}>
+                    Description
                 </a>
+
             </li>
             <li class="menu-item nav-menu__menu-item_collapse-icon" data-item="syllabus">
-                <a href="{{notebook.get_absolute_url_public}}" aria-disabled="false">
+                <a href="{{notebook.get_absolute_url_public}}"
+                   {% if request.path == notebook.get_absolute_url_public %}data-active="" {%endif%}>
                     <span>Content</span>
                 </a>
             </li>
@@ -24,14 +29,16 @@
                 </a>
             </li>
             <li class="menu-item nav-menu__menu-item_collapse-icon" data-item="reviews">
-                <a href="/course/58852/reviews" aria-disabled="false">
+                 {% url 'notebook:reviews' notebook.slug as description_url %}
+                <a href="{{ description_url }}"
+                   {% if request.path == description_url %}data-active="" {% endif %}>
                     <span>Reviews</span>
                 </a>
             </li>
             <li class="menu-item-divider " data-media-query="not-mobile"></li>
             <li class="menu-item " data-media-query="not-mobile" data-item="search">
                 <a href="/course/58852/search" aria-disabled="false">
-                    <span  class="svg-icon search_icon ember-view">
+                    <span class="svg-icon search_icon ember-view">
                         <svg xmlns="http://www.w3.org/2000/svg">
                             <use xlink:href="/static/frontend-build/icons.svg?1720098406#search"></use>
                         </svg>
@@ -41,4 +48,4 @@
             </li>
         </ul>
     </div>
-  </nav>
+</nav>

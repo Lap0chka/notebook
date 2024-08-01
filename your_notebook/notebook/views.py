@@ -25,10 +25,10 @@ def notebook_page(request, slug):
     return render(request, 'notebook/notebook_page.html', {'notebook': notebook})
 
 
-def notebook_page_step(request, slug_notebook, slug_topic, slug_note, step_value):
+def notebook_page_step(request, slug_notebook, slug_topic, slug_note, order):
     notebook = get_object_or_404(Notebook, slug=slug_notebook)
     note = get_object_or_404(NotebookNote, slug=slug_note)
-    step = get_object_or_404(NotebookStep, value=step_value, note=note)
+    step = get_object_or_404(NotebookStep, order=order, note=note)
 
     steps = note.steps.all()
     steps_count = steps.count()
@@ -46,3 +46,8 @@ def notebook_page_step(request, slug_notebook, slug_topic, slug_note, step_value
 def notebook_description(request, slug):
     notebook = get_object_or_404(Notebook, slug=slug)
     return render(request, 'notebook/description.html', {'notebook': notebook})
+
+
+def notebook_reviews(request, slug):
+    notebook = get_object_or_404(Notebook, slug=slug)
+    return render(request, 'notebook/contact/reviews.html', {'notebook': notebook})

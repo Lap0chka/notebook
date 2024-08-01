@@ -54,11 +54,18 @@ class NotebookTopic(models.Model):
     topic = models.CharField(max_length=128)
     slug = models.SlugField(max_length=76, blank=True)
     description = models.TextField(blank=True)
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
 
     def save(self, *args, **kwargs):
         """
         Save the category instance to the database.
         """
+        if self.pk is None:
+            last_step = NotebookStep.objects.filter(notebook=self.notebook).order_by('order').last()
+            self.order = last_step.order + 1 if last_step else 0
         if not self.slug:
             self.slug = slugify(rand_slug() + self.topic)
         super().save(*args, **kwargs)
@@ -71,6 +78,10 @@ class NotebookNote(models.Model):
     topic = models.ForeignKey(NotebookTopic, on_delete=models.CASCADE, related_name='notes')
     title = models.CharField(max_length=128)
     slug = models.SlugField(max_length=76, blank=True)
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
 
     def get_absolute_url(self):
         first = self.steps.all().first()
@@ -83,14 +94,16 @@ class NotebookNote(models.Model):
             'slug_notebook': self.topic.notebook.slug,
             'slug_topic': self.topic.slug,
             'slug_note': self.slug,
-            'step_value': 1
+            'order': 1
         })
 
     def save(self, *args, **kwargs):
+        if self.pk is None:
+            last_step = NotebookStep.objects.filter(topic=self.topic).order_by('order').last()
+            self.order = last_step.order + 1 if last_step else 1
         if not self.slug:
             self.slug = slugify(rand_slug() + self.title)
         super().save(*args, **kwargs)
-        NotebookStep.objects.get_or_create(note=self)
 
     def __str__(self):
         return self.title
@@ -99,7 +112,7 @@ class NotebookNote(models.Model):
 class NotebookStep(models.Model):
     note = models.ForeignKey(NotebookNote, on_delete=models.CASCADE, related_name='steps')
     content = RichTextUploadingField(blank=True)
-    value = models.PositiveSmallIntegerField(default=0, blank=True)
+    order = models.PositiveSmallIntegerField(default=0)
 
     def get_absolute_url(self):
         return reverse('notebook_manager:edit_note', kwargs={
@@ -111,13 +124,10 @@ class NotebookStep(models.Model):
             'slug_notebook': self.note.topic.notebook.slug,
             'slug_topic': self.note.topic.slug,
             'slug_note': self.note.slug,
-            'step_value': self.value
+            'order': self.order
         })
 
     def save(self, *args, **kwargs):
-        last_value = NotebookStep.objects.filter(note=self.note).order_by('value').last()
-        if last_value:
-            self.value = last_value.value + 1
-        else:
-            self.value = 1
+        last_step = NotebookStep.objects.filter(note=self.note).order_by('order').last()
+        self.order = last_step.order + 1 if last_step else 0
         return super().save(*args, **kwargs)

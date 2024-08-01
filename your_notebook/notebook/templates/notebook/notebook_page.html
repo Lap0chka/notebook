@@ -4,121 +4,7 @@
 <main class="main-content">
     <div class="marco-layout course">
         <span id="course-nav-menu-label" hidden="">Main menu and course navigation</span>
-        <nav class="marco-layout__nav course__course-nav-container" data-marco-sticky-nav-content=""
-             aria-labelledby="course-nav-menu-label">
-            <div class="nav-menu course-nav ember-view course__course-nav">
-                <img class="course-nav__cover" src="{{notebook.image.url}}" alt="Course cover" height="56" width="56">
-                <h1 class="course-nav__title">{{notebook.name}}</h1>
-                <div class="course-join-button ember-view course-nav__course-join">
-                    <button class="button" title="Продолжить обучение с последнего пройденного шага" type="button"
-                            data-ember-action="" data-ember-action-734="734">
-                        Continue
-                    </button>
-                </div>
-
-                <!---->
-                <ul class="nav-menu__menu menu course-nav__main-menu" data-level="1">
-                    <li class="menu-item nav-menu__menu-item_collapse-icon" data-item="info">
-                        <a href="{% url 'notebook:notebook_description' notebook.slug %}" aria-disabled="false">
-                            <span>Description</span>
-                        </a>
-                    </li>
-
-                    <li class="menu-item nav-menu__menu-item_collapse-icon" data-item="syllabus">
-                        <a href="/course/58852/syllabus" aria-disabled="false" data-active="">
-                            <!---->
-                            <span>Содержание</span>
-
-                            <!---->
-                            <!---->
-                            <!---->
-                        </a>
-                    </li>
-
-                    <li class="menu-item nav-menu__menu-item_collapse-icon" data-item="news">
-                        <a href="/course/58852/news" aria-disabled="false">
-                            <!---->
-                            <span>Новости</span>
-
-                            <!---->
-                            <!---->
-                            <!---->
-                        </a>
-                    </li>
-
-                    <li class="menu-item nav-menu__menu-item_collapse-icon" data-item="comments">
-                        <a href="/course/58852/comments" aria-disabled="false">
-                            <!---->
-                            <span>Комментарии</span>
-
-                            <!---->
-                            <!---->
-                            <!---->
-                        </a>
-                    </li>
-
-                    <li class="menu-item nav-menu__menu-item_collapse-icon" data-item="reviews">
-                        <a href="/course/58852/reviews" aria-disabled="false">
-                            <!---->
-                            <span>Отзывы</span>
-
-                            <!---->
-                            <!---->
-                            <!---->
-                        </a>
-                    </li>
-
-                    <li class="menu-item-divider " data-media-query="not-mobile"></li>
-
-                    <li class="menu-item " data-media-query="not-mobile" data-item="search">
-                        <a href="/course/58852/search" aria-disabled="false">
-        <span id="ember756" class="svg-icon search_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
-    <use xlink:href="/static/frontend-build/icons.svg?1720098406#search"></use>
-  </svg></span>
-
-                            <span>Искать в курсе</span>
-
-                            <!---->
-                            <!---->
-                            <!---->
-                        </a>
-                    </li>
-
-                    <li class="menu-item " data-media-query="not-mobile" data-item="favorite">
-                        <button type="button">
-        <span id="ember760" class="svg-icon bookmark_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
-    <use xlink:href="/static/frontend-build/icons.svg?1720098406#bookmark"></use>
-  </svg></span>
-
-                            <span>Добавить в избранные</span>
-
-                            <!---->
-                            <!---->
-                            <!---->
-                        </button>
-                    </li>
-
-                    <li class="menu-item " data-media-query="not-mobile" data-item="new-class">
-                        <a href="/new-class?course=58852" aria-disabled="false">
-        <span id="ember764" class="svg-icon plus-2_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
-    <use xlink:href="/static/frontend-build/icons.svg?1720098406#plus-2"></use>
-  </svg></span>
-
-                            <span>Создать класс</span>
-
-                            <!---->
-                            <!---->
-                            <!---->
-                        </a>
-                    </li>
-
-                    <li class="menu-item-divider " data-media-query="not-mobile"></li>
-
-                </ul>
-
-
-                <!----></div>
-        </nav>
+        {% include 'notebook/includes/left_menu.html' %}
 
 
         <header class="course-page__syllabus page-fragment marco-layout__header">
@@ -150,7 +36,7 @@
                                 <div id="ember869" class="lesson-widget ember-view toc-syllabus__lesson">
                                     <div class="lesson-widget__content">
                                         <div class="lesson-widget__cover">
-                                            <a href="{% url 'notebook:notebook_step' notebook.slug topic.slug note.slug note.steps.first.id %}"
+                                            <a href=" {{note.get_absolute_url_public}} "
                                                tabindex="-1">
                                                 <div class="lesson-widget__cover-image"
                                                      style="background-image: url(https://ucarecdn.com/836b8980-19a2-43d4-a788-0d31d687e93c/-/scale_crop/180x180/center/);"></div>
@@ -158,7 +44,7 @@
                                         </div>
                                         <div class="lesson-widget__info">
                                             <div class="lesson-widget__title">
-                                                <a href="{% url 'notebook:notebook_step' notebook.slug topic.slug note.slug note.steps.first.id %}"
+                                                <a href="{{note.get_absolute_url_public}}"
                                                    class="lesson-widget__title-text">
                                                     {{index}}.{{note_index}}
                                                     {{note.title}} <!---->

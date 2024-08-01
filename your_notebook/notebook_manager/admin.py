@@ -21,5 +21,5 @@ class NotebookTopicAdmin(admin.ModelAdmin):
 @admin.register(NotebookStep)
 class NotebookStepAdmin(admin.ModelAdmin):
     list_display = ('id', 'content',)
-    readonly_fields = ('value',)
+    readonly_fields = ('order',)
 
