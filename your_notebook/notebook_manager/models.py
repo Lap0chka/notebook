@@ -64,7 +64,7 @@ class NotebookTopic(models.Model):
         Save the category instance to the database.
         """
         if self.pk is None:
-            last_step = NotebookStep.objects.filter(notebook=self.notebook).order_by('order').last()
+            last_step = NotebookTopic.objects.filter(notebook=self.notebook).order_by('order').last()
             self.order = last_step.order + 1 if last_step else 0
         if not self.slug:
             self.slug = slugify(rand_slug() + self.topic)
@@ -99,7 +99,7 @@ class NotebookNote(models.Model):
 
     def save(self, *args, **kwargs):
         if self.pk is None:
-            last_step = NotebookStep.objects.filter(topic=self.topic).order_by('order').last()
+            last_step = NotebookNote.objects.filter(topic=self.topic).order_by('order').last()
             self.order = last_step.order + 1 if last_step else 1
         if not self.slug:
             self.slug = slugify(rand_slug() + self.title)

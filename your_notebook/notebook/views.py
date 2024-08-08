@@ -16,7 +16,7 @@ def index(request):
 @login_required
 def my_notebooks(request):
     return render(
-        request, 'notebook/my_notebooks.html',
+        request, 'notebook/my_notebooks/my_notebooks.html',
     )
 
 
