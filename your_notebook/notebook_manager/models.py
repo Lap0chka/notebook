@@ -2,10 +2,12 @@ from random import sample
 from string import ascii_letters, digits
 
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField
+
+User = get_user_model()
 
 
 def rand_slug() -> str:
@@ -131,3 +133,31 @@ class NotebookStep(models.Model):
         last_step = NotebookStep.objects.filter(note=self.note).order_by('order').last()
         self.order = last_step.order + 1 if last_step else 0
         return super().save(*args, **kwargs)
+
+
+class Comment(models.Model):
+    step = models.ForeignKey(NotebookStep, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='users')
+    text = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    likes = models.PositiveIntegerField(default=0)
+    dislikes = models.PositiveIntegerField(default=0)
+
+    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
+
+    class Meta:
+        ordering = ['created_at']
+
+    def __str__(self):
+        return f"Comment by {self.user} on {self.step.note.title} step {self.step.order}"
+
+    def is_reply(self):
+        return self.parent is not None
+
+    def like(self):
+        self.likes += 1
+        self.save()
+
+    def dislike(self):
+        self.dislikes += 1
+        self.save()

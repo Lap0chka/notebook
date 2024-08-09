@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {%block title%}{%endblock%}
 {% block menu %}
 <div id="main-navbar-body-slot">
@@ -6,7 +7,9 @@
         <div class="player-topbar__step-pins">
             {%for step in steps%}
             <div class="m-step-pin ember-view player__step-pin"
-                 {% if request.path == step.get_absolute_url_public%} data-is-passed="" data-is-active="" {%endif%}>
+                 {% if request.path == step.get_absolute_url_public%}
+                    data-is-passed="" data-is-active=""
+                 {%endif%}>
                 <a href="{{step.get_absolute_url_public}}" class="active ember-view m-step-pin__link">
                         <span class="m-step-pin__pin">
                         </span>
@@ -88,12 +91,12 @@
                 <div class="lesson lesson-modern">
                     <div class="lesson__player">
                         <div class="player-content-wrapper">
-                            <article  class="step-show ember-view">
+                            <article class="step-show ember-view">
                                 <div class="step-dynamic-container">
                                     <div class="step-view step-view_material ember-view"><!---->
                                         <div class="step-wrapper">
                                             <div class="step-inner page-fragment">
-                                                <div  class="html-content rich-text-viewer ember-view" data-processed="">
+                                                <div class="html-content rich-text-viewer ember-view" data-processed="">
                                                     <span>
                                                        {{ step.content|safe }}
                                                     </span>
@@ -112,10 +115,8 @@
                             <div class="ui-vote lesson__likes-widget" data-is-liked="" data-is-abused="">
                                 <button class="st-button_style_none ui-like ui-vote__like" title="Like!"
                                         data-type="like" tabindex="0" type="button">
-                                    <span  class="svg-icon thumbs-up_icon ember-view ui-like__icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg">
-                                            <use xlink:href="/static/frontend-build/icons.svg?1720098406#thumbs-up"></use>
-                                        </svg>
+                                    <span class="svg-icon thumbs-up_icon ember-view ui-like__icon">
+                                        <img src="{% static 'img/icons/thumbs-up.svg'%}" style="margin-bottom: 10px;">
                                     </span>
                                     <span class="ui-like__count">
                                         19196
@@ -124,9 +125,7 @@
                                 <button class="st-button_style_none ui-like ui-vote__like" title="Dislike"
                                         data-type="dislike" tabindex="0" type="button">
                                     <span class="svg-icon thumbs-up_icon ember-view ui-like__icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg">
-                                            <use xlink:href="/static/frontend-build/icons.svg?1720098406#thumbs-up"></use>
-                                        </svg>
+                                        <img src="{% static 'img/icons/thumbs-up.svg'%}" style="margin-bottom: 10px;">
                                     </span>
                                     <span class="ui-like__count">
                                         1615
@@ -135,23 +134,16 @@
                             </div>
 
                             <span class="lesson__step-title">
-                              Step {{step.value}}
+                              Step {{step.order}}
                             </span>
                             <div class="lesson__footer-nav-buttons">
-                                <a class="lesson__next-btn button has-icon" href="" >
-                                          <span>
-                                            Next step
-                                          </span>
-                                    <span  class="svg-icon right-arrow_icon ember-view">
-                                        <svg xmlns="http://www.w3.org/2000/svg">
-                                            <use xlink:href="/static/frontend-build/icons.svg?1720098406#right-arrow"></use>
-                                        </svg>
-                                    </span>
+                                <a class="lesson__next-btn button has-icon" href="">
+                                    Next step
                                 </a>
                             </div>
                         </div>
                     </div>
-
+                    {%include 'notebook/includes/comments.html'%}
                 </div>
             </div>
         </div>

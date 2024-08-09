@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.safestring import mark_safe
 
-from notebook_manager.models import Notebook, NotebookTopic, NotebookNote, NotebookStep
+from notebook_manager.models import Notebook, NotebookTopic, NotebookNote, NotebookStep, Comment
 
 
 class SettingsNotebookForm(forms.ModelForm):
@@ -67,3 +67,18 @@ class NotebookStepForm(forms.ModelForm):
     class Meta:
         model = NotebookStep
         fields = ['content']
+
+
+class CommentNoteForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text', 'parent']
+        widgets = {
+            'parent': forms.HiddenInput(),
+            'text': forms.Textarea(
+                attrs={'class': 'rich-text-editor__container '
+                                'rich-text-editor__content cke_editable '
+                                'cke_editable_inline cke_contents_ltr '
+                                'cke_show_borders',
+                       'cols': 120})
+        }

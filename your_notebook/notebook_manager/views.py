@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, reverse, get_object_or_404
@@ -127,4 +128,10 @@ def settings_notebook(request, slug):
         'notebooks/manager/settings/notebook_settings.html',
         context
     )
+
+
+
+
+
+
 

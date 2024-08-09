@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from notebook_manager.models import Notebook, NotebookNote, NotebookTopic, NotebookStep
+from notebook_manager.models import Notebook, NotebookNote, NotebookTopic, NotebookStep, Comment
 
 
 @admin.register(Notebook)
@@ -26,3 +26,7 @@ class NotebookStepAdmin(admin.ModelAdmin):
     list_display = ('id', 'content',)
     readonly_fields = ('order',)
 
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    pass
