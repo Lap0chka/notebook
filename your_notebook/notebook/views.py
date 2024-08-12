@@ -25,7 +25,7 @@ def my_notebooks(request):
 
 def notebook_page(request, slug):
     notebook = get_object_or_404(Notebook, slug=slug)
-    return render(request, 'notebook/notebook_page.html', {'notebook': notebook})
+    return render(request, 'notebook/left_menu/content.html', {'notebook': notebook})
 
 
 def notebook_page_step(request, slug_notebook, slug_topic, slug_note, order):
@@ -50,12 +50,25 @@ def notebook_page_step(request, slug_notebook, slug_topic, slug_note, order):
 
 def notebook_description(request, slug):
     notebook = get_object_or_404(Notebook, slug=slug)
-    return render(request, 'notebook/description.html', {'notebook': notebook})
+    return render(request, 'notebook/left_menu/description.html', {'notebook': notebook})
 
 
 def notebook_reviews(request, slug):
     notebook = get_object_or_404(Notebook, slug=slug)
-    return render(request, 'notebook/contact/reviews.html', {'notebook': notebook})
+    return render(request, 'notebook/left_menu/reviews.html', {'notebook': notebook})
+
+
+def notebook_comments(request, slug):
+    notebook = get_object_or_404(Notebook, slug=slug)
+    comments = Comment.objects.filter(step__note__topic__notebook=notebook)
+    print(comments)
+
+    context = {
+        'notebook': notebook,
+        'comment_form': CommentNoteForm(),
+        'comments': comments
+    }
+    return render(request, 'notebook/left_menu/all_comments.html', context, )
 
 
 @login_required
@@ -84,6 +97,7 @@ def like_comment(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
     comment.like()
     return JsonResponse({'likes': comment.likes, 'dislikes': comment.dislikes})
+
 
 @login_required
 def dislike_comment(request, comment_id):

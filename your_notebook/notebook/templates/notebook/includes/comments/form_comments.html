@@ -1,0 +1,35 @@
+<div class="comment-widget-avatar ember-view discussions__comment-input">
+    {% if user.is_authenticated %}
+    <div class="comment-widget-avatar__avatar-block">
+                            <span class="user-avatar ember-view comment-widget-avatar__avatar">
+                                <a href="/users/930370884" class="ember-view user-avatar__link">
+                                    <img src="https://stepik.org/users/930370884/4c4a2b56d1e27b94deeaeeb47e08dc9f42ad4e1c/avatar.svg"
+                                         alt="User avatar" class="user-avatar__img user-avatar__img_shape_square"
+                                         style="width: 35px; height: 35px;">
+
+                                </a>
+                            </span>
+    </div>
+    <div class="comment-widget-avatar__main">
+        <form action="{% url 'notebook:comment_step' step.note.slug step.order %}" method="POST">
+            {%csrf_token%}
+            <div class="comment-input ember-view">
+                <div class="comment-input__bait" role="button" data-ember-action="">
+                    {{ comment_form.text }}
+                    <input class="lesson__next-btn button has-icon" type="submit" value="Send">
+                </div>
+            </div>
+
+        </form>
+    </div>
+    {%else%}
+    <div class="comment-widget-avatar__main">
+        <div class="comment-input ember-view">
+            <div class="comment-input__bait" role="button" data-ember-action="">
+                Please sign in
+            </div>
+        </div>
+    </div>
+    {%endif%}
+</div>
+

@@ -1,0 +1,96 @@
+{% load static %}
+<div class="lesson__discussions-wrapper">
+    <div class="page-fragment">
+        <div class="discussions-list ember-view">
+            <div class="discussions__header" id="discussions">
+                <ul class="tab tab--border">
+                    <li class="tab__item discussions__tab" data-active="">
+                        <a href="/lesson/290248/step/1?unit=271724"
+                           class="active ember-view">
+                            <span class="tab__item-counter" data-value="{{ comments|length }}"></span>
+                            Comments
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+
+            <div class="discussions__community-rules">
+                Please be polite and follow our <a href=""
+                                                   target="_blank"> community guidelines</a>.
+            </div>
+            {% include 'notebook/includes/comments/form_comments.html' %}
+
+
+            {% include 'notebook/includes/comments/list_comments.html' %}
+
+            <div class="modal-popup ember-view">
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="lesson__go-top-wrapper" hidden="">
+    <button class="st-button_style_none lesson__go-top" type="button" data-ember-action=""
+            data-ember-action-2935="2935">
+      <span class="svg-icon arrow2-up_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+    <use xlink:href="/static/frontend-build/icons.svg?1720098406#arrow2-up"></use>
+  </svg></span>
+    </button>
+</div>
+
+<script>
+    function toggleComment(button) {
+        // Найти блок с комментарием, который находится рядом с кнопкой
+        var commentContent = button.nextElementSibling;
+
+        // Переключить отображение блока
+        if (commentContent.style.display === "none") {
+            commentContent.style.display = "block";
+        } else {
+            commentContent.style.display = "none";
+        }
+    }
+</script>
+
+
+<script>
+    function toggleReplies(button) {
+        // Найти следующий элемент с классом 'comment-replies'
+        var repliesDiv = button.closest('.comment-widget').querySelector('.comment-replies');
+
+        // Если блок найден, переключить видимость
+        if (repliesDiv) {
+            if (repliesDiv.style.display === "none" || repliesDiv.style.display === "") {
+                repliesDiv.style.display = "block";
+                button.textContent = "Hide responses";  // Меняем текст на кнопке
+            } else {
+                repliesDiv.style.display = "none";
+                button.textContent = "Look at " + repliesDiv.querySelectorAll('.comment-widget').length + " response";  // Возвращаем текст на кнопке
+            }
+        }
+    }
+</script>
+
+<script>
+    function handleVote(commentId, action) {
+        const url = action === 'like'
+            ? `{% url 'notebook:like_comment' 0 %}`.replace('/0/', `/${commentId}/`)
+            : `{% url 'notebook:dislike_comment' 0 %}`.replace('/0/', `/${commentId}/`);
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById(`like-count-${commentId}`).textContent = data.likes;
+                document.getElementById(`dislike-count-${commentId}`).textContent = data.dislikes;
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>

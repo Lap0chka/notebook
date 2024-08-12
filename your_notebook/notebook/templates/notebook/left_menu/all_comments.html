@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Comments{%endblock%}
+{%block content%}
+<div class="marco-layout course">
+    <span id="course-nav-menu-label" hidden="">Main menu and course navigation</span>
+    {% include 'notebook/includes/left_menu.html' %}
+
+    <!---->
+    <header id="ember533" class="course-learn-header marco-layout__header ember-view"><!----></header>
+
+
+    <header class="marco-layout__header course-comments__header">
+        <h1>Comments</h1>
+    </header>
+
+    <article data-marco-no-aside="" class="marco-layout__content">
+        <div class="discussions-list ember-view">
+            <div class="discussions__header" id="discussions">
+                <ul class="tab tab--border">
+                    <li class="tab__item discussions__tab" data-active="">
+                        <a class="ember-view">
+                            <span class="tab__item-counter" data-value="{{comments.all|length}}"></span>
+                            Comments
+                        </a>
+                    </li>
+
+
+                    <li class="tab__item tab__item--action">
+                        <select class="st-select st-select_font_normal discussions__sorting">
+                            <option value="default">
+                                Popular
+                            </option>
+                            <option value="default">
+                                Un popular
+                            </option>
+                            <option value="by_date">
+                                New
+                            </option>
+                            <option value="active">
+                                More comments
+                            </option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="discussions__list">
+                {%include 'notebook/includes/comments/list_comments.html'%}
+
+            </div>
+
+            <div data-theme="tak-confirm-danger" id="ember80865" class="modal-popup ember-view"><!----></div>
+
+        </div>
+    </article>
+</div>
+{%endblock%}

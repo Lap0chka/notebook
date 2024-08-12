@@ -13,7 +13,7 @@
                 {% url 'notebook:description' notebook.slug as description_url %}
                 <a href="{{ description_url }}"
                    {% if request.path == description_url %}data-active="" {% endif %}>
-                    Description
+                    <span>Descriptiom</span>
                 </a>
 
             </li>
@@ -24,12 +24,14 @@
                 </a>
             </li>
             <li class="menu-item nav-menu__menu-item_collapse-icon" data-item="comments">
-                <a href="/course/58852/comments" aria-disabled="false">
+                {% url 'notebook:comments' notebook.slug as description_url %}
+                <a href="{{ description_url }}"
+                   {% if request.path == description_url %}data-active="" {% endif %}>
                     <span>Comments</span>
                 </a>
             </li>
             <li class="menu-item nav-menu__menu-item_collapse-icon" data-item="reviews">
-                 {% url 'notebook:reviews' notebook.slug as description_url %}
+                {% url 'notebook:reviews' notebook.slug as description_url %}
                 <a href="{{ description_url }}"
                    {% if request.path == description_url %}data-active="" {% endif %}>
                     <span>Reviews</span>
