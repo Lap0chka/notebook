@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # Apps
     'notebook_manager',
     'notebook',
+    'account',
 ]
 
 MIDDLEWARE = [

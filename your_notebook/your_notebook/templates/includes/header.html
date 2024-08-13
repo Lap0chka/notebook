@@ -1,5 +1,16 @@
+{%load static%}
+<header id="main-header" class="main-header no-print">
+    <!---->
 
+    <div id="custom-navbar-slot"></div>
 
+    <nav id="main-navbar" class="navbar" aria-label="Общая навигация по сайту">
+        <a href="/catalog?auth=registration" id="ember441" class="ember-view navbar__logo-link">
+            <picture>
+                <source srcset="{% static 'img/logo/logo_main.png' %}" media="(max-width: 1024px)">
+                <img class="navbar__logo" alt="Your Notebook" src="{% static 'img/logo/logo_main.png' %}">
+            </picture>
+        </a>
 
         <ul class="navbar__links">
             <li class="navbar__menu-item" data-navbar-item="catalog">
@@ -30,7 +41,7 @@
             </li>
 
             <li class="navbar__menu-item" data-navbar-item="teach">
-                <a class="navbar__link st-link" href="https://teach.stepik.org/ru" target="_blank"
+                <a class="navbar__link st-link" href="{% url 'notebook_manager:create_notebook' %}" target="_blank"
                    rel="noopener noreferrer">
                     Create notebook
                 </a>
@@ -38,5 +49,60 @@
         </ul>
 
 
+        <div class="navbar__spacer"></div>
 
+        <form class="navbar__search-form" data-ember-action="" data-ember-action-446="446">
+            <div id="ember447" class="ember-view"><span id="ember448" class="with-autocomplete ember-view"><div
+                    id="ember449" class="drop-down drop-down-menu ember-view with-autocomplete__drop-down">
+  <div aria-expanded="false" aria-haspopup="true" id="ember450" class="drop-down__toggler drop-down-toggler ember-view">
+    <div class="with-autocomplete__content">
+
+  <div class="navbar__search-wrapper st-input-wrapper st-input-wrapper_border-none st-input-wrapper_type-search">
+    <input class="navbar__search-input st-input st-input_border_none" aria-label="Search" placeholder="Поиск…"
+           type="search">
+  </div>
+
+    </div>
+
+</div>
+
+                <!---->
+
+                <!----></div></span></div>
+        </form>
+
+        {% if user.is_authenticated %}
+        <div class="drop-down drop-down-menu ember-view navbar__profile">
+            <div aria-expanded="false" aria-haspopup="true" id="ember458"
+                 class="drop-down__toggler drop-down-toggler drop-down-toggler--auto-toggle ember-view">
+                <button class="navbar__profile-toggler st-button_style_none" aria-label="Profile"
+                        aria-describedby="profile-notifications-badge platform-news-badge" type="button">
+                    <img class="navbar__profile-img" alt="User avatar"
+                         src="https://stepik.org/users/930370884/4c4a2b56d1e27b94deeaeeb47e08dc9f42ad4e1c/avatar.svg">
+
+                    <!---->
+                    <span id="profile-notifications-badge" class="navbar__profile-notifications-badge"
+                          aria-label="0 notifications" data-count="0">
+                0
+              </span>
+
+                    <!---->          </button>
+
+            </div>
+
+            <!---->
+
+
+            <!----></div>
+        {%else%}
+        <a href="{% url 'account:login' %}" class="ember-view navbar__auth navbar__auth_login st-link st-link_style_button">
+          Sign in
+        </a>
+          <a href="{% url 'account:login' %}" class="ember-view navbar__auth navbar__auth_login st-link st-link_style_button">
+          Sign up
+        </a>
+        {%endif%}
+    </nav>
+
+</header>
 

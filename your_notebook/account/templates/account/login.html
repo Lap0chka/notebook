@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Login{%endblock%}
+{%block content%}
+<div class="modal-dialog ember-view modal-dialog_paddings_none auth-modal">
+    <div class="modal-dialog-wrap">
+        <div class="modal-dialog-bg"></div>
+        <div class="modal-dialog-block" role="dialog" style="width: 450px;">
+            <div class="modal-dialog-inner">
+                <div class="modal-dialog-top__close" role="button">
+                        <span class="svg-icon modal-button-close_icon ember-view modal-button-close-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg">
+                                <img src="{% static 'img/icons/x.png' %}" alt="" style="height: 60px;">
+                            </svg>
+                        </span>
+                </div>
+
+                <div class="modal-dialog__content">
+                    <div class="auth-widget sign-form sign-form__shaking ember-view">
+                        <div class="">
+                            <div class="light-tabs ember-view">
+                                <header class="light-tabs__header ">
+                                    <div class="flex-row start-xs">
+                                        <div class="col-xs-12 no-pad-sm">
+                                            <a href="/catalog?auth=login" class="active ember-view light-tabs__switch"
+                                               data-tab-name="login">
+                                                Sign in
+                                            </a>
+                                            <a href="/catalog?auth=registration" class="ember-view light-tabs__switch"
+                                               data-tab-name="registration">
+                                                Sign up
+                                            </a>
+                                        </div>
+                                    </div>
+                                </header>
+                                <div class="auth-widget__body">
+                                    <div class="sign-form__body login-form__body ember-view">
+                                        <form id="login_form" autocomplete="on" method="POST">
+                                            {%csrf_token%}
+                                            <div class="sign-form__input-group">
+                                                <label class="sign-form__hidden-label" for="id_login_email">E-mail</label>
+                                                {{form.username}}
+                                                <label class="sign-form__hidden-label"
+                                                       for="id_login_password">Пароль</label>
+                                                {{form.password}}
+                                            </div>
+                                            <button class="sign-form__btn button_with-loader " type="submit">
+                                                Sign in
+                                            </button>
+                                            <div class="sign-form__sub">
+                                                <a href="/catalog?auth=login&amp;pass_reset=true"
+                                                   class="ember-view link_no-static-line">
+                                                    Forget password
+                                                </a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <hr class="split">
+                                <div class="flex-row center-xs">
+                                    <div class="col-xs-12 col-md-11">
+                                        <div class="box-container">
+                                            <div class="social-title">
+                                                Sign in with social media
+                                            </div>
+                                            <div class="ember-view">
+                                                <div class="flex-row center-xs social-wrap">
+                                                    <div class="col-xs-2">
+                                                        <a class="btn btn-block btn-social btn-vk"
+                                                           href="https://stepik.org/accounts/vk/login/?next=/catalog"
+                                                           title="Войти через VK" data-href-to-ignore="">
+                                                            <img src="https://cdn.stepik.net/static/frontend/social_fa/vk.svg?1723485821"
+                                                                 alt="VK">
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-xs-2">
+                                                        <a class="btn btn-block btn-social btn-google"
+                                                           href="https://stepik.org/accounts/google/login/?next=/catalog"
+                                                           title="Войти через Google" data-href-to-ignore="">
+                                                            <img src="https://cdn.stepik.net/static/frontend/social_fa/google.svg?1723485821"
+                                                                 alt="Google">
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-xs-2">
+                                                        <a class="btn btn-block btn-social btn-github"
+                                                           href="https://stepik.org/accounts/github/login/?next=/catalog"
+                                                           title="Войти через GitHub" data-href-to-ignore="">
+                                                            <img src="https://cdn.stepik.net/static/frontend/social_fa/github.svg?1723485821"
+                                                                 alt="GitHub">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
