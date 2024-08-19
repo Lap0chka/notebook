@@ -72,34 +72,30 @@
         </form>
 
         {% if user.is_authenticated %}
+        <a href="">
         <div class="drop-down drop-down-menu ember-view navbar__profile">
-            <div aria-expanded="false" aria-haspopup="true" id="ember458"
+            <div aria-expanded="false" aria-haspopup="true"
                  class="drop-down__toggler drop-down-toggler drop-down-toggler--auto-toggle ember-view">
-                <button class="navbar__profile-toggler st-button_style_none" aria-label="Profile"
+                <a href="{% url 'account:profile' %}" class="navbar__profile-toggler st-button_style_none" aria-label="Profile"
                         aria-describedby="profile-notifications-badge platform-news-badge" type="button">
                     <img class="navbar__profile-img" alt="User avatar"
                          src="https://stepik.org/users/930370884/4c4a2b56d1e27b94deeaeeb47e08dc9f42ad4e1c/avatar.svg">
-
-                    <!---->
-                    <span id="profile-notifications-badge" class="navbar__profile-notifications-badge"
-                          aria-label="0 notifications" data-count="0">
-                0
-              </span>
-
-                    <!---->          </button>
-
+                </a>
             </div>
-
-            <!---->
-
-
-            <!----></div>
-        {%else%}
-        <a href="{% url 'account:login' %}" class="ember-view navbar__auth navbar__auth_login st-link st-link_style_button">
-          Sign in
+        </div>
         </a>
-          <a href="{% url 'account:login' %}" class="ember-view navbar__auth navbar__auth_login st-link st-link_style_button">
-          Sign up
+        <a href="{% url 'account:logout' %}"
+           class="ember-view navbar__auth navbar__auth_login st-link st-link_style_button">
+            Log out
+        </a>
+        {%else%}
+        <a href="{% url 'account:login' %}"
+           class="ember-view navbar__auth navbar__auth_login st-link st-link_style_button">
+            Sign in
+        </a>
+        <a href="{% url 'account:login' %}"
+           class="ember-view navbar__auth navbar__auth_login st-link st-link_style_button">
+            Sign up
         </a>
         {%endif%}
     </nav>

@@ -1,0 +1,156 @@
+{%extends 'base.html' %}
+{% block title %}Profile{%endblock%}
+
+{% block content %}
+<main class="main-content">
+    <div class="page-fragment page-content user-edit">
+        <div class="flex-row flex-row_paddings_none">
+            <nav class="user-edit-menu flex-row">
+                <ul class="user-edit-menu__links">
+                    <li>
+                        <a href="/edit-profile/info" class="active ember-view" data-qa="user_edit__info-link">
+                            Edit profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/edit-profile/email" class="ember-view" data-qa="user_edit__email-link">
+                            Change mail
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/edit-profile/pass" class="ember-view" data-qa="user_edit__change-password-link">
+                            Change the password
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/edit-profile/notifications" class="ember-view"
+                           data-qa="user_edit__notifications-link">
+                            Notification
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="col-xs-12 col-md-9 user-edit__page-wrapper">
+                <form action="" method="post">
+                    {%csrf_token%}
+                    <div class="flex-row">
+                        <h4 class="form__header col-xs-12">
+                            Profile edit
+                        </h4>
+                    </div>
+                    <div>
+                        <div class="flex-row form-row  ">
+                            <div class="col-xs-12 col-md-3">
+                                <label class="st-size-normal" for="first_name">
+                                    Your name <span title="required" style="cursor: help">*</span>
+                                </label>
+                            </div>
+                            <div class="col-xs-12 col-md-9 make-col-span">
+                                {{form.first_name}}
+                            </div>
+                        </div>
+
+                        <div class="flex-row form-row  ">
+                            <div class="col-xs-12 col-md-3">
+                                <label class="st-size-normal" for="last_name">
+                                    Last Name <span title="required" style="cursor: help">*</span>
+                                </label>
+                            </div>
+                            <div class="col-xs-12 col-md-9">
+                                {{form.last_name}}
+                            </div>
+                        </div>
+                        <div class="flex-row form-row  ">
+                            <div class="col-xs-12 col-md-3">
+                                <label class="st-size-normal" for="last_name">
+                                    <!---->            City
+                                </label>
+                            </div>
+                            <div class="col-xs-12 col-md-9">
+                                <input maxlength="30" id="city"
+                                       class="ember-text-field ember-view st-input st-input_width_max st-size-normal"
+                                       type="text">
+                            </div>
+                        </div>
+
+                        <div class="flex-row form-row  ">
+                            <div class="col-xs-12 col-md-3">
+                                <label class=" st-size-normal" for="short_bio">
+                                    Short biography<br>(by 255 symbols)
+                                </label>
+                            </div>
+
+                            <div class="col-xs-12 col-md-9">
+                                <textarea rows="3" maxlength="255" id="short_bio"
+                                          class="ember-text-area ember-view st-input st-input_width_max st-size-normal"
+                                          style="height: 77px;"></textarea></div>
+                        </div>
+
+                        <div class="flex-row form-row  ">
+                            <div class="col-xs-12 col-md-3">
+                                <label class=" st-size-normal" for="details">
+                                    About me
+                                </label>
+                            </div>
+
+                            <div class="col-xs-12 col-md-9">
+                                <textarea rows="7" id="details"
+                                          class="ember-text-area ember-view st-input st-input_width_max st-size-normal"
+                                          style="height: 149px;"></textarea></div>
+                        </div>
+
+                        <div class="flex-row form-row ">
+                            <div class="col-xs-12">
+                                <button type="submit" data-ember-action="" data-ember-action-995="995">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="user-edit__settings-divider"></div>
+
+                        <div class="flex-row form-row  ">
+                            <div class="col-xs-12 col-md-3">
+                                <label class=" st-size-normal">
+                                    Photo
+                                </label>
+                            </div>
+
+                            <div class="col-xs-12 col-md-9 user-edit__image-field">
+                                <img class="user-edit__image-field-pic"
+                                     src="https://stepik.org/users/552594420/5dfaa1ef6e41538ebc1010dee42549d326ac11ed/avatar.svg"
+                                     alt="Profile avatar" data-is-avatar="">
+
+                                <div class="user-edit__image-field-tools">
+
+                                    <button class="user-edit__image-upload btn-link " type="button" data-ember-action=""
+                                            data-ember-action-996="996">
+              <span class="st-button__text">
+                Загрузить
+
+                  <!---->              </span>
+                                    </button>
+
+
+                                    <input class="file-upload__input" name="avatar" accept="image/png,image/jpeg"
+                                           tabindex="-1" type="file">
+
+
+                                    <button class="btn-link " disabled="" type="button" data-ember-action=""
+                                            data-ember-action-997="997">
+                                        <span class="st-button__text">Убрать</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!---->
+        </div>
+    </div>
+</main>
+{% endblock %}
