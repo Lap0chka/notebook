@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Register{%endblock%}
+
+{% block content %}
+<div class="modal-dialog ember-view modal-dialog_paddings_none auth-modal">
+    <div class="modal-dialog-wrap">
+        <div class="modal-dialog-bg"></div>
+        <div class="modal-dialog-block" role="dialog" style="width: 450px;">
+            <div class="modal-dialog-inner">
+
+                <div class="modal-dialog-top__close" role="button">
+                        <span class="svg-icon modal-button-close_icon ember-view modal-button-close-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg">
+                                <img src="{% static 'img/icons/x.png' %}" alt="" style="height: 60px;">
+                            </svg>
+                        </span>
+                </div>
+
+                <div class="modal-dialog__content">
+
+                    <div class="auth-widget sign-form sign-form__shaking ember-view">
+                        <div class="">
+                            <div id="ember979" class="light-tabs ember-view">
+                                <header class="light-tabs__header ">
+                                    <div class="flex-row start-xs">
+                                        <div class="col-xs-12 no-pad-sm">
+                                            <a href="{% url 'account:login' %}" id="ember980"
+                                               class="ember-view light-tabs__switch"
+                                               data-tab-name="login">
+                                                Sign in
+                                            </a>
+                                            <a href="/" id="ember981"
+                                               class="active ember-view light-tabs__switch"
+                                               data-tab-name="registration">
+                                                Sign up
+                                            </a>
+                                        </div>
+                                    </div>
+                                </header>
+
+
+                                <div class="auth-widget__body">
+                                    <div id="ember982" class="sign-form__body registration-form__body ember-view">
+                                        <form autocomplete="on" method="post">
+                                            {%csrf_token%}
+                                            <div class="sign-form__input-group">
+                                                {{form.username}}
+                                                {{form.email}}
+                                                {{form.password1}}
+                                                {{form.password2}}
+                                            </div>
+
+                                            <div class="auth-disclaimer sign-form__disclaimer">
+                                                <div class="auth-disclaimer__form">
+                                                    <label class="form-checkbox">
+                                                        {{form.policy}}
+                                                        <span></span>
+                                                    </label>
+                                                    <div class="auth-disclaimer__caption">
+
+                                                        I agree  <a href="https://welcome.stepik.org/ru/terms"
+                                                                          target="_blank">to the terms</a>,
+                                                        <a
+                                                                href="https://welcome.stepik.org/ru/privacy"
+                                                                target="_blank">of use policy confidentiality </a> and I authorize the processing of my
+ personal data
+                                                    </div>
+                                                </div>
+
+                                                <!----></div>
+
+                                            <button class="sign-form__btn button_with-loader " type="submit">
+                                                Register
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <hr class="split">
+
+                                <div class="flex-row center-xs">
+                                    <div class="col-xs-12 col-md-11">
+                                        <div class="box-container">
+                                            <div class="social-title">
+                                                Or come with social media
+                                            </div>
+
+                                            <div id="ember986" class="ember-view">
+                                                <div class="flex-row center-xs social-wrap">
+                                                    <div class="col-xs-2">
+                                                        <button class="st-button_style_none btn btn-block btn-social btn-google"
+                                                                title="Войти через Google" type="button">
+                                                            <img src="https://cdn.stepik.net/static/frontend/social_fa/google.svg?1723819221"
+                                                                 alt="Google">
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-xs-2">
+                                                        <button class="st-button_style_none btn btn-block btn-social btn-github"
+                                                                title="Войти через GitHub" type="button">
+                                                            <img src="https://cdn.stepik.net/static/frontend/social_fa/github.svg?1723819221"
+                                                                 alt="GitHub">
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

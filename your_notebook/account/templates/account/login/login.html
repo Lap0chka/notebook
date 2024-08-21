@@ -21,11 +21,11 @@
                                 <header class="light-tabs__header ">
                                     <div class="flex-row start-xs">
                                         <div class="col-xs-12 no-pad-sm">
-                                            <a href="/catalog?auth=login" class="active ember-view light-tabs__switch"
+                                            <a href="/" class="active ember-view light-tabs__switch"
                                                data-tab-name="login">
                                                 Sign in
                                             </a>
-                                            <a href="/catalog?auth=registration" class="ember-view light-tabs__switch"
+                                            <a href="{% url 'account:signup' %}" class="ember-view light-tabs__switch"
                                                data-tab-name="registration">
                                                 Sign up
                                             </a>
