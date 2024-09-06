@@ -54,7 +54,7 @@ class Notebook(models.Model):
 class NotebookTopic(models.Model):
     notebook = models.ForeignKey(Notebook, on_delete=models.CASCADE, related_name='topics')
     topic = models.CharField(max_length=128)
-    slug = models.SlugField(max_length=76, blank=True)
+    slug = models.SlugField(max_length=76, blank=True, unique=True)
     description = models.TextField(blank=True)
     order = models.PositiveIntegerField(default=0)
 
@@ -67,7 +67,7 @@ class NotebookTopic(models.Model):
         """
         if self.pk is None:
             last_step = NotebookTopic.objects.filter(notebook=self.notebook).order_by('order').last()
-            self.order = last_step.order + 1 if last_step else 0
+            self.order = last_step.order + 1 if last_step else 1
         if not self.slug:
             self.slug = slugify(rand_slug() + self.topic)
         super().save(*args, **kwargs)
@@ -79,16 +79,15 @@ class NotebookTopic(models.Model):
 class NotebookNote(models.Model):
     topic = models.ForeignKey(NotebookTopic, on_delete=models.CASCADE, related_name='notes')
     title = models.CharField(max_length=128)
-    slug = models.SlugField(max_length=76, blank=True)
+    slug = models.SlugField(max_length=76, blank=True, unique=True)
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
         ordering = ['order']
 
     def get_absolute_url(self):
-        first = self.steps.all().first()
         return reverse('notebook_manager:edit_note', kwargs={
-            'slug_topic': self.topic.slug, 'slug': self.slug, 'pk': first.pk
+            'slug_topic': self.topic.slug, 'slug': self.slug, 'order': 1
         })
 
     def get_absolute_url_public(self):
@@ -110,6 +109,10 @@ class NotebookNote(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def notebook_object(self):
+        return self.topic.notebook
+
 
 class NotebookStep(models.Model):
     note = models.ForeignKey(NotebookNote, on_delete=models.CASCADE, related_name='steps')
@@ -118,7 +121,9 @@ class NotebookStep(models.Model):
 
     def get_absolute_url(self):
         return reverse('notebook_manager:edit_note', kwargs={
-            'slug_topic': self.note.topic.slug, 'slug': self.note.slug, 'pk': self.pk
+            'slug_topic': self.note.topic.slug,
+            'slug': self.note.slug,
+            'order': self.order
         })
 
     def get_absolute_url_public(self):
@@ -131,7 +136,7 @@ class NotebookStep(models.Model):
 
     def save(self, *args, **kwargs):
         last_step = NotebookStep.objects.filter(note=self.note).order_by('order').last()
-        self.order = last_step.order + 1 if last_step else 0
+        self.order = last_step.order + 1 if last_step else 1
         return super().save(*args, **kwargs)
 
 

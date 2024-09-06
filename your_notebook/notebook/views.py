@@ -34,6 +34,7 @@ def notebook_page_step(request, slug_notebook, slug_topic, slug_note, order):
     step = get_object_or_404(NotebookStep, order=order, note=note)
     comments = Comment.objects.filter(step=step, parent=None)
     steps = note.steps.all()
+
     steps_count = steps.count()
 
     context = {

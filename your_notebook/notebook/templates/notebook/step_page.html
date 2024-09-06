@@ -21,6 +21,7 @@
 </div>
 {% endblock %}
 {%block content%}
+
 <main class="main-content">
     <div class="lesson-modern__main lesson-wrapper in-course ember-view">
         <div class="lesson-modern__body">
@@ -75,11 +76,11 @@
                 <div class="lesson-modern__top-panel ember-view">
                     <div class="top-tools page-fragment">
                         <div class="top-tools__lesson-name" title="About">
-                            {{topic_index}}.{{step.value}}
+                            {{step.note.topic.order}}.{{step.order}}
                             {{step.note.title}}
                         </div>
                         <div class="top-tools__progress">
-                            <span>{{step.value}}</span>
+                            <span>{{step.order}}</span>
                             of
                             <span>{{steps_count}}</span>
 
@@ -146,8 +147,8 @@
                     {%include 'notebook/includes/comments/comments.html'%}
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
 
 

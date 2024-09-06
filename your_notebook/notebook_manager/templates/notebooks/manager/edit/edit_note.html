@@ -1,247 +1,114 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('.lesson-editor__add-step-pin-btn').click(function () {
-            $.ajax({
-                url: '{% url "notebook_manager:add_step" %}',  // URL для обработки запроса
-                type: 'POST',
-                data: {
-                    'csrfmiddlewaretoken': '{{ csrf_token }}',
-                    'note_id': '{{ note.id }}'
-                },
-                success: function (response) {
-                    // Получаем идентификатор нового шага
-                    var stepId = response.id;
-                    var url = "{% url 'notebook_manager:edit_note' slug_topic=note.topic.slug slug=note.slug pk='0' %}".replace('0', stepId);
 
-                    window.location.href = url;
-                },
-                error: function (xhr, errmsg, err) {
-                    // Обработка ошибки
-                    console.log('Error:', errmsg);
-                }
-            });
-        });
-    });
-</script>
-<script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
-<script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 <main class="main-content">
     <div class="lesson-editor">
         <div class="lesson-editor__body">
-            <div data-pinned="" id="ember1109" class="lesson-sidebar ember-view player-lesson-sidebar">
-                <button class="lesson-sidebar__expand-sidebar" aria-label="Expand course contents sidebar"
-                        type="button">
-  <span class="lesson-sidebar__expand-sidebar-content">
-    <span id="ember1110" class="svg-icon arrow-right_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
-    <use xlink:href="/static/frontend-build/icons.svg?1720098406#arrow-right"></use>
-  </svg></span>
-    <span>Содержание</span>
-  </span>
-                </button>
-
+            <div data-pinned="" class="lesson-sidebar ember-view player-lesson-sidebar">
                 <div class="lesson-sidebar__wrapper">
                     <div class="lesson-sidebar__body">
-
                         <div class="lesson-sidebar__header">
-                            <a title="Test" href="{{note.topic.name_notebook.get_absolute_url}}" id="ember1111"
+                            <a title="NAME" href=" {{note.notebook_object.get_absolute_url}}"
                                class="ember-view lesson-sidebar__course-title">
-                                {{note.topic.name_notebook.name}}
+                                {{note.notebook_object.name}}
                             </a>
-
-                            <button class="st-button_style_none lesson-sidebar__pin-sidebar"
-                                    aria-label="Unpin course contents sidebar" type="button" data-ember-action=""
-                                    data-ember-action-1112="1112">
-            <span id="ember1113" class="svg-icon pin_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
-    <use xlink:href="/static/frontend-build/icons.svg?1720098406#pin"></use>
-  </svg></span>
-                            </button>
-
-                            <!---->      </div>
-                        {% for topic in topics %}
-                        {% with forloop.counter as index_topic %}
+                        </div>
                         <div class="lesson-sidebar__content custom-scrollbar custom-scrollbar_dark">
-                            <nav id="ember1114" class="toc-sections ember-view lesson-sidebar__toc"
-                                 aria-label="Навигация по курсу">
-                                <div class="lesson-sidebar__module-header sidebar-module-header" data-section="435504"
-                                     role="directory" aria-expanded="false">
-                                    <div class="line-progress-bar">&nbsp;</div>
-                                    <div class="line-progress-bar-green" style="height: 0%;">
-                                        &nbsp;
-                                    </div>
-                                    <!---->
+                            <nav class="toc-sections ember-view lesson-sidebar__toc" aria-label="Navigation">
+                                {% for topic in topics %}
+                                {% with forloop.counter as index_topic %}
+                                <div class="lesson-sidebar__module-header sidebar-module-header" role="directory"
+                                     aria-expanded="false">
                                     <div class="sidebar-module-header__title">
                                         {{index_topic}}&nbsp;&nbsp;{{topic.topic}}
                                     </div>
-
                                 </div>
                                 {% for note in topic.notes.all %}
                                 {% with forloop.counter as index_note %}
-                                <div class="lesson-sidebar__toc-inner" data-section="435504">
-
-                                    <div data-unit="1403944" id="ember1115"
-                                         class="with-lazy-loading toc-lesson ember-view">
+                                <div class="lesson-sidebar__toc-inner">
+                                    <div class="with-lazy-loading toc-lesson ember-view">
                                         <div>
                                             <a href="{{note.get_absolute_url}}"
                                                class="ember-view lesson-sidebar__lesson
-         {% if request.path  == note.get_absolute_url %} active {%else%} ''{%endif%}">
-                                                <div class="line-progress-bar">&nbsp;</div>
-
-                                                <div class="line-progress-bar-green" style="height: 0%;">
-                                                    &nbsp;
-                                                </div>
-
+                                                    {% if note.title  == step.note.title %} active {%else%} ''{%endif%}">
                                                 <span class="lesson-sidebar__lesson-name">
-          {{index_topic}}.{{index_note}}&nbsp;&nbsp;{{note.title}}
-
-        </span>
-
-
+                                                    {{index_topic}}.{{index_note}}&nbsp;&nbsp;{{note.title}}
+                                                </span>
                                             </a>
                                         </div>
                                     </div>
-
                                 </div>
                                 {%endwith%}
                                 {%endfor%}
-
-
+                                {% endwith %}
+                                {% endfor %}
                             </nav>
                         </div>
-                        {% endwith %}
-                        {% endfor %}
-                        <!---->
-                        <span data-tippy-singleton-source="" hidden=""></span>
                     </div>
                 </div>
             </div>
-
-            <article class="lesson-editor__player">
+            <form class="lesson-editor__player" method="post">
                 <h1 class="lesson-editor__player-title">
                     Edit note
                 </h1>
-
                 <div class="lesson-edit-widget lesson-editor__info">
                     <div class="lesson-edit-widget__cover">
-                        <div class="lesson-edit-widget__cover-image lesson-edit-widget__cover-edit"
-                             style="background-image: url('/static/frontend/lesson_cover.svg');"></div>
-
-                        <span class="course-review-card__cover-badge" tabindex="0">
-          <span id="ember1117" class="svg-icon lock3_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
-    <use xlink:href="/static/frontend-build/icons.svg?1720098406#lock3"></use>
-  </svg></span>
-        </span>
-
-                        <div class="lesson-edit-widget__cover-upload-buttons">
-                            <button class="st-button_style_none lesson-edit-widget__upload-cover-btn" type="button"
-                                    data-ember-action="" data-ember-action-1118="1118">
-          <span id="ember1119" class="svg-icon close_icon svg-icon_inline ember-view"><svg
-                  xmlns="http://www.w3.org/2000/svg">
-    <use xlink:href="/static/frontend-build/icons.svg?1720098406#close"></use>
-  </svg></span>
-                            </button>
-
-
-                            <button class="st-button_style_none lesson-edit-widget__upload-cover-btn" unselectable="on"
-                                    type="button" data-ember-action="" data-ember-action-1120="1120">
-            <span id="ember1121" class="svg-icon pick-image_icon svg-icon_inline ember-view"><svg
-                    xmlns="http://www.w3.org/2000/svg">
-    <use xlink:href="/static/frontend-build/icons.svg?1720098406#pick-image"></use>
-  </svg></span>
-                            </button>
-
+                        <div class="lesson-edit-widget__cover-image lesson-edit-widget__cover-edit">
+                            <img src="{{note.notebook_object.image.url}}" alt="">
                         </div>
                     </div>
-
                     <div class="lesson-edit-widget__title">
-                        <input id="ember1122" value="{{note.title}}"
-                               class="ember-text-field ember-view st-input step-editor__input lesson-edit-widget__title-input"
-                               type="text">
-
-                        <div class="lesson-edit-widget__symbols-left">
-                            осталось 50 символов
-                        </div>
-
-                        <div class="input-note">
-
+                        {{form.title_note}}
+                        <div class="lesson-edit-widget__symbols-left" id="charCount">
                         </div>
                     </div>
                 </div>
-
                 <div class="step-pins-editor lesson-editor__step-pins-editor">
                     <div class="smooth-dnd-container horizontal drag-and-drop ember-view lesson-editor__step-pins">
                         {% for step in note.steps.all %}
-                         {% with forloop.counter as index %}
-                        <div id="ember1125" class="drag-and-drop-draggable smooth-dnd-draggable-wrapper ember-view">
+                        {% with forloop.counter as index %}
+                        <div class="drag-and-drop-draggable smooth-dnd-draggable-wrapper ember-view">
                             <div class="lesson-edit-step-pin
-                             {% if request.path == step.get_absolute_url %}is_active {%else%} {%endif%}"
+                             {% if request.path == step.get_absolute_url %} is_active {%else%} {%endif%}"
                                  data-step-position="{{index}}">
-                                <a href="{{step.get_absolute_url}}" id="ember1127"
+                                <a href="{{step.get_absolute_url}}"
                                    class="active ember-view lesson-edit-step-pin__link" draggable="false">
-                                    <div id="ember1128" class="step-pin-icon ember-view"><span id="ember1129"
-                                                                                               class="svg-icon null_icon ember-view step-pin-icon__icon"><!----></span>
-
-                                        <!----></div>
                                 </a>
                             </div>
-
-
                         </div>
                         {%endwith%}
                         {% endfor %}
                     </div>
-
                     <div class="lesson-edit-step-pin lesson-editor__add-step-pin" data-has-caption="">
-
-                        <button class="lesson-editor__add-step-pin-btn st-button_style_none" name ='add_new_step' title="Add new step"
+                        <button class="lesson-editor__add-step-pin-btn st-button_style_none" name='add_new_step'
+                                title="Add new step"
                                 type="button">
-        <span id="ember1130" class="svg-icon add_icon ember-view">
-            <svg xmlns="http://www.w3.org/2000/svg">
-                <use xlink:href="/static/frontend-build/icons.svg?1720098406#add"></use>
-            </svg>
-        </span>
                             <span class="lesson-editor__add-step-pin-caption">
-            Add new step
-        </span>
+                                Add new step
+                            </span>
                         </button>
-
                     </div>
-
                 </div>
-
-
-                <!---->
                 <section class="lesson-editor__content step-editor">
                     <div class="step-editor__header">
-                        <!---->
-                        <form method="post">
-                            {% csrf_token %}
-                            {{ form.media }}
-                            {{ form.as_p }}
-                            <button type="submit">Save</button>
-                        </form>
-                    </div>
-
-                    <!---->
-
-                    <!---->
-                    <!---->
-                    <!---->
-                    <!---->
-                    <div id="ember1135" class="step-history ember-view">
-                        <div id="ember1136" class="modal-popup ember-view step-history__diff-modal"><!----></div>
+                        {% csrf_token %}
+                        {{ form.media }}
+                        {{ form.content }}
                     </div>
                 </section>
-            </article>
+                <button type="submit">Save</button>
+            </form>
+            <form action="{% url 'notebook_manager:delete_step' %}" method="post">
+                {%csrf_token%}
+                <input type="hidden" value="{{note.slug}}" name="note_slug">
+                <input type="hidden" value="{{step.id}}" name="step_id">
+                <button style="background: indianred;" type="submit">Delete</button>
+            </form>
         </div>
-
     </div>
-
-    <!---->
-    <!---->
 </main>
 
 {% endblock %}
+{%block footer%}
+{%endblock%}

@@ -1,0 +1,32 @@
+
+            <ul class="navbar__links">
+            <li class="navbar__menu-item" data-navbar-item="catalog">
+                <div class="drop-down ember-view drop-down-empty rubricator-dropdown navbar__rubricator">
+                    <div aria-expanded="false" aria-haspopup="true"
+                         class="drop-down__toggler drop-down-toggler drop-down-toggler--auto-toggle ember-view">
+                        <a href="{% url 'notebook:index' %}" class="navbar__link st-link">
+                            Catalog
+                            <span class="svg-icon down-arrow_icon ember-view navbar__down-arrow rubricator-dropdown__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="/static/frontend-build/icons.svg?1720098406#down-arrow"></use>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <li class="navbar__menu-item" data-navbar-item="learn">
+                <a href="{% url 'notebook:my_notebooks'%}" id="ember445" class="ember-view navbar__link st-link">
+                    My notebooks
+                </a>
+            </li>
+
+            <li class="navbar__menu-item" data-navbar-item="teach">
+                <a class="navbar__link st-link" href="{% url 'notebook_manager:create_notebook' %}" target="_blank"
+                   rel="noopener noreferrer">
+                    Create notebook
+                </a>
+            </li>
+        </ul>
+
+

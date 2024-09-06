@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.forms import UserChangeForm
 from django.utils.safestring import mark_safe
 
 from notebook_manager.models import Notebook, NotebookTopic, NotebookNote, NotebookStep, Comment
@@ -64,9 +65,27 @@ class NotebookNoteForm(forms.ModelForm):
 
 
 class NotebookStepForm(forms.ModelForm):
+    title_note = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'ember-text-field ember-view st-input step-editor__input lesson-edit-widget__title-input'}),
+        required=False
+    )
+
     class Meta:
         model = NotebookStep
         fields = ['content']
+
+    def __init__(self, *args, **kwargs):
+        # Extract 'title_note' from kwargs (passed during form instantiation)
+        title_note_value = kwargs.pop('title_note', None)
+        super(NotebookStepForm, self).__init__(*args, **kwargs)
+
+        # Set the initial value for the 'title_note' field if it's provided
+        if title_note_value:
+            self.fields['title_note'].initial = title_note_value
+
+
+
+
 
 
 class CommentNoteForm(forms.ModelForm):
