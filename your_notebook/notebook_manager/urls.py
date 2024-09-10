@@ -11,7 +11,7 @@ urlpatterns = [
     path('edit_notebook/<slug:slug>/', views.edit_notebook, name='edit_notebook',),
 
    # Edit note
-    path('<slug:slug_topic>/<slug:slug>/edit_note/<int:order>', views.edit_note, name='edit_note',),
+    path('<slug:slug_notebook>/<slug:slug_topic>/<slug:slug_note>/edit_note/<int:order>', views.edit_note, name='edit_note',),
     path('edit_note/delete/', views.delete_step, name='delete_step',),
     path('add_step/', views.add_step, name='add_step',),
 

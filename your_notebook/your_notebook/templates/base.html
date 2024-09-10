@@ -69,7 +69,7 @@
         </a>
         {%endif%}
     </nav>
-{%include 'includes/messages.html'%}
+    {%include 'includes/messages.html'%}
 </header>
 
 {% block content %}
@@ -88,40 +88,38 @@
 
 <div class="modal-popup ember-view upgrade-course-modal-dialog"><!----></div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-
-<script src="https://www.google.com/recaptcha/api.js?render=explicit&amp;onload=__ember_g_recaptcha_ember509_onload&amp;hl=ru&amp;onload=__ember_g_recaptcha_ember509_onload"
-        ></script>
 
 <script>
     $(document).ready(function () {
-        $('.lesson-editor__add-step-pin-btn').click(function () {
-            $.ajax({
-                url: '{% url "notebook_manager:add_step" %}',  // URL для обработки запроса
-                type: 'POST',
-                data: {
-                    'csrfmiddlewaretoken': '{{ csrf_token }}',
-                    'order': '{{ note.order }}',
-                    'note_slug': '{{note.slug}}'
-                },
-                success: function (response) {
-                    window.location.href = response.redirect_url;
-                },
-                error: function (xhr, errmsg, err) {
-                    // Обработка ошибки
-                    console.log('Error:', errmsg);
-                }
-            });
+    $('.lesson-editor__add-step-pin-btn').click(function () {
+        $.ajax({
+            url: '{% url "notebook_manager:add_step" %}',
+            type: 'POST',
+            data: {
+                'csrfmiddlewaretoken': '{{ csrf_token }}',
+                'note_slug': '{{note.slug}}'
+            },
+            success: function (response) {
+                window.location.href = response.redirect_url;
+            },
+            error: function (xhr, errmsg, err) {
+                console.log('Error:', errmsg, err);
+            }
         });
     });
+});
 </script>
 <script>
-    // Ваш JavaScript код здесь
+ document.addEventListener('DOMContentLoaded', function () {
     const titleInput = document.querySelector('.lesson-edit-widget__title-input');
     const charCount = document.querySelector('.lesson-edit-widget__symbols-left');
     const maxChars = 128;
 
-    titleInput.addEventListener('input', function () {
+    // Функция для обновления счетчика символов
+    function updateCharCount() {
         const currentLength = titleInput.value.length;
 
         if (currentLength > maxChars) {
@@ -130,12 +128,48 @@
 
         const remainingChars = maxChars - titleInput.value.length;
         charCount.textContent = `left ${remainingChars} symbols`;
-    });
+    }
 
-    charCount.textContent = `left ${maxChars} symbols`;
+    // Обновляем при вводе данных
+    titleInput.addEventListener('input', updateCharCount);
+
+    // Обновляем при загрузке страницы (если поле уже заполнено)
+    updateCharCount();
+});
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Функция для обновления счетчика символов
+        function updateCharCount(input, counter, maxLength) {
+            let currentLength = input.value.length;
+            counter.textContent = `${currentLength}/${maxLength}`;
+        }
+
+        // Ищем все блоки с классом .the-form-field
+        document.querySelectorAll('.the-form-field').forEach(function (formField) {
+            // Ищем поле ввода (input или textarea) внутри каждого блока
+            let input = formField.querySelector('input, textarea');
+            if (!input) return;  // Пропускаем, если поле ввода не найдено
+
+            // Ищем элемент для отображения счетчика символов
+            let charCounter = formField.querySelector('.the-form-field__char-counter');
+            if (!charCounter) return;  // Пропускаем, если счетчик не найден
+
+            // Получаем максимальное количество символов из атрибута maxlength (если есть)
+            let maxLength = input.getAttribute('maxlength') || 256;  // По умолчанию 256 символов
+
+            // Обработчик события для обновления счётчика при вводе текста
+            input.addEventListener('input', function () {
+                updateCharCount(input, charCounter, maxLength);
+            });
+
+            // Инициализация счетчика при загрузке страницы
+            updateCharCount(input, charCounter, maxLength);
+        });
+    });
+</script>
+
+
 <script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
 <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 </body>

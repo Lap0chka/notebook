@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 
 from notebook_manager.forms import CommentNoteForm
-from notebook_manager.models import Notebook, NotebookStep, NotebookNote, Comment
+from notebook_manager.models import Notebook, Step, Note, Comment
 
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -30,8 +30,8 @@ def notebook_page(request, slug):
 
 def notebook_page_step(request, slug_notebook, slug_topic, slug_note, order):
     notebook = get_object_or_404(Notebook, slug=slug_notebook)
-    note = get_object_or_404(NotebookNote, slug=slug_note)
-    step = get_object_or_404(NotebookStep, order=order, note=note)
+    note = get_object_or_404(Note, slug=slug_note)
+    step = get_object_or_404(Step, order=order, note=note)
     comments = Comment.objects.filter(step=step, parent=None)
     steps = note.steps.all()
 
@@ -74,8 +74,8 @@ def notebook_comments(request, slug):
 
 @login_required
 def comment_step(request, slug_note, order):
-    note = get_object_or_404(NotebookNote, slug=slug_note)
-    step = get_object_or_404(NotebookStep, order=order, note=note)
+    note = get_object_or_404(Note, slug=slug_note)
+    step = get_object_or_404(Step, order=order, note=note)
     if request.method == 'POST':
         form = CommentNoteForm(request.POST)
         if form.is_valid():

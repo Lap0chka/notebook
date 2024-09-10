@@ -1,8 +1,10 @@
 from random import sample
 from string import ascii_letters, digits
 
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.template.context_processors import request
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -17,32 +19,58 @@ def rand_slug() -> str:
     return "".join(sample(ascii_letters + digits, 3))
 
 
-class Notebook(models.Model):
+class TitleSlugMixin(models.Model):
+    title = models.CharField(max_length=64)
+    slug = models.SlugField(unique=True)
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(rand_slug() + self.title)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
+
+class CommonFieldsNotebook(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        abstract = True
+        ordering = ['order']
+
+    def get_filter_params(self):
+        return
+
+    def save(self, *args, **kwargs):
+        """
+        Save the category instance to the database.
+        """
+        if self.pk is None:
+            last_step = self.__class__.objects.filter(user=self.user, **self.get_filter_params()).order_by(
+                'order').last()
+            self.order = last_step.order + 1 if last_step else 1
+        super().save(*args, **kwargs)
+
+
+class Notebook(TitleSlugMixin):
     class Mode(models.TextChoices):
         PUBLIC = 'PB', 'Public'
         PRIVATE = 'PR', 'Private'
 
-    name = models.CharField(max_length=64)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     description = RichTextUploadingField(blank=True)
     audience = RichTextUploadingField(blank=True)
-    slug = models.SlugField(max_length=76, unique=True)
     image = models.ImageField(upload_to='Notebook_images/%Y/%m/', blank=True, default='default/default_notebook.jpeg')
     mode = models.CharField(
         max_length=2,
         choices=Mode.choices,
         default=Mode.PRIVATE,
     )
-
-    def __str__(self):
-        return self.name
-
-    def save(self, *args, **kwargs):
-        """
-        Save the category instance to the database.
-        """
-        if not self.slug:
-            self.slug = slugify(rand_slug() + self.name)
-        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('notebook_manager:edit_notebook', kwargs={'slug': self.slug})
@@ -51,97 +79,64 @@ class Notebook(models.Model):
         return reverse('notebook:notebook_page', kwargs={'slug': self.slug})
 
 
-class NotebookTopic(models.Model):
+class Topic(TitleSlugMixin, CommonFieldsNotebook):
     notebook = models.ForeignKey(Notebook, on_delete=models.CASCADE, related_name='topics')
-    topic = models.CharField(max_length=128)
-    slug = models.SlugField(max_length=76, blank=True, unique=True)
     description = models.TextField(blank=True)
-    order = models.PositiveIntegerField(default=0)
 
-    class Meta:
-        ordering = ['order']
-
-    def save(self, *args, **kwargs):
-        """
-        Save the category instance to the database.
-        """
-        if self.pk is None:
-            last_step = NotebookTopic.objects.filter(notebook=self.notebook).order_by('order').last()
-            self.order = last_step.order + 1 if last_step else 1
-        if not self.slug:
-            self.slug = slugify(rand_slug() + self.topic)
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.topic
+    def get_filter_params(self):
+        return {'notebook': self.notebook}
 
 
-class NotebookNote(models.Model):
-    topic = models.ForeignKey(NotebookTopic, on_delete=models.CASCADE, related_name='notes')
-    title = models.CharField(max_length=128)
-    slug = models.SlugField(max_length=76, blank=True, unique=True)
-    order = models.PositiveIntegerField(default=0)
+class Note(TitleSlugMixin, CommonFieldsNotebook):
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name='notes')
 
-    class Meta:
-        ordering = ['order']
+    def get_filter_params(self):
+        return {'topic': self.topic}
 
-    def get_absolute_url(self):
-        return reverse('notebook_manager:edit_note', kwargs={
-            'slug_topic': self.topic.slug, 'slug': self.slug, 'order': 1
-        })
-
-    def get_absolute_url_public(self):
-        return reverse('notebook:notebook_step', kwargs={
+    def get_url_kwargs(self):
+        return {
             'slug_notebook': self.topic.notebook.slug,
             'slug_topic': self.topic.slug,
             'slug_note': self.slug,
             'order': 1
-        })
+        }
 
-    def save(self, *args, **kwargs):
-        if self.pk is None:
-            last_step = NotebookNote.objects.filter(topic=self.topic).order_by('order').last()
-            self.order = last_step.order + 1 if last_step else 1
-        if not self.slug:
-            self.slug = slugify(rand_slug() + self.title)
-        super().save(*args, **kwargs)
+    def get_absolute_url(self):
+        return reverse('notebook_manager:edit_note', kwargs=self.get_url_kwargs())
 
-    def __str__(self):
-        return self.title
+    def get_absolute_url_public(self):
+        return reverse('notebook:notebook_step', kwargs=self.get_url_kwargs())
 
     @property
     def notebook_object(self):
         return self.topic.notebook
 
 
-class NotebookStep(models.Model):
-    note = models.ForeignKey(NotebookNote, on_delete=models.CASCADE, related_name='steps')
+class Step(CommonFieldsNotebook):
+    note = models.ForeignKey(Note, on_delete=models.CASCADE, related_name='steps')
     content = RichTextUploadingField(blank=True)
-    order = models.PositiveSmallIntegerField(default=0)
 
-    def get_absolute_url(self):
-        return reverse('notebook_manager:edit_note', kwargs={
-            'slug_topic': self.note.topic.slug,
-            'slug': self.note.slug,
-            'order': self.order
-        })
 
-    def get_absolute_url_public(self):
-        return reverse('notebook:notebook_step', kwargs={
+    def get_url_kwargs(self):
+        return {
             'slug_notebook': self.note.topic.notebook.slug,
             'slug_topic': self.note.topic.slug,
             'slug_note': self.note.slug,
             'order': self.order
-        })
+        }
 
-    def save(self, *args, **kwargs):
-        last_step = NotebookStep.objects.filter(note=self.note).order_by('order').last()
-        self.order = last_step.order + 1 if last_step else 1
-        return super().save(*args, **kwargs)
+    def get_absolute_url(self):
+        return reverse('notebook_manager:edit_note', kwargs=self.get_url_kwargs())
+
+    def get_absolute_url_public(self):
+        return reverse('notebook:notebook_step', self.get_url_kwargs())
+
+    def get_filter_params(self):
+        return {'note': self.note}
 
 
 class Comment(models.Model):
-    step = models.ForeignKey(NotebookStep, on_delete=models.CASCADE, related_name='comments')
+    step = models.ForeignKey(Step, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='users')
     text = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

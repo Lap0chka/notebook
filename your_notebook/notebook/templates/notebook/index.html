@@ -2,51 +2,41 @@
 {% block title %}Your Notebook{%endblock%}
 {% block content %}
 <main class="main-content">
-
-
     <div class="catalog">
         <div class="catalog__search-bar">
             <div class="search-form ember-view catalog__search-form">
                 <div class="search-form__form">
                     <div class="search-form__input-wrapper">
-      <span  class="search-form__autocomplete with-autocomplete ember-view"><div
-              class="drop-down drop-down-menu ember-view with-autocomplete__drop-down">
-  <div aria-expanded="false" aria-haspopup="true"
-       class="drop-down__toggler drop-down-toggler ember-view">
-    <div class="with-autocomplete__content">
-
-        <input class="search-form__input " placeholder="Notebook name autor or topic" autocomplete="off"
-               spellcheck="false" aria-label="Search" type="search">
-
-        <button class="st-button_style_none search-form__reset" hidden="" type="button" data-ember-action=""
-                data-ember-action-1624="1624">
-          <span class="svg-icon close_icon svg-icon_inline ember-view"><svg
-                  xmlns="http://www.w3.org/2000/svg">
-    <use xlink:href="/static/frontend-build/icons.svg?1720098406#close"></use>
-  </svg></span>
-        </button>
-
-    </div>
-
-</div>
-
-          <!---->
-
-          <!----></div></span>
+                        <span class="search-form__autocomplete with-autocomplete ember-view">
+                            <div class="drop-down drop-down-menu ember-view with-autocomplete__drop-down">
+                                <div aria-expanded="false" aria-haspopup="true"
+                                     class="drop-down__toggler drop-down-toggler ember-view">
+                                    <div class="with-autocomplete__content">
+                                        <input class="search-form__input " placeholder="Notebook name autor or topic"
+                                               autocomplete="off"
+                                               spellcheck="false" aria-label="Search" type="search">
+                                            <button class="st-button_style_none search-form__reset" hidden=""
+                                                    type="button">
+                                              <span class="svg-icon close_icon svg-icon_inline ember-view">
+                                                  <svg xmlns="http://www.w3.org/2000/svg">
+                                                    <use xlink:href="/static/frontend-build/icons.svg?1720098406#close"></use>
+                                                    </svg>
+                                              </span>
+                                            </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </span>
                     </div>
-
-
-                    <button class="catalog__reset-search-mobile" aria-label="Go back to Catalog" hidden="" type="button"
-                            data-ember-action="" data-ember-action-1626="1626">
-          <span  class="svg-icon arrow2-left_icon svg-icon_inline ember-view"><svg
+                    <button class="catalog__reset-search-mobile" aria-label="Go back to Catalog" hidden="" >
+                    <span class="svg-icon arrow2-left_icon svg-icon_inline ember-view"><svg
                   xmlns="http://www.w3.org/2000/svg">
     <use xlink:href="/static/frontend-build/icons.svg?1720098406#arrow2-left"></use>
   </svg></span>
                     </button>
 
-
                     <button class="catalog__search-all-filters-mobile secondary" aria-label="Filters" type="button">
-          <span  class="svg-icon filter2_icon svg-icon_inline ember-view"><svg
+          <span class="svg-icon filter2_icon svg-icon_inline ember-view"><svg
                   xmlns="http://www.w3.org/2000/svg">
     <use xlink:href="/static/frontend-build/icons.svg?1720098406#filter2"></use>
   </svg></span>
@@ -61,7 +51,7 @@
                 Popular Notebooks
 
                 <span
-                      class="svg-icon arrow2-right_icon svg-icon_inline ember-view catalog-block__title-arrow-icon"><svg
+                        class="svg-icon arrow2-right_icon svg-icon_inline ember-view catalog-block__title-arrow-icon"><svg
                         xmlns="http://www.w3.org/2000/svg">
     <use xlink:href="/static/frontend-build/icons.svg?1720098406#arrow2-right"></use>
   </svg></span>
@@ -159,7 +149,7 @@
                 Random notebooks
 
                 <span
-                      class="svg-icon arrow2-right_icon svg-icon_inline ember-view catalog-block__title-arrow-icon"><svg
+                        class="svg-icon arrow2-right_icon svg-icon_inline ember-view catalog-block__title-arrow-icon"><svg
                         xmlns="http://www.w3.org/2000/svg">
     <use xlink:href="/static/frontend-build/icons.svg?1720098406#arrow2-right"></use>
   </svg></span>
@@ -169,18 +159,18 @@
             <div class="catalog-block__content">
                 <div class="catalog-block-recommended-courses ember-view">
                     <div data-list-type="fragment" class="catalog-course-cards ember-view">
-                        <div  class="catalog-course-cards__hor-scroller horizontal-scroller ember-view"
+                        <div class="catalog-course-cards__hor-scroller horizontal-scroller ember-view"
                              data-has-right-scroll="">
                             <div class="horizontal-scroller__content catalog-course-cards__hor-scrollable">
 
                                 <ul class="course-cards ember-view catalog-course-cards__cards">
                                     <li class="course-cards__item">
                                         <div
-                                             class="course-card catalog-rich-card ember-view course-cards__card"
-                                             data-has-bookmark=""><a class="catalog-rich-card__link-wrapper"
-                                                                     href="/course/4852?auth=login"
-                                                                     aria-label="Введение в Data Science и машинное обучение"
-                                                                     draggable="false"></a>
+                                                class="course-card catalog-rich-card ember-view course-cards__card"
+                                                data-has-bookmark=""><a class="catalog-rich-card__link-wrapper"
+                                                                        href="/course/4852?auth=login"
+                                                                        aria-label="Введение в Data Science и машинное обучение"
+                                                                        draggable="false"></a>
 
                                             <a class="course-card__title" href="/course/4852?auth=login">
                                                 Введение в Data Science и машинное обучение
@@ -196,7 +186,7 @@
                                             <!---->
                                             <div class="course-card__widgets">
           <span class="course-card__widget" data-type="rating" aria-label="Rating of this course is 4.9 out of 5">
-              <span  class="svg-icon star2_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+              <span class="svg-icon star2_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
     <use xlink:href="/static/frontend-build/icons.svg?1720098406#star2"></use>
   </svg></span>
               <span>4.9</span>
@@ -204,7 +194,7 @@
 
                                                 <span class="course-card__widget" data-type="learners"
                                                       aria-label="There are 139K learners in the course">
-            <span  class="svg-icon user_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+            <span class="svg-icon user_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
     <use xlink:href="/static/frontend-build/icons.svg?1720098406#user"></use>
   </svg></span>
             <span>139K</span>
@@ -212,7 +202,7 @@
 
                                                 <span class="course-card__widget" data-type="workload"
                                                       aria-label="Course workload is 21 ч">
-            <span  class="svg-icon clock_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+            <span class="svg-icon clock_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
     <use xlink:href="/static/frontend-build/icons.svg?1720098406#clock"></use>
   </svg></span>
             <span>21 ч</span>
@@ -221,7 +211,7 @@
                                                 <span class="course-card__widget"
                                                       aria-label="This course issues a certificate"
                                                       data-type="certificate" data-tooltip="сертификат" tabindex="0">
-          <span  class="svg-icon diploma_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+          <span class="svg-icon diploma_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
     <use xlink:href="/static/frontend-build/icons.svg?1720098406#diploma"></use>
   </svg></span>
 
@@ -238,18 +228,18 @@
 
   </span>
 
-                                            <div  class="course-badges ember-view course-card__badges">
+                                            <div class="course-badges ember-view course-card__badges">
                                                 <!----></div>
 
                                             <!---->
 
                                             <button class="course-card__bookmark ember-tooltip-target" data-toggled=""
                                                     type="button" data-ember-action="" data-ember-action-3069="3069">
-          <span  class="svg-icon favorite-filled_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+          <span class="svg-icon favorite-filled_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
     <use xlink:href="/static/frontend-build/icons.svg?1720098406#favorite-filled"></use>
   </svg></span>
 
-                                                <div  class="ember-tooltip-base ember-view">
+                                                <div class="ember-tooltip-base ember-view">
                                                     <div>
                                                         <!---->  </div>
                                                 </div>
@@ -259,11 +249,11 @@
                                     </li>
                                     <li class="course-cards__item">
                                         <div
-                                             class="course-card catalog-rich-card ember-view course-cards__card"
-                                             data-has-bookmark=""><a class="catalog-rich-card__link-wrapper"
-                                                                     href="/course/4852?auth=login"
-                                                                     aria-label="Введение в Data Science и машинное обучение"
-                                                                     draggable="false"></a>
+                                                class="course-card catalog-rich-card ember-view course-cards__card"
+                                                data-has-bookmark=""><a class="catalog-rich-card__link-wrapper"
+                                                                        href="/course/4852?auth=login"
+                                                                        aria-label="Введение в Data Science и машинное обучение"
+                                                                        draggable="false"></a>
 
                                             <a class="course-card__title" href="/course/4852?auth=login">
                                                 Введение в Data Science и машинное обучение
@@ -279,7 +269,7 @@
                                             <!---->
                                             <div class="course-card__widgets">
           <span class="course-card__widget" data-type="rating" aria-label="Rating of this course is 4.9 out of 5">
-              <span  class="svg-icon star2_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+              <span class="svg-icon star2_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
     <use xlink:href="/static/frontend-build/icons.svg?1720098406#star2"></use>
   </svg></span>
               <span>4.9</span>
@@ -287,7 +277,7 @@
 
                                                 <span class="course-card__widget" data-type="learners"
                                                       aria-label="There are 139K learners in the course">
-            <span  class="svg-icon user_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+            <span class="svg-icon user_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
     <use xlink:href="/static/frontend-build/icons.svg?1720098406#user"></use>
   </svg></span>
             <span>139K</span>
@@ -295,7 +285,7 @@
 
                                                 <span class="course-card__widget" data-type="workload"
                                                       aria-label="Course workload is 21 ч">
-            <span  class="svg-icon clock_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+            <span class="svg-icon clock_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
     <use xlink:href="/static/frontend-build/icons.svg?1720098406#clock"></use>
   </svg></span>
             <span>21 ч</span>
@@ -304,7 +294,7 @@
                                                 <span class="course-card__widget"
                                                       aria-label="This course issues a certificate"
                                                       data-type="certificate" data-tooltip="сертификат" tabindex="0">
-          <span  class="svg-icon diploma_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+          <span class="svg-icon diploma_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
     <use xlink:href="/static/frontend-build/icons.svg?1720098406#diploma"></use>
   </svg></span>
 
@@ -321,18 +311,18 @@
 
   </span>
 
-                                            <div  class="course-badges ember-view course-card__badges">
+                                            <div class="course-badges ember-view course-card__badges">
                                                 <!----></div>
 
                                             <!---->
 
                                             <button class="course-card__bookmark ember-tooltip-target" data-toggled=""
                                                     type="button" data-ember-action="" data-ember-action-3069="3069">
-          <span  class="svg-icon favorite-filled_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
+          <span class="svg-icon favorite-filled_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
     <use xlink:href="/static/frontend-build/icons.svg?1720098406#favorite-filled"></use>
   </svg></span>
 
-                                                <div  class="ember-tooltip-base ember-view">
+                                                <div class="ember-tooltip-base ember-view">
                                                     <div>
                                                         <!---->  </div>
                                                 </div>
@@ -353,7 +343,7 @@
                 Recommended notebooks
 
                 <span
-                      class="svg-icon arrow2-right_icon svg-icon_inline ember-view catalog-block__title-arrow-icon"><svg
+                        class="svg-icon arrow2-right_icon svg-icon_inline ember-view catalog-block__title-arrow-icon"><svg
                         xmlns="http://www.w3.org/2000/svg">
     <use xlink:href="/static/frontend-build/icons.svg?1720098406#arrow2-right"></use>
   </svg></span>

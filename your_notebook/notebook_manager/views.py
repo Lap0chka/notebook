@@ -6,7 +6,7 @@ from django.views.decorators.http import require_POST
 
 from notebook_manager.forms import TitleNotebookForm, NotebookTopicForm, NotebookNoteForm, NotebookStepForm, \
     SettingsNotebookForm
-from notebook_manager.models import Notebook, NotebookNote, NotebookTopic, NotebookStep
+from notebook_manager.models import Notebook, Note, Topic, Step
 
 
 # @login_required
@@ -34,7 +34,7 @@ def edit_notebook(request, slug):
             if note_form.is_valid():
                 note = note_form.save(commit=False)
                 topic_id = int(request.POST.get('form_note'))
-                note.topic = get_object_or_404(NotebookTopic, id=topic_id)
+                note.topic = get_object_or_404(Topic, id=topic_id)
                 note.save()
                 first_step = note.steps.all().first()
                 if first_step:
@@ -49,6 +49,7 @@ def edit_notebook(request, slug):
         elif topic_form.is_valid():
             instance = topic_form.save(commit=False)
             instance.notebook = notebook
+            instance.user = request.user
             instance.save()
             return redirect(reverse(
                 'notebook_manager:edit_notebook', kwargs={'slug': slug})
@@ -62,18 +63,19 @@ def edit_notebook(request, slug):
         'topic_form': topic_form,
         'note_form': note_form,
         'topics': topics,
+        'notebook': notebook,
     }
     return render(request, 'notebooks/manager/edit/edit_notebook.html', context)
 
 
 # @login_required
 def list_notebooks(request):
-    notebooks = Notebook.objects.all()
+    notebooks = Notebook.objects.filter(user=request.user)
     return render(request, 'notebooks/lists/notebooks.html', {'notebooks': notebooks})
 
 
 @login_required
-def edit_note(request, slug_topic, slug, order):
+def edit_note(request,slug_notebook, slug_topic, slug_note, order):
     """
     View for editing a specific step of a note in a notebook.
 
@@ -84,8 +86,8 @@ def edit_note(request, slug_topic, slug, order):
     """
 
     # Fetch the note and step, raising 404 if not found
-    note = get_object_or_404(NotebookNote, slug=slug)
-    step = get_object_or_404(NotebookStep, note=note, order=order)
+    note = get_object_or_404(Note, slug=slug_note, user=request.user)
+    step = get_object_or_404(Step, note=note, order=order)
 
     # Handle form submission
     if request.method == 'POST':
@@ -93,7 +95,7 @@ def edit_note(request, slug_topic, slug, order):
 
         if form.is_valid():
             # Update the note's title only if it has been changed
-            new_title = form.cleaned_data['title_note']
+            new_title = request.POST.get('note_title')
             if new_title and new_title != note.title:
                 note.title = new_title
                 note.save(update_fields=['title'])
@@ -105,9 +107,9 @@ def edit_note(request, slug_topic, slug, order):
 
     else:
         # Instantiate the form with initial data for GET requests
-        form = NotebookStepForm(instance=step, title_note=note.title)
+        form = NotebookStepForm(instance=step)
 
-    topics = NotebookTopic.objects.all()
+    topics = Topic.objects.filter(user=request.user)
 
     # Build context for rendering
     context = {
@@ -121,6 +123,7 @@ def edit_note(request, slug_topic, slug, order):
     return render(request, 'notebooks/manager/edit/edit_note.html', context)
 
 
+@require_POST
 def add_step(request):
     """
     Handle POST request to add a new step to a NotebookNote.
@@ -130,19 +133,23 @@ def add_step(request):
     response with a redirect URL to the newly created step. If the step limit is
     exceeded, it returns an error message.
     """
-    order = request.POST.get('order')
-    note_slug = request.POST.get('note_id')
-    note = get_object_or_404(NotebookNote, order=order, slug=note_slug)
+    note_slug = request.POST.get('note_slug')
+    note = get_object_or_404(Note, slug=note_slug, user=request.user)
 
-    if NotebookStep.objects.filter(note=note).count() < 15:
-        new_step = NotebookStep.objects.create(note=note)
+    if Step.objects.filter(note=note).count() < 15:
+        new_step = Step.objects.create(note=note, user=request.user)
         return JsonResponse({
-            'redirect_url': reverse('notebook_manager:edit_note', args=[note.topic.slug, note.slug, new_step.order])
+            'redirect_url': reverse('notebook_manager:edit_note', args=[
+                note.topic.notebook.slug,
+                note.topic.slug,
+                note.slug,
+                new_step.order
+            ])
         })
     else:
         return JsonResponse({'error': 'You have created the maximum number of steps'}, status=400)
 
-
+@login_required
 def delete_step(request):
     """
     Handles the deletion of a step from a notebook note.
@@ -153,8 +160,8 @@ def delete_step(request):
     """
     if request.method == 'POST':
         # Retrieve the note and step objects
-        note = get_object_or_404(NotebookNote, slug=request.POST.get('note_slug'))
-        step = get_object_or_404(NotebookStep, note=note, id=request.POST.get('step_id'))
+        note = get_object_or_404(Note, slug=request.POST.get('note_slug'), user=request.user)
+        step = get_object_or_404(Step, note=note, id=request.POST.get('step_id'), user=request.user)
 
         # Clear content for step order 1, otherwise delete the step
         if step.order == 1:
@@ -166,8 +173,9 @@ def delete_step(request):
         # Add success message and redirect to the edit note page
         messages.success(request, 'Step deleted successfully.')
         return redirect(reverse('notebook_manager:edit_note', kwargs={
-            'slug': note.slug,
+            'slug_notebook': note.topic.notebook.slug,
             'slug_topic': note.topic.slug,
+            'slug_note': note.slug,
             'order': 1
         }))
 

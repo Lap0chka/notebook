@@ -1,27 +1,27 @@
 from django.contrib import admin
 
-from notebook_manager.models import Notebook, NotebookNote, NotebookTopic, NotebookStep, Comment
+from notebook_manager.models import Notebook, Note, Topic, Step, Comment
 
 
 @admin.register(Notebook)
 class NameNotebookAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name',)
-    prepopulated_fields = {"slug": ("name",)}
+    list_display = ('id', 'title',)
+    prepopulated_fields = {"slug": ("title",)}
 
 
-@admin.register(NotebookNote)
+@admin.register(Note)
 class NotebookNoteAdmin(admin.ModelAdmin):
     list_display = ('id', 'title',)
     prepopulated_fields = {"slug": ("title",)}
 
 
-@admin.register(NotebookTopic)
+@admin.register(Topic)
 class NotebookTopicAdmin(admin.ModelAdmin):
-    list_display = ('id', 'topic',)
-    prepopulated_fields = {"slug": ("topic",)}
+    list_display = ('id', 'title',)
+    prepopulated_fields = {"slug": ("title",)}
 
 
-@admin.register(NotebookStep)
+@admin.register(Step)
 class NotebookStepAdmin(admin.ModelAdmin):
     list_display = ('id', 'content',)
     readonly_fields = ('order',)

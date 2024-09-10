@@ -2,13 +2,13 @@ from django import forms
 from django.contrib.auth.forms import UserChangeForm
 from django.utils.safestring import mark_safe
 
-from notebook_manager.models import Notebook, NotebookTopic, NotebookNote, NotebookStep, Comment
+from notebook_manager.models import Notebook, Topic, Note, Step, Comment
 
 
 class SettingsNotebookForm(forms.ModelForm):
     class Meta:
         model = Notebook
-        fields = ['name', 'description', 'audience', 'image']
+        fields = ['title', 'description', 'audience', 'image']
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'st-input w-full block',
@@ -29,19 +29,19 @@ class SettingsNotebookForm(forms.ModelForm):
 class TitleNotebookForm(forms.ModelForm):
     class Meta:
         model = Notebook
-        fields = ['name']
+        fields = ['title']
         widgets = {
-            'name': forms.TextInput(
+            'title': forms.TextInput(
                 attrs={'class': 'class="ember-text-field ember-view new-course-form__input st-input'}),
         }
 
 
 class NotebookTopicForm(forms.ModelForm):
     class Meta:
-        model = NotebookTopic
-        fields = ['topic', 'description']
+        model = Topic
+        fields = ['title', 'description']
         widgets = {
-            'topic': forms.TextInput(
+            'title': forms.TextInput(
                 attrs={'class': "ember-text-field ember-view st-input st-input-expand",
                        'placeholder': 'Topic'},
             ),
@@ -55,34 +55,13 @@ class NotebookTopicForm(forms.ModelForm):
 
 class NotebookNoteForm(forms.ModelForm):
     class Meta:
-        model = NotebookNote
+        model = Note
         fields = ['title']
         widgets = {
             'title': forms.TextInput(
                 attrs={'class': 'ember-text-field ember-view st-input st-size-normal st-input-expand',
                        'placeholder': 'Create note'}),
         }
-
-
-class NotebookStepForm(forms.ModelForm):
-    title_note = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'ember-text-field ember-view st-input step-editor__input lesson-edit-widget__title-input'}),
-        required=False
-    )
-
-    class Meta:
-        model = NotebookStep
-        fields = ['content']
-
-    def __init__(self, *args, **kwargs):
-        # Extract 'title_note' from kwargs (passed during form instantiation)
-        title_note_value = kwargs.pop('title_note', None)
-        super(NotebookStepForm, self).__init__(*args, **kwargs)
-
-        # Set the initial value for the 'title_note' field if it's provided
-        if title_note_value:
-            self.fields['title_note'].initial = title_note_value
-
 
 
 
@@ -101,3 +80,19 @@ class CommentNoteForm(forms.ModelForm):
                                 'cke_show_borders',
                        'cols': 120})
         }
+
+
+
+
+class NotebookStepForm(forms.ModelForm):
+    """
+    A Django form for creating and updating NotebookStep instances.
+    This form includes a content field
+
+    for the step. The title field is optional.
+    """
+
+    class Meta:
+        model = Step
+        fields = ['content']
+

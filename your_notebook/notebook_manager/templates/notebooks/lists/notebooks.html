@@ -17,7 +17,8 @@
             <header class="teachlearn__content-header">
                 <div class="teachlearn__content-header-toolbar">
                     <div data-value="" class="select-box ember-view teachlearn__filter">
-          <span id="ember1215" class="search-form ember-view teachlearn__search-form"><div class="search-form__form">
+          <span id="ember1215" class="search-form ember-view teachlearn__search-form">
+              <div class="search-form__form">
   <div class="search-form__input-wrapper">
 
         <input class="search-form__input " placeholder="Notebooks name " autocomplete="on" spellcheck="false"
@@ -54,7 +55,6 @@
                         <div class="item-tile teach-course-tile">
                             <a class="item-tile__link-wrapper" href="{{ notebook.get_absolute_url }}"
                                aria-label="Link to the course Test"></a>
-
                             <figure class="item-tile__cover">
                                 <img class="item-tile__cover-img" alt="Course cover"
                                      src="{{notebook.image.url}}">
@@ -69,7 +69,7 @@
 
                             <div class="item-tile__title item-tile__title_with_badge">
                                 <a href="" class="item-tile__title-link" tabindex="-1">
-                                    {{notebook.name}}
+                                    {{notebook.title}}
                                 </a>
                             </div>
                             <div class="item-tile__footer" data-hover="true">
@@ -83,8 +83,7 @@
                         </div>
                     </div>
                     {%endfor%}
-
-                    <!----> <span class="infinite-scroll-modern__trigger" aria-hidden="true"></span></div>
+                    <span class="infinite-scroll-modern__trigger" aria-hidden="true"></span></div>
             </div>
         </article>
 

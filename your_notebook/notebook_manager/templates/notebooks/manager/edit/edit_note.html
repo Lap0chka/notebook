@@ -11,7 +11,7 @@
                         <div class="lesson-sidebar__header">
                             <a title="NAME" href=" {{note.notebook_object.get_absolute_url}}"
                                class="ember-view lesson-sidebar__course-title">
-                                {{note.notebook_object.name}}
+                                {{note.notebook_object.title}}
                             </a>
                         </div>
                         <div class="lesson-sidebar__content custom-scrollbar custom-scrollbar_dark">
@@ -21,7 +21,7 @@
                                 <div class="lesson-sidebar__module-header sidebar-module-header" role="directory"
                                      aria-expanded="false">
                                     <div class="sidebar-module-header__title">
-                                        {{index_topic}}&nbsp;&nbsp;{{topic.topic}}
+                                        {{index_topic}}&nbsp;&nbsp;{{topic.title}}
                                     </div>
                                 </div>
                                 {% for note in topic.notes.all %}
@@ -59,7 +59,8 @@
                         </div>
                     </div>
                     <div class="lesson-edit-widget__title">
-                        {{form.title_note}}
+                        <input  class="ember-text-field ember-view st-input step-editor__input lesson-edit-widget__title-input"
+                               name="note_title" value="{{note.title}}" type="text">
                         <div class="lesson-edit-widget__symbols-left" id="charCount">
                         </div>
                     </div>
@@ -90,6 +91,7 @@
                         </button>
                     </div>
                 </div>
+
                 <section class="lesson-editor__content step-editor">
                     <div class="step-editor__header">
                         {% csrf_token %}
