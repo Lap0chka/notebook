@@ -94,80 +94,82 @@
 
 <script>
     $(document).ready(function () {
-    $('.lesson-editor__add-step-pin-btn').click(function () {
-        $.ajax({
-            url: '{% url "notebook_manager:add_step" %}',
-            type: 'POST',
-            data: {
-                'csrfmiddlewaretoken': '{{ csrf_token }}',
-                'note_slug': '{{note.slug}}'
-            },
-            success: function (response) {
-                window.location.href = response.redirect_url;
-            },
-            error: function (xhr, errmsg, err) {
-                console.log('Error:', errmsg, err);
-            }
+        $('.lesson-editor__add-step-pin-btn').click(function () {
+            $.ajax({
+                url: '{% url "notebook_manager:add_step" %}',
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                    'note_slug': '{{note.slug}}'
+                },
+                success: function (response) {
+                    window.location.href = response.redirect_url;
+                },
+                error: function (xhr, errmsg, err) {
+                    console.log('Error:', errmsg, err);
+                }
+            });
         });
     });
-});
-</script>
-<script>
- document.addEventListener('DOMContentLoaded', function () {
-    const titleInput = document.querySelector('.lesson-edit-widget__title-input');
-    const charCount = document.querySelector('.lesson-edit-widget__symbols-left');
-    const maxChars = 128;
-
-    // Функция для обновления счетчика символов
-    function updateCharCount() {
-        const currentLength = titleInput.value.length;
-
-        if (currentLength > maxChars) {
-            titleInput.value = titleInput.value.substring(0, maxChars);
-        }
-
-        const remainingChars = maxChars - titleInput.value.length;
-        charCount.textContent = `left ${remainingChars} symbols`;
-    }
-
-    // Обновляем при вводе данных
-    titleInput.addEventListener('input', updateCharCount);
-
-    // Обновляем при загрузке страницы (если поле уже заполнено)
-    updateCharCount();
-});
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        const titleInput = document.querySelector('.lesson-edit-widget__title-input');
+        const charCount = document.querySelector('.lesson-edit-widget__symbols-left');
+        const maxChars = 64;
+
         // Функция для обновления счетчика символов
-        function updateCharCount(input, counter, maxLength) {
-            let currentLength = input.value.length;
-            counter.textContent = `${currentLength}/${maxLength}`;
+        function updateCharCount() {
+            const currentLength = titleInput.value.length;
+
+            if (currentLength > maxChars) {
+                titleInput.value = titleInput.value.substring(0, maxChars);
+            }
+
+            const remainingChars = maxChars - titleInput.value.length;
+            charCount.textContent = `left ${remainingChars} symbols`;
         }
 
-        // Ищем все блоки с классом .the-form-field
-        document.querySelectorAll('.the-form-field').forEach(function (formField) {
-            // Ищем поле ввода (input или textarea) внутри каждого блока
-            let input = formField.querySelector('input, textarea');
-            if (!input) return;  // Пропускаем, если поле ввода не найдено
+        // Обновляем при вводе данных
+        titleInput.addEventListener('input', updateCharCount);
 
-            // Ищем элемент для отображения счетчика символов
-            let charCounter = formField.querySelector('.the-form-field__char-counter');
-            if (!charCounter) return;  // Пропускаем, если счетчик не найден
-
-            // Получаем максимальное количество символов из атрибута maxlength (если есть)
-            let maxLength = input.getAttribute('maxlength') || 256;  // По умолчанию 256 символов
-
-            // Обработчик события для обновления счётчика при вводе текста
-            input.addEventListener('input', function () {
-                updateCharCount(input, charCounter, maxLength);
-            });
-
-            // Инициализация счетчика при загрузке страницы
-            updateCharCount(input, charCounter, maxLength);
-        });
+        // Обновляем при загрузке страницы (если поле уже заполнено)
+        updateCharCount();
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    // Функция для обновления счетчика символов
+    function updateCharCount(input, counter, maxLength) {
+        const currentLength = input.value.length;
+        // Если поле пустое, показываем "0"
+        counter.textContent = `${currentLength}/${maxLength}`;
+    }
+
+    // Ищем все блоки с классом .the-form-field
+    document.querySelectorAll('.the-form-field').forEach(function (formField) {
+        // Ищем поле ввода (input или textarea) внутри каждого блока
+        const input = formField.querySelector('input, textarea');
+        if (!input) return;  // Пропускаем, если поле ввода не найдено
+
+        // Ищем элемент для отображения счетчика символов
+        const charCounter = formField.querySelector('.the-form-field__char-counter');
+        if (!charCounter) return;  // Пропускаем, если счетчик не найден
+
+        // Получаем максимальное количество символов из атрибута maxlength (если есть)
+        const maxLength = parseInt(input.getAttribute('maxlength')) || 256;  // По умолчанию 256 символов
+
+        // Обработчик события для обновления счётчика при вводе текста
+        input.addEventListener('input', function () {
+            updateCharCount(input, charCounter, maxLength);
+        });
+
+        // Инициализация счетчика при загрузке страницы
+        updateCharCount(input, charCounter, maxLength);
+    });
+});
+</script>
+
 
 
 <script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>

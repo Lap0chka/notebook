@@ -39,9 +39,11 @@ class CommonFieldsNotebook(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     order = models.PositiveIntegerField(default=0)
 
+
     class Meta:
         abstract = True
         ordering = ['order']
+
 
     def get_filter_params(self):
         return
@@ -129,7 +131,7 @@ class Step(CommonFieldsNotebook):
         return reverse('notebook_manager:edit_note', kwargs=self.get_url_kwargs())
 
     def get_absolute_url_public(self):
-        return reverse('notebook:notebook_step', self.get_url_kwargs())
+        return reverse('notebook:notebook_step', kwargs=self.get_url_kwargs())
 
     def get_filter_params(self):
         return {'note': self.note}

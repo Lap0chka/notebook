@@ -9,9 +9,9 @@
             ERROR: {{ message }}
             {% else %}
             {{ message.tags|title }}
+            {{message}}
             {% endif %}
         </strong>
-        {{ message }}
     </div>
 </div>
 {% endfor %}

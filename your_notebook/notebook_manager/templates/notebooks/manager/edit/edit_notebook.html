@@ -19,14 +19,13 @@
                 <div class="syllabus-editor__section-list">
                     <div class="section-editor ember-view" data-anchor="">
                         <div class="section-editor__head">
-                            <form action="" method="POST">
+                            <form action="" method="post">
                                 {%csrf_token%}
                                 <div class="section-editor__head-content">
                                     <div class="section-editor__headline">
                                         <span class="section-editor__title">
                                           <div class="section-editor__title-editor">
-                                            <div class="the-form-field ember-view section-editor__title-field"
-                                                 data-err-shown="">
+                                            <div class="the-form-field ember-view section-editor__title-field">
                                                     {{topic_form.title}}
                                                 <span class="the-form-field__char-counter" data-pos="legend"
                                                       id="charCount">
@@ -35,23 +34,6 @@
                                             </div>
                                           </div>
                                         </span>
-                                        <div class="section-editor__head-actions">
-                                            <div class="drop-down drop-down-menu ember-view section-editor__menu">
-                                                <div aria-expanded="false" aria-haspopup="true"
-                                                     class="drop-down__toggler drop-down-toggler drop-down-toggler--auto-toggle ember-view">
-                                                    <button class="st-button_style_none section-editor__menu-toggler"
-                                                            type="button">
-                                                        <span class="svg-icon menu-more_icon svg-icon_inline ember-view">
-                                                            <svg
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                            <use xlink:href="/static/frontend-build/icons.svg?1720098406#menu-more"></use>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                     <div data-visible-errors="0"
                                          class="the-form-field ember-view section-editor__description">
@@ -62,7 +44,7 @@
                                     </div>
                                     <div class="deadlines-editor ember-view"
                                          data-anchor="">
-                                        <button class="course-editor__save-btn" type="submit">
+                                        <button class="course-editor__save-btn" name="topic_form" type="submit">
                                             Save
                                         </button>
                                     </div>
@@ -73,10 +55,11 @@
                         </div>
                     </div>
                 </div>
-                {% for topic in topics %}
+                {% for item in topics_notes_forms%}
                 <div class="syllabus-editor__section-list">
                     <div class="section-editor ember-view" data-anchor="">
                         <div class="section-editor__head">
+
                             <form action="" method="POST">
                                 {%csrf_token%}
                                 <div class="section-editor__head-content">
@@ -85,9 +68,7 @@
                                           <div class="section-editor__title-editor">
                                             <div class="the-form-field ember-view section-editor__title-field"
                                                  data-err-shown="">
-                                                <input type="text"
-                                                       class='ember-text-field ember-view st-input st-input-expand'
-                                                       value="{{topic.title}}">
+                                                 {{item.form.title}}
                                                   <span class="the-form-field__char-counter" data-pos="legend">
                                                     4/64
                                                   </span>
@@ -96,34 +77,24 @@
                                         </span>
                                     </div>
                                     <div class="the-form-field ember-view section-editor__description"><!---->
-
-                                        <textarea class="ember-text-field ember-view st-input st-input-expand">
-                                            {{topic.description}}
-                                        </textarea>
+                                        {{item.form.description}}
                                         <span class="the-form-field__char-counter" data-pos="legend">
-                                            4/256
+                                            0/256
                                         </span>
+                                        {{item.form.pk}}
                                     </div>
-
-                                    <div id="" class="deadlines-editor ember-view"
-                                         data-anchor=""><!---->
-                                        <button class="course-editor__save-btn" type="submit" data-ember-action=""
-                                                data-ember-action-754="754">
+                                    <div class="deadlines-editor ember-view">
+                                        <button class="course-editor__save-btn" type="submit">
                                             Save
                                         </button>
-
-
-                                        <!----></div>
+                                    </div>
                                 </div>
                             </form>
+
                             <div class="section-editor__reorder-btns">
-                                <!---->
-                                <!---->    </div>
-
+                            </div>
                         </div>
-
                         <div class="section-editor__unit-list">
-
                             <form action="" method="POST">
                                 {%csrf_token%}
                                 <div class="new-unit ember-view">
@@ -132,69 +103,49 @@
                                     </div>
                                     <div class="new-unit__info">
                                         <div class="new-unit__headline">
-                                            <div data-required="" data-visible-errors="0" data-invalid="presence"
-                                                 class="the-form-field ember-view new-unit__lesson-title">
+                                            <div class="the-form-field ember-view new-unit__lesson-title">
                                                 {{note_form.title}}
                                                 <span class="the-form-field__char-counter" data-pos="footnote">
-                                                    10/52
                                                 </span>
                                             </div>
-
+                                            {{item.form.pk}}
                                             <button class="st-size-normal new-unit__btn" type="submit"
-                                                    name="form_note" value="{{topic.id}}">
+                                                    name="note_form" value="">
                                                 Create note
                                             </button>
+
                                         </div>
                                     </div>
                                 </div>
                             </form>
-                            {% for note in topic.notes.all %}
+
+                            {% for note in item.notes %}
                             <div class="smooth-dnd-container vertical drag-and-drop ember-view">
                                 <div
                                         class="drag-and-drop-draggable smooth-dnd-draggable-wrapper ember-view section-editor__unit-draggable">
-                                    <div class="unit-editor sortable-item ember-view">  <span
-                                            class="svg-icon dragndrop_icon ember-view unit-editor__drag"><svg
-                                            xmlns="http://www.w3.org/2000/svg">
-                                    </svg>
-                                    </span>
-
-                                        <div class="unit-editor__cover-image"></div>
-
-
+                                    <div class="unit-editor sortable-item ember-view">
+                                        <div class="unit-editor__cover-image">
+                                            <img src="{{note.notebook_object.image.url}}" style="width: 60px" alt="">
+                                        </div>
                                         <div class="unit-editor__info">
                                             <div class="unit-editor__headline">
                                                 {{note.title}}
-                                                <div data-required="" data-visible-errors="0" data-valid=""
-                                                     id="ember729"
-                                                     class="the-form-field ember-view unit-editor__lesson-title"><!---->
-
-                                                    <input id="ember730"
-                                                           class="ember-text-field ember-view st-input st-h3 st-input-expand"
-                                                           type="text" required="" maxlength="64" size="64">
-
-
-                                                    <!---->
-                                                    <span class="the-form-field__char-counter" data-pos="footnote">
-    14/64
-  </span>
-
-                                                    <!----></div>
-
+                                                <div class="the-form-field ember-view unit-editor__lesson-title">
+                                                </div>
                                                 <a href="{{ note.get_absolute_url }}"
                                                    class="ember-view button grey unit-editor__lesson-edit">Edit</a>
-
-                                                <button class="st-button_style_none unit-editor__delete" type="button"
-                                                        data-ember-action="" data-ember-action-732="732">
-        <span class="svg-icon close_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
-    <use xlink:href="/static/frontend-build/icons.svg?1720098406#close"></use>
-  </svg></span>
-                                                </button>
+                                                <form action="{% url 'notebook_manager:delete_note' %}" method="post">
+                                                    {%csrf_token%}
+                                                    {{item.form.pk}}
+                                                    <input type="hidden" value="{{note.slug}}" name="note_slug">
+                                                    <button class="st-size-normal new-unit__btn"
+                                                            style="background: indianred; margin: 20px; margin-bottom: 5px" type="submit">Delete
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
-
                                         <div class="unit-editor__reorder-btns unit-editor_only_hover">
-                                            <!---->
-                                            <!---->  </div>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -208,6 +159,7 @@
                         <!----></div>
                 </div>
                 {%endfor%}
+
 
             </div>
 

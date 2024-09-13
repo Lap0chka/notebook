@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} {{notebook.name}}  topics {%endblock%}
+{% block title %} {{notebook.title}}  topics {%endblock%}
 {% block content %}
 <main class="main-content">
     <div class="marco-layout course">
@@ -26,7 +26,7 @@
                                         <span class="toc-syllabus-section__position">
                                           {{index}}
                                         </span>
-                                        {{ topic.topic }}
+                                        {{ topic.title }}
                                     </div>
                                 </div>
                             </div>

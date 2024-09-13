@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.decorators.http import require_POST
-
+from notebook_manager import additional_function
 from notebook_manager.forms import TitleNotebookForm, NotebookTopicForm, NotebookNoteForm, NotebookStepForm, \
     SettingsNotebookForm
 from notebook_manager.models import Notebook, Note, Topic, Step
@@ -21,46 +21,68 @@ def create_notebook(request):
     return render(request, 'notebooks/manager/creation/creation_notebook.html', {'form': form})
 
 
-# @login_required
-def edit_notebook(request, slug):
+@login_required
+def list_notebooks(request):
+    notebooks = Notebook.objects.filter(user=request.user)
+    return render(request, 'notebooks/lists/notebooks.html', {'notebooks': notebooks})
+
+def settings_notebook(request, slug):
     notebook = get_object_or_404(Notebook, slug=slug)
-    topics = notebook.topics.all()
-
     if request.method == 'POST':
-        topic_form = NotebookTopicForm(request.POST)
-
-        if 'form_note' in request.POST:
-            note_form = NotebookNoteForm(request.POST)
-            if note_form.is_valid():
-                note = note_form.save(commit=False)
-                topic_id = int(request.POST.get('form_note'))
-                note.topic = get_object_or_404(Topic, id=topic_id)
-                note.save()
-                first_step = note.steps.all().first()
-                if first_step:
-                    return redirect(reverse('notebook_manager:edit_note', kwargs={
-                        'slug_topic': note.topic.slug, 'slug': note.slug, 'pk': first_step.pk
-                    }))
-                else:
-                    return redirect(reverse(
-                        'notebook_manager:edit_notebook',
-                        kwargs={'slug': slug})
-                    )
-        elif topic_form.is_valid():
-            instance = topic_form.save(commit=False)
-            instance.notebook = notebook
-            instance.user = request.user
-            instance.save()
-            return redirect(reverse(
-                'notebook_manager:edit_notebook', kwargs={'slug': slug})
-            )
-
+        form = SettingsNotebookForm(request.POST, request.FILES, instance=notebook)
+        if form.is_valid():
+            form.save()
     else:
-        topic_form = NotebookTopicForm()
-        note_form = NotebookNoteForm()
+        form = SettingsNotebookForm(instance=notebook)
+    context = {
+        'notebook': notebook,
+        'form': form
+    }
+    return render(
+        request,
+        'notebooks/manager/settings/notebook_settings.html',
+        context
+    )
+
+@login_required
+def delete_note(request):
+    if request.method == 'POST':
+        topic = get_object_or_404(Topic, pk=request.POST.get('pk'))
+        note = get_object_or_404(Note, topic=topic, slug=request.POST['note_slug'])
+        note.delete()
+        print('asdasdasd')
+    else:
+        messages.error(request, 'Something went wrong.')
+    #return redirect('notebook_manager:edit_notebook', topic.notebook.slug)
+    return redirect('notebook_manager:create_notebook', )
+
+@login_required
+def edit_notebook(request, slug):
+    topics_forms_notes = []
+    notebook = get_object_or_404(Notebook, slug=slug, user=request.user)
+    topics = notebook.topics.all()
+    if request.method == 'POST':
+        if 'note_form' in request.POST:
+            additional_function.note_form(request, slug, topics)
+        elif 'topic_form' in request.POST:
+            additional_function.topic_form(request, slug, topics, notebook)
+        else:
+            additional_function.topic_form_update(request, slug, topics)
+
+    topic_form = NotebookTopicForm()
+    note_form = NotebookNoteForm()
+
+    for topic in topics:
+        form = NotebookTopicForm(instance=topic, initial={'pk': topic.pk})
+        notes = topic.notes.all()
+        topics_forms_notes.append({
+            'form': form,
+            'notes': notes
+        })
 
     context = {
         'topic_form': topic_form,
+        'topics_notes_forms': topics_forms_notes,
         'note_form': note_form,
         'topics': topics,
         'notebook': notebook,
@@ -68,14 +90,11 @@ def edit_notebook(request, slug):
     return render(request, 'notebooks/manager/edit/edit_notebook.html', context)
 
 
-# @login_required
-def list_notebooks(request):
-    notebooks = Notebook.objects.filter(user=request.user)
-    return render(request, 'notebooks/lists/notebooks.html', {'notebooks': notebooks})
+
 
 
 @login_required
-def edit_note(request,slug_notebook, slug_topic, slug_note, order):
+def edit_note(request, slug_notebook, slug_topic, slug_note, order):
     """
     View for editing a specific step of a note in a notebook.
 
@@ -123,6 +142,7 @@ def edit_note(request,slug_notebook, slug_topic, slug_note, order):
     return render(request, 'notebooks/manager/edit/edit_note.html', context)
 
 
+@login_required
 @require_POST
 def add_step(request):
     """
@@ -148,6 +168,7 @@ def add_step(request):
         })
     else:
         return JsonResponse({'error': 'You have created the maximum number of steps'}, status=400)
+
 
 @login_required
 def delete_step(request):
@@ -180,20 +201,4 @@ def delete_step(request):
         }))
 
 
-def settings_notebook(request, slug):
-    notebook = get_object_or_404(Notebook, slug=slug)
-    if request.method == 'POST':
-        form = SettingsNotebookForm(request.POST, request.FILES, instance=notebook)
-        if form.is_valid():
-            form.save()
-    else:
-        form = SettingsNotebookForm(instance=notebook)
-    context = {
-        'notebook': notebook,
-        'form': form
-    }
-    return render(
-        request,
-        'notebooks/manager/settings/notebook_settings.html',
-        context
-    )
+
