@@ -17,7 +17,7 @@ urlpatterns = [
 
     #Edit notebook
     path('edit_notebook/<slug:slug>/', views.edit_notebook, name='edit_notebook',),
-    path('edit_notebook/delete_note/', views.delete_note, name='delete_note',),
+
 
 
     path('lists/notebooks', views.list_notebooks, name='notebooks',),

@@ -85,11 +85,20 @@
                                     </div>
                                     <div class="deadlines-editor ember-view">
                                         <button class="course-editor__save-btn" type="submit">
-                                            Save
+                                            Update
                                         </button>
+                                        <form method="post">
+                                            {%csrf_token%}
+                                            {{item.form.pk}}
+                                            <button class="course-editor__save-btn"
+                                                    style="background: indianred;"
+                                                    name="delete_topic" value="" type="submit">Delete
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </form>
+
 
                             <div class="section-editor__reorder-btns">
                             </div>
@@ -134,12 +143,12 @@
                                                 </div>
                                                 <a href="{{ note.get_absolute_url }}"
                                                    class="ember-view button grey unit-editor__lesson-edit">Edit</a>
-                                                <form action="{% url 'notebook_manager:delete_note' %}" method="post">
+                                                <form method="post">
                                                     {%csrf_token%}
-                                                    {{item.form.pk}}
                                                     <input type="hidden" value="{{note.slug}}" name="note_slug">
                                                     <button class="st-size-normal new-unit__btn"
-                                                            style="background: indianred; margin: 20px; margin-bottom: 5px" type="submit">Delete
+                                                            style="background: indianred; margin: 20px; margin-bottom: 5px"
+                                                            name="delete_note" value="" type="submit">Delete
                                                     </button>
                                                 </form>
                                             </div>
@@ -154,9 +163,7 @@
                             {% endfor %}
                         </div>
 
-                        <!---->
-                        <!---->
-                        <!----></div>
+                    </div>
                 </div>
                 {%endfor%}
 

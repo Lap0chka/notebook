@@ -23,98 +23,56 @@
             </span>
             {%endif%}
         </div>
-
         <a class="button course-nav__publish-btn success is-outlined" href="/course/210510/publication">
             Publish
         </a>
-        <ul class="nav-menu__menu menu course-nav__main-menu" data-level="1">
-            <li class="menu-item " data-item="course">
-                <ul class="nav-menu__menu menu" data-level="2" aria-labelledby="ember573">
-                    <li class="menu-item " data-item="syllabus">
-                        <a href="/course/210510/syllabus" aria-disabled="false" data-active="">
-                            <span>Edit</span>
-                        </a>
-                    </li>
+        <ul class="nav-menu__menu menu course-nav__main-menu">
+            <li class="menu-item " data-item="settings">
+                <span hidden="">Settings</span>
+                <a href="{% url 'notebook_manager:setting_notebook' notebook.slug %}" class="nav-menu__menu-toggler"
+                   aria-expanded="false"
+                   type="button">
+                    <span>Contents</span>
+                </a>
+            </li>
 
-                </ul>
+
+            <li class="menu-item " data-item="settings">
+                <span hidden="">Settings</span>
+                <a href="{% url 'notebook_manager:edit_notebook' notebook.slug %}" class="nav-menu__menu-toggler"
+                   aria-expanded="false"
+                   type="button">
+                    <span>Edit</span>
+                </a>
             </li>
             <li class="menu-item " data-item="settings">
-                <span id="ember627" hidden="">Settings</span>
-
-                <button class="nav-menu__menu-toggler" aria-expanded="false"
-                        type="button" data-ember-action="" data-ember-action-629="629">
-        <span id="ember631" class="svg-icon course-settings_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
-    <use xlink:href="/static/frontend-build/icons.svg?1720098406#course-settings"></use>
-  </svg></span>
-
+                <span hidden="">Settings</span>
+                <a href="{% url 'notebook_manager:setting_notebook' notebook.slug %}" class="nav-menu__menu-toggler"
+                   aria-expanded="false"
+                   type="button">
                     <span>Settings</span>
-
-                    <!---->
-                    <!---->
-                    <span id="ember632"
-                          class="svg-icon right-arrow_icon ember-view nav-menu__menu-item-fold-icon"><svg
-                            xmlns="http://www.w3.org/2000/svg">
-    <use xlink:href="/static/frontend-build/icons.svg?1720098406#right-arrow"></use>
-  </svg></span>
-
-                </button>
+                </a>
             </li>
             <li class="menu-item ">
                 <span></span>
                 <button class="nav-menu__menu-toggler" aria-expanded="false"
                         type="button">
-        <span class="svg-icon course-settings_icon ember-view">
-            <svg xmlns="http://www.w3.org/2000/svg">
-    <use xlink:href="/static/frontend-build/icons.svg?1720098406#course-settings"></use>
-  </svg>
-        </span>
                     <span>Comments</span>
-
-                    <span
-                            class="svg-icon right-arrow_icon ember-view nav-menu__menu-item-fold-icon"><svg
-                            xmlns="http://www.w3.org/2000/svg">
-    <use xlink:href="/static/frontend-build/icons.svg?1720098406#right-arrow"></use>
-  </svg></span>
-
                 </button>
             </li>
             <li class="menu-item ">
                 <span></span>
                 <button class="nav-menu__menu-toggler">
-        <span id="" class="svg-icon course-settings_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
-    <use xlink:href="/static/frontend-build/icons.svg?1720098406#course-settings"></use>
-  </svg></span>
-
                     <span>Reviews</span>
-
-                    <!---->
-                    <!---->
-                    <span
-                            class="svg-icon right-arrow_icon ember-view nav-menu__menu-item-fold-icon"><svg
-                            xmlns="http://www.w3.org/2000/svg">
-    <use xlink:href="/static/frontend-build/icons.svg?1720098406#right-arrow"></use>
-  </svg></span>
-
                 </button>
             </li>
             <li class="menu-item-divider " data-media-query="not-mobile"></li>
-
             <li class="menu-item " data-media-query="not-mobile" data-item="new-class">
                 <a href="/new-class?course=210510" aria-disabled="false">
-        <span id="ember682" class="svg-icon plus-2_icon ember-view"><svg xmlns="http://www.w3.org/2000/svg">
-    <use xlink:href="/static/frontend-build/icons.svg?1720098406#plus-2"></use>
-  </svg></span>
-
                     <span>Create Notebook</span>
-
-                    <!---->
-                    <!---->
-                    <!---->
                 </a>
             </li>
 
         </ul>
-
-
-        <!----></div>
+    </div>
 </nav>

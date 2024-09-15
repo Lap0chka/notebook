@@ -26,6 +26,7 @@ def list_notebooks(request):
     notebooks = Notebook.objects.filter(user=request.user)
     return render(request, 'notebooks/lists/notebooks.html', {'notebooks': notebooks})
 
+
 def settings_notebook(request, slug):
     notebook = get_object_or_404(Notebook, slug=slug)
     if request.method == 'POST':
@@ -40,21 +41,10 @@ def settings_notebook(request, slug):
     }
     return render(
         request,
-        'notebooks/manager/settings/notebook_settings.html',
+        'notebooks/manager/left_menu/notebook_settings.html',
         context
     )
 
-@login_required
-def delete_note(request):
-    if request.method == 'POST':
-        topic = get_object_or_404(Topic, pk=request.POST.get('pk'))
-        note = get_object_or_404(Note, topic=topic, slug=request.POST['note_slug'])
-        note.delete()
-        print('asdasdasd')
-    else:
-        messages.error(request, 'Something went wrong.')
-    #return redirect('notebook_manager:edit_notebook', topic.notebook.slug)
-    return redirect('notebook_manager:create_notebook', )
 
 @login_required
 def edit_notebook(request, slug):
@@ -66,6 +56,12 @@ def edit_notebook(request, slug):
             additional_function.note_form(request, slug, topics)
         elif 'topic_form' in request.POST:
             additional_function.topic_form(request, slug, topics, notebook)
+        elif 'delete_note' in request.POST:
+            slug_note = request.POST.get('note_slug')
+            additional_function.delete_note_form(request, slug_note)
+        elif 'delete_topic' in request.POST:
+            topic_id = request.POST.get('pk')
+            additional_function.delete_topic_form(request, topic_id)
         else:
             additional_function.topic_form_update(request, slug, topics)
 
@@ -88,9 +84,6 @@ def edit_notebook(request, slug):
         'notebook': notebook,
     }
     return render(request, 'notebooks/manager/edit/edit_notebook.html', context)
-
-
-
 
 
 @login_required
@@ -199,6 +192,3 @@ def delete_step(request):
             'slug_note': note.slug,
             'order': 1
         }))
-
-
-

@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib import messages
 from django.contrib.auth.forms import UserChangeForm
 from django.utils.safestring import mark_safe
 
@@ -66,23 +67,32 @@ class NotebookStepForm(forms.ModelForm):
 class NotebookTopicForm(forms.ModelForm):
     pk = forms.IntegerField(widget=forms.HiddenInput(), required=False)
 
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        self.instance = None
+        if 'instance' in kwargs:
+            self.instance = kwargs['instance']
+        print(self.instance)
+        super(NotebookTopicForm, self).__init__(*args, **kwargs)
+
+
     class Meta:
         model = Topic
         fields = ['title', 'description']
         widgets = {
             'title': forms.TextInput(
                 attrs={'class': 'ember-text-field ember-view st-input st-size-normal st-input-expand',
-                       'style': 'width: 100 %;',
                        'placeholder': 'Topic'
-
                        },
             ),
             'description': forms.Textarea(
-                attrs={'class': "ember-text-field ember-view st-input st-input-expand",
+                attrs={'class': "ember-text-area ember-view st-input st-input-expand",
                        'placeholder': 'Description',
                        'rows': 4
                        }, ),
         }
+
+
 
 
 class NotebookNoteForm(forms.ModelForm):
@@ -94,6 +104,8 @@ class NotebookNoteForm(forms.ModelForm):
                 attrs={'class': 'ember-text-field ember-view st-input st-size-normal st-input-expand',
                        'placeholder': 'Create note'}),
         }
+
+
 
 
 
